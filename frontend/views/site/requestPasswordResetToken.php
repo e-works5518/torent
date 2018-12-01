@@ -10,22 +10,33 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Request password reset';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-request-password-reset">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out your email. A link to reset password will be sent there.</p>
+<img src="/main/assets/images/login-page-bg.jpg" alt="" class="body-bg-img">
+<div class="container">
+    <div class="logo">
+        <a href="/site/login"><img src="/main/assets/images/logo.png" alt="Grant Thornton | An instinct for growth&trade;" title="Grant Thornton | An instinct for growth&trade;"></a>
+    </div>
+    <div class="access-area">
+        <h1>Performance Appraisal System</h1>
+        <div class="access-form">
+            <?php $form = ActiveForm::begin([
+                'id' => 'request-password-reset-form',
+            ]); ?>
+            <div class="welcome-heading">Sign-in to access your account</div>
+            <div class="access-form-row">
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
-
-                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
+                <label class="username">
+                    <?= $form->field($model, 'email',[
+                        'options' => [
+                            'class' => 'form-username',
+                        ],
+                    ])->textInput(["placeholder" => "Email", 'class' => 'uppercase'])->label(false) ?>
+                </label>
+            </div>
+            <div>
+                <?= Html::submitButton('Send', ['class' => 'btn btn-primary uppercase']) ?>
+            </div>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
