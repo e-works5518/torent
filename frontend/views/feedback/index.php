@@ -1,6 +1,7 @@
 <?php
 $this->registerJsFile('/js/jq.js');
 $this->registerJsFile('/js/feedback/feedback-src.js');
+$this->params['feedback'] = true;
 ?>
 
 <div class="main-content">
@@ -17,7 +18,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                         <?php if (!empty($behavioral_feedbacks)): ?>
                             <?php foreach ($behavioral_feedbacks as $feedback): ?>
                                 <li class="flex">
-                            <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                            <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                        class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
                                     <span>External</span>
@@ -35,7 +36,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                         <?php if (!empty($goals_feedbacks)): ?>
                             <?php foreach ($goals_feedbacks as $feedback): ?>
                                 <li class="flex">
-                            <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                            <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                        class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>
@@ -54,7 +55,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                         <?php if (!empty($behavioral_feedbacks_provided)): ?>
                             <?php foreach ($behavioral_feedbacks_provided as $feedback): ?>
                                 <li class="flex">
-                                    <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                                    <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
                                     <span>External</span>
@@ -68,7 +69,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                         <?php if (!empty($goals_feedbacks_provided)): ?>
                             <?php foreach ($goals_feedbacks_provided as $feedback): ?>
                                 <li class="flex">
-                                    <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                                    <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>

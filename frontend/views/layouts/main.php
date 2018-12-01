@@ -5,17 +5,18 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
+use  common\models\BehavioralFeedback;
+use  common\models\GoalsFeedback;
 
 AppAsset::register($this);
+$beh_count = count(BehavioralFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => BehavioralFeedback::STATE_UPCOMING]));
+$goals_count = count(GoalsFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => GoalsFeedback::STATE_UPCOMING]));
+$upcoming_feel = $beh_count + $goals_count;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language ?>" >
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,14 +44,17 @@ AppAsset::register($this);
             <ul class="nav-menu flex">
                 <?php if (!Yii::$app->user->isGuest): ?>
                 <li>
-                    <a href="/goals" class="transition relative active">
+                    <a href="/goals" class="transition relative <?= !empty($this->params['goals']) ? 'active' : '' ?>">
                         <i class="fas fa-expand"></i>goals
                     </a>
                 </li>
                 <li>
-                    <a href="/feedback" class="transition relative">
+                    <a href="/feedback"
+                       class="transition relative <?= !empty($this->params['feedback']) ? 'active' : '' ?>">
                         <i class="far fa-check-circle"></i>feedback requests
-                        <span class="has-notification">2</span>
+                        <?php if (!empty($upcoming_feel)): ?>
+                            <span class="has-notification"><?= $upcoming_feel ?></span>
+                        <?php endif; ?>
                     </a>
                 </li>
                 <li>
@@ -86,7 +90,7 @@ AppAsset::register($this);
 
                 <div class="dropdown">
                     <a class="dropdown-toggle flex" type="button" data-toggle="dropdown">
-                        <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
+                        <img src="/users/<?= Yii::$app->user->identity->avatar ?>" alt="">
                         <span class="inline-block"><?= \backend\models\User::GetCurrentUserName() ?></span>
                         <i class="fas fa-angle-down"></i></a>
                     <ul class="dropdown-menu">

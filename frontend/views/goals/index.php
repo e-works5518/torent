@@ -1,5 +1,6 @@
 <?php
 $this->registerJsFile('/js/goals/content.js');
+$this->params['goals'] = true;
 ?>
 
 <div class="main-content">
@@ -72,7 +73,7 @@ $this->registerJsFile('/js/goals/content.js');
             <a class="load-more-btn flex semibold" id="add-objective"><i
                         class="fas fa-plus"></i>Add objective</a>
         </div>
-        <?php echo $this->render('@app/views/layouts/_right-menu.php'); ?>
+        <?php echo $this->render('@app/views/layouts/_right-menu.php',['active' => 'goals']); ?>
     </div>
 </div>
 <div class="popup-layer transition">

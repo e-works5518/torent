@@ -90,7 +90,7 @@ class AjaxController extends Controller
                 } else {
                     return BehavioralFeedback::SaveFeedback(
                         $post['user_id'],
-                        $post['behavioral_id'],
+                        $post['id'],
                         $post['comment'],
                         $post['status']
                     );

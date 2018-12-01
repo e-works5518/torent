@@ -3,6 +3,7 @@
 $this->registerJsFile('/js/jq.js');
 $this->registerJsFile('/js/behavioral/content.js');
 $this->registerJsFile('/js/custom.js');
+$this->params['goals'] = true;
 ?>
 
 <div class="main-content">
@@ -11,7 +12,7 @@ $this->registerJsFile('/js/custom.js');
             <h1 class="content-title">Behavioral competencies | 2018</h1>
             <div id="behavioral"></div>
         </div>
-        <?php echo $this->render('@app/views/layouts/_right-menu.php'); ?>
+        <?php echo $this->render('@app/views/layouts/_right-menu.php',['active' => 'behavioral']); ?>
     </div>
 </div>
 
