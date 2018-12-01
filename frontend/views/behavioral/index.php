@@ -19,15 +19,15 @@ $this->registerJsFile('/js/custom.js');
     <div class="popup relative">
         <a href="javascript:void(0);" class="popup-close absolute" title="Close popup"></a>
         <div class="request-body">
-            <strong>Goal / Objective</strong>
+            <strong>Select a manager </strong>
             <div class="request-msg">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
                 a piece of classical Latin literature from 45 BC, making it over 2000 years old.
             </div>
             <div class="request-feedback flex">
                 <select size="1" id="users">
                     <option selected>Select manager</option>
-                    <?php foreach ($users as $user): ?>
-                        <option value="<?= $user['id'] ?>"><?= $user['username'] ?></option>
+                    <?php foreach ($users as $k => $user): ?>
+                        <option value="<?= $k ?>"><?= $user ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

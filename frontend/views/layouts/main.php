@@ -41,7 +41,7 @@ AppAsset::register($this);
             <input type="checkbox">
             <span class="burger-icon"></span>
             <ul class="nav-menu flex">
-                <?php if (!Yii::$app->user->isGuest):?>
+                <?php if (!Yii::$app->user->isGuest): ?>
                 <li>
                     <a href="/goals" class="transition relative active">
                         <i class="fas fa-expand"></i>goals
@@ -60,40 +60,40 @@ AppAsset::register($this);
                     </a>
                 </li>
             </ul>
-            <?php endif;?>
+            <?php endif; ?>
         </label>
         <div class="user-options">
-            <?php if (Yii::$app->user->isGuest):?>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/site/signup">Register</a>
-                    <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                        <div class="col-lg-12">
-                            <div class="text-center"><h3><b>Register</b></h3></div>
-                        </div>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/site/login">Log In</span></a>
-                    <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-                        <div class="col-lg-12">
-                            <div class="text-center"><h3><b>Log In</b></h3></div>
-                        </div>
-                    </ul>
-                </li>
-            </ul>
-            <?php else:?>
+            <?php if (Yii::$app->user->isGuest): ?>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/site/signup">Register</a>
+                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Register</b></h3></div>
+                            </div>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/site/login">Log In</span></a>
+                        <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                            <div class="col-lg-12">
+                                <div class="text-center"><h3><b>Log In</b></h3></div>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            <?php else: ?>
 
                 <div class="dropdown">
                     <a class="dropdown-toggle flex" type="button" data-toggle="dropdown">
-                        <img src="/main/assets/images/members/member-1.png" alt="">
-                        <span class="inline-block"><?=Yii::$app->user->identity->username;?></span>
+                        <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
+                        <span class="inline-block"><?= \backend\models\User::GetCurrentUserName() ?></span>
                         <i class="fas fa-angle-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a data-method="post" href="/site/logout">Logout</a></li>
                     </ul>
                 </div>
-            <?php endif;?>
+            <?php endif; ?>
         </div>
     </div>
 </div>

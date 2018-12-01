@@ -40,8 +40,8 @@ var feedback = {
             data: data,
             success: function (res) {
                 if (res) {
-                    $('.popup-layer .request-to img').attr('ddd');
-                    $('.popup-layer .request-to strong').html(res.username);
+                    $('.popup-layer .request-to img').attr('src','/users/'+res.avatar);
+                    $('.popup-layer .request-to strong').html(res.first_name +' '+ res.last_name);
                     $('.popup-layer .request-to .request-date .date').html(res.date);
                     $('.popup-layer .description').html(res.description);
                     $('.popup-layer .comment').html(res.user_comment);
@@ -67,7 +67,7 @@ var feedback = {
             success: function (res) {
                 if (res) {
                     $(".popup-layer").removeClass("active");
-                    // location.reload();
+                    location.reload();
                 }
             }
         });

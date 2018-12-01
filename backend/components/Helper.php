@@ -19,4 +19,15 @@ class Helper
         echo '</pre>';
         die;
     }
+
+    public static function GetDate($date)
+    {
+        return date("d-m-Y", strtotime($date));
+    }
+
+    public static function GetDateFoSql($date)
+    {
+        return date("Y-m-d", strtotime($date));
+
+    }
 }

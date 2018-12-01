@@ -3,6 +3,7 @@ namespace frontend\models;
 
 use yii\base\Model;
 use common\models\User;
+use yii\web\UploadedFile;
 
 /**
  * Signup form
@@ -12,8 +13,13 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $first_name;
+    public $last_name;
 
-
+    /**
+     * @var UploadedFile
+     */
+    public $avatar_f;
     /**
      * {@inheritdoc}
      */
@@ -33,6 +39,16 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            [['avatar_f'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
+
+            ['last_name', 'trim'],
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['first_name', 'trim'],
+            ['first_name', 'required'],
+            ['first_name', 'string', 'max' => 255],
         ];
     }
 

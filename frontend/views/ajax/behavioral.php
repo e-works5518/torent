@@ -30,30 +30,21 @@ $behs = \common\models\Behavioral::GetAll();
                     class="fas fa-plus fa-icon-prop"></i></a>
         <span class="post-title semibold">Manager’s comments</span>
         <?php if (!empty($managers_comments)): ?>
-            <?php foreach ($managers_comments as $managers_comment): ?>
-                <div class="comment-item flex">
+            <?php foreach ($managers_comments as $managers_comment):
+                $status = $managers_comment['status'] == 0 ? 'strongly-agree' : 'agree';
+                $status = $managers_comment['status'] == 2 ? 'strongly-agree' : '' ? "disagree" : $status;
+                $status_mess = $managers_comment['status'] == 0 ? 'Strongly agree' : 'Agree';
+                $status_mess = $managers_comment['status'] == 2 ? 'Disagree' : $status_mess ?>
+                <div class="comment-item flex" status="<?= $managers_comment['status'] ?>">
                     <div class="request-to">
-                        <img src="assets/images/members/member-2.png" alt="" class="request-to-whom">
-                        <strong>Vladislav Muradyan</strong>
-                        <span class="request-date"><i class="far fa-clock"></i>20.08.2017</span>
-                        <a href="javascript:void(0);" class="btn strongly-agree inline-block transition">Strongly
-                            agree</a>
+                        <img src="/users/<?= $managers_comment['avatar'] ?>" alt="" class="request-to-whom">
+                        <strong><?= $managers_comment['first_name'] ?> <?= $managers_comment['last_name'] ?></strong>
+                        <span class="request-date"><i
+                                    class="far fa-clock"></i><?= \backend\components\Helper::GetDate($managers_comment['date']) ?></span>
+                        <a href="javascript:void(0);"
+                           class="btn <?= $status ?> inline-block transition"><?= $status_mess ?></a>
                     </div>
-                    <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
-                        Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
-                        theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem
-                        ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-                </div>
-                <div class="comment-item flex">
-                    <div class="request-to">
-                        <img src="assets/images/members/member-2.png" alt="" class="request-to-whom">
-                        <strong>Gurgen Hakobyan</strong>
-                        <span class="request-date"><i class="far fa-clock"></i>20.08.2017</span>
-                        <a href="javascript:void(0);" class="btn agree inline-block transition">Agree</a>
-                    </div>
-                    <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
-                        Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the
-                        theory of ethics, very popular during the Renaissance.</p>
+                    <p><?= $managers_comment['comment'] ?></p>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

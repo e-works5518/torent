@@ -20,6 +20,7 @@
                     ['label' => 'Behavioral feedback', 'icon' => 'file-code-o', 'url' => ['/behavioral-feedback']],
                     ['label' => 'Goals', 'icon' => 'file-code-o', 'url' => ['/goals']],
                     ['label' => 'Goals feedback', 'icon' => 'file-code-o', 'url' => ['/goals-feedback']],
+                    ['label' => 'Users', 'icon' => 'file-code-o', 'url' => ['/user']],
 
                 ],
             ]
