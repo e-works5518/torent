@@ -8,6 +8,7 @@ use common\models\search\BehavioralSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * BehavioralController implements the CRUD actions for Behavioral model.
@@ -65,7 +66,13 @@ class BehavioralController extends Controller
     public function actionCreate()
     {
         $model = new Behavioral();
-
+        if (Yii::$app->request->isPost) {
+            $model->icon_f = UploadedFile::getInstance($model, 'icon_f');
+            $u = $model->uploadIcon();
+            if (!empty($u)) {
+                $model->icon = $u;
+            }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -85,7 +92,13 @@ class BehavioralController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        if (Yii::$app->request->isPost) {
+            $model->icon_f = UploadedFile::getInstance($model, 'icon_f');
+            $u = $model->uploadIcon();
+            if (!empty($u)) {
+                $model->icon = $u;
+            }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

@@ -34,7 +34,8 @@
         "cocur/slugify": "^3.1",
         "kartik-v/yii2-datecontrol": "dev-master",
         "moonlandsoft/yii2-phpexcel": "*",
-        "kartik-v/yii2-mpdf": "dev-master"
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-widget-colorinput": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

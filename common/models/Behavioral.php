@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "behavioral".
@@ -13,9 +14,15 @@ use Yii;
  * @property string $color
  * @property string $icon
  * @property string $date
+ * @property string $icon_f
  */
 class Behavioral extends \yii\db\ActiveRecord
 {
+    /**
+     * @var UploadedFile
+     */
+    public $icon_f;
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +38,7 @@ class Behavioral extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
+            [['icon_f'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
             [['date'], 'safe'],
             [['title', 'color', 'icon'], 'string', 'max' => 255],
         ];
@@ -48,6 +56,18 @@ class Behavioral extends \yii\db\ActiveRecord
             'color' => 'Color',
             'icon' => 'Icon',
             'date' => 'Date',
+            'attachment' => 'Icon',
         ];
+    }
+
+    public function uploadIcon()
+    {
+        if (!empty($this->icon_f)) {
+            $name = substr(md5(microtime(true)), 0, 5) . '_' . date('d-m-Y') . '.' . $this->icon_f->extension;
+            $this->icon_f->saveAs('../../frontend/web/logos/' . $name);
+            return $name;
+        } else {
+            return false;
+        }
     }
 }
