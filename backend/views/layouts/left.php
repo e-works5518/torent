@@ -15,6 +15,12 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
+                    ['label' => 'Behavioral', 'icon' => 'file-code-o', 'url' => ['/behavioral']],
+                    ['label' => 'User behavioral', 'icon' => 'file-code-o', 'url' => ['/user-behavioral']],
+                    ['label' => 'Behavioral feedback', 'icon' => 'file-code-o', 'url' => ['/behavioral-feedback']],
+                    ['label' => 'Goals', 'icon' => 'file-code-o', 'url' => ['/goals']],
+                    ['label' => 'Goals feedback', 'icon' => 'file-code-o', 'url' => ['/goals-feedback']],
+
                 ],
             ]
         ) ?>
