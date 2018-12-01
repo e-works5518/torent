@@ -52,8 +52,18 @@ class Goals extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function getGoalsAndFeedback(){
-
+    public static function getGoalByIdUserId($goal_id, $user_id)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'goal.*',
+                    'u.*',
+                ])
+            ->from(self::tableName().' goal')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = goal.user_id')
+            ->where(['goal.id' => $goal_id, 'user_id' => $user_id])
+            ->one();
     }
 
 }

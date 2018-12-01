@@ -64,7 +64,11 @@ $this->registerJsFile('/js/goals/content.js');
                                           rows="4"></textarea>
                             </div>
                         </div>
-
+                    <div class="post post-comments relative">
+                        <a href="javascript:void(0);" data-id="<?= $goal->id; ?>" class="post-edit absolute give-feedback-btn give-feedback-btn"><span>Request feedback</span><i class="fas fa-plus fa-icon-prop"></i></a>
+                    </div>
+                        <br>
+                        <br>
                     <?php endif; ?>
                 </div>
             </div>

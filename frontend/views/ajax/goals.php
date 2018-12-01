@@ -14,6 +14,7 @@
     </div>
 </div>
 <div class="post post-comments relative">
-<a href="javascript:void(0);" class="post-edit absolute give-feedback-btn give-feedback-btn><span>Request feedback</span><i class="fas fa-plus fa-icon-prop"></i></a>
+<a href="javascript:void(0);" class="post-edit absolute give-feedback-btn give-feedback-btn"><span>Request feedback</span><i class="fas fa-plus fa-icon-prop"></i></a>
 </div>
+<br>
 <br>

@@ -66,14 +66,6 @@ AppAsset::register($this);
             <?php if (Yii::$app->user->isGuest): ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/site/signup">Register</a>
-                        <ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-                            <div class="col-lg-12">
-                                <div class="text-center"><h3><b>Register</b></h3></div>
-                            </div>
-                        </ul>
-                    </li>
-                    <li>
                         <a href="/site/login">Log In</span></a>
                         <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
                             <div class="col-lg-12">

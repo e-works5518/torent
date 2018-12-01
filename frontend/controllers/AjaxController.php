@@ -65,9 +65,9 @@ class AjaxController extends Controller
             $post = Yii::$app->request->post();
             if (!empty($post)) {
                 if ($post['type'] == 'goal') {
-                    return '';
+                    return Goals::getGoalByIdUserId($post['id'], $post['user_id']);
                 } else {
-                    return UserBehavioral::GetBehavioralByUserId($post['behavioral_id'], $post['user_id']);
+                    return UserBehavioral::GetBehavioralByUserId($post['id'], $post['user_id']);
                 }
 
             }
