@@ -9,13 +9,18 @@ use Yii;
  *
  * @property int $id
  * @property int $goal_id
- * @property int $menager_id
+ * @property int $manager_id
  * @property int $status
  * @property string $comment
  * @property string $date
+ * @property int $user_id
+ * @property int $state
  */
 class GoalsFeedback extends \yii\db\ActiveRecord
 {
+    const STATE_UPCOMING = 0;
+    const STATE_END = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -30,7 +35,7 @@ class GoalsFeedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['goal_id', 'menager_id', 'status'], 'integer'],
+            [['user_id', 'goal_id', 'manager_id', 'status'], 'integer'],
             [['comment'], 'string'],
             [['date'], 'safe'],
         ];
@@ -44,10 +49,26 @@ class GoalsFeedback extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'goal_id' => 'Goal ID',
-            'menager_id' => 'Menager ID',
+            'manager_id' => 'Menager ID',
             'status' => 'Status',
             'comment' => 'Comment',
             'date' => 'Date',
+            'user_id' => 'User Id',
+            'state' => 'State',
         ];
+    }
+
+    public static function goalRequestFeedback($manager_id, $goal_id)
+    {
+        $m = self::findOne(['user_id' => Yii::$app->user->getId(), 'manager_id' => $manager_id, 'goal_id' => $goal_id]);
+        if (empty($m)) {
+            $model = new self();
+            $model->user_id = Yii::$app->user->getId();
+            $model->manager_id = $manager_id;
+            $model->goal_id = $goal_id;
+            $model->state = self::STATE_UPCOMING;
+            return $model->save();
+        }
+        return true;
     }
 }

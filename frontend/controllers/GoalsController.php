@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use backend\models\User;
 use Yii;
 use common\models\Goals;
 use yii\web\Controller;
@@ -47,10 +48,11 @@ class GoalsController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Goals();
+        $goals = Goals::find()->where(['user_id' => Yii::$app->user->identity->getId()])->all();
 
         return $this->render('index',[
-            'model' => $model
+            'goals' => $goals,
+            'users' => User::GetAll()
         ]);
     }
 }

@@ -5,6 +5,8 @@ namespace frontend\controllers;
 
 use common\models\Behavioral;
 use common\models\BehavioralFeedback;
+use common\models\Goals;
+use common\models\GoalsFeedback;
 use common\models\UserBehavioral;
 use Yii;
 use yii\web\Controller;
@@ -89,6 +91,66 @@ class AjaxController extends Controller
                     );
                 }
 
+            }
+        }
+    }
+
+    public function actionGetGoalsInputContent(){
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_HTML;
+            $contentLength = Yii::$app->request->post('contentLength');
+            $this->layout = false;
+            if (!empty($contentLength)){
+                return $this->render('goals',[
+                    'contentLength' => $contentLength
+                ]);
+            }
+           return false;
+        }
+    }
+
+    public function actionCreateGoal(){
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            $description = $post['description'];
+            $userComment = $post['userComment'];
+            if (!empty($description) || !empty($userComment)){
+                $model = new Goals();
+                $model->user_id = Yii::$app->user->identity->getId();
+                $model->description = $description;
+                $model->user_comment = $userComment;
+                if ($model->save()){
+                    return $model->id;
+                } ;
+            }
+            return false;
+        }
+    }
+
+    public function actionEditGoal(){
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+            $goalsId = $post['goalsId'];
+            $description = $post['description'];
+            $userComment = $post['userComment'];
+            $model = Goals::findOne($goalsId);
+            $model->description = $description;
+            $model->user_comment = $userComment;
+            if ($model->save()){
+                return true;
+            } ;
+            return false;
+        }
+    }
+
+    public function actionGoalRequestFeedback()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            if (!empty($post)) {
+                return GoalsFeedback::goalRequestFeedback($post['manager_id'], $post['goal_id']);
             }
         }
     }
