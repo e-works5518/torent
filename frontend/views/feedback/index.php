@@ -26,7 +26,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                                     <span><a href="javascript:void(0);"
                                              data-type="behavioral"
                                              data-id="<?= $feedback['behavioral_id'] ?>"
-                                             data-user-id="<?= $feedback['u_id'] ?>"
+                                             data-user-id="<?= $feedback['user_id'] ?>"
                                              class="btn give-feedback-btn inline-block transition give_feedback">Give feedback</a></span>
                                 </li>
                             <?php endforeach; ?>
@@ -45,7 +45,7 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                                     <span><a href="javascript:void(0);"
                                              data-type="behavioral"
                                              data-id="<?= $feedback['behavioral_id'] ?>"
-                                             data-user-id="<?= $feedback['u_id'] ?>"
+                                             data-user-id="<?= $feedback['user_id'] ?>"
                                              class="btn give-feedback-btn inline-block transition give_feedback">Give feedback</a></span>
                                 </li>
                             <?php endforeach; ?>
@@ -66,22 +66,27 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
         </div>
         <div class="request-body">
             <strong class="title"></strong>
+            <h3>Description</h3>
             <div class="request-msg description"></div>
+            <h3>Comment</h3>
             <div class="request-msg comment"> </div>
-            <textarea placeholder="Leave your comment (max. 250 chars)"></textarea>
+            <textarea class="comment_val" placeholder="Leave your comment (max. 250 chars)"></textarea>
         </div>
         <div class="request-options">
-            <label><input type="radio" name="status" checked><i class="fas fa-check transition fa-icon-prop"></i>Objective
+            <label>
+                <input class="status_val" type="radio" value="0" name="status" checked><i class="fas fa-check transition fa-icon-prop"></i>Objective
                 was
                 achieved</label>
-            <label><input type="radio" name="status"><i class="fas fa-check transition fa-icon-prop"></i>Objective was
+            <label>
+                <input class="status_val" type="radio" value="1" name="status"><i class="fas fa-check transition fa-icon-prop"></i>Objective was
                 partially
                 achieved</label>
-            <label><input type="radio" name="status"><i class="fas fa-check transition fa-icon-prop"></i>Objective
+            <label>
+                <input class="status_val" type="radio" value="2"  name="status"><i class="fas fa-check transition fa-icon-prop"></i>Objective
                 wasn’t achieved</label>
         </div>
         <div align="center">
-            <button class="submit-btn transition">Submit feedback</button>
+            <button class="submit-btn transition submit_feedback" >Submit feedback</button>
         </div>
     </div>
 </div>

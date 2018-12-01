@@ -115,4 +115,16 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
             ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
             ->all();
     }
+
+    public static function SaveFeedback($user_id, $behavioral_id, $comment, $status)
+    {
+        $m = self::findOne(['user_id' => $user_id, 'manager_id' => Yii::$app->user->getId(), 'behavioral_id' => $behavioral_id]);
+        if (!empty($m)) {
+            $m->comment = $comment;
+            $m->state = self::STATE_END;
+            $m->status = $status;
+            return $m->save();
+        }
+        return true;
+    }
 }

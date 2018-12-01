@@ -86,6 +86,6 @@ class UserBehavioral extends \yii\db\ActiveRecord
             ->leftJoin(Behavioral::tableName() . ' b', 'b.id = ub.behavioral_id')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = ub.user_id')
             ->where(['behavioral_id' => $behavioral_id, 'user_id' => $user_id])
-            ->all();
+            ->one();
     }
 }

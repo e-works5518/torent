@@ -71,4 +71,26 @@ class AjaxController extends Controller
             }
         }
     }
+
+    public function actionSaveFeedback()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            if (!empty($post)) {
+                if ($post['type'] == 'goal') {
+                    return '';
+                } else {
+                    return BehavioralFeedback::SaveFeedback(
+                        $post['user_id'],
+                        $post['behavioral_id'],
+                        $post['comment'],
+                        $post['status']
+                    );
+                }
+
+            }
+        }
+    }
+
 }
