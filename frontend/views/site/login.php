@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <img src="/main/assets/images/login-page-bg.jpg" alt="" class="body-bg-img">
     <div class="container">
         <div class="logo">
-            <a href="login.html"><img src="/main/assets/images/logo.png" alt="Grant Thornton | An instinct for growth&trade;" title="Grant Thornton | An instinct for growth&trade;"></a>
+            <a href="/site/login"><img src="/main/assets/images/logo.png" alt="Grant Thornton | An instinct for growth&trade;" title="Grant Thornton | An instinct for growth&trade;"></a>
         </div>
         <div class="access-area">
             <h1>Performance Appraisal System</h1>

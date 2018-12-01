@@ -32,7 +32,7 @@ var feedback = {
     GetObjectData: function (type, id, user_id) {
         var data = {};
         data.type = type;
-        data.behavioral_id = id;
+        data.id = id;
         data.user_id = user_id;
         $.ajax({
             type: "POST",
