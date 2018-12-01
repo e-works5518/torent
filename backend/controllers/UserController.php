@@ -2,12 +2,14 @@
 
 namespace backend\controllers;
 
+
 use Yii;
 use backend\models\User;
 use backend\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -15,7 +17,7 @@ use yii\filters\VerbFilter;
 class UserController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -44,18 +46,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single User model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new User model.
@@ -65,11 +55,18 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $name = $model->upload();
+            if (!empty($name)) {
+                $model->avatar = (string)$name;
+            }
         }
 
+        if ($model->load(Yii::$app->request->post())) {
+            $id = $model->SaveUser();
+            return $this->redirect(['update', 'id' => $id]);
+        }
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -80,16 +77,22 @@ class UserController extends Controller
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $name = $model->upload();
+            if (!empty($name)) {
+                $model->avatar = (string)$name;
+            }
         }
 
+        if ($model->load(Yii::$app->request->post())) {
+            $id = $model->UpdateUser($id);
+            return $this->redirect(['index']);
+        }
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -100,7 +103,6 @@ class UserController extends Controller
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
@@ -120,8 +122,8 @@ class UserController extends Controller
     {
         if (($model = User::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

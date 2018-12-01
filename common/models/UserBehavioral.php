@@ -80,7 +80,7 @@ class UserBehavioral extends \yii\db\ActiveRecord
                 [
                     'ub.*',
                     'b.description',
-                    'u.username',
+                    'u.*',
                 ])
             ->from('user_behavioral as ub')
             ->leftJoin(Behavioral::tableName() . ' b', 'b.id = ub.behavioral_id')

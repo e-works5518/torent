@@ -4,38 +4,45 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\UserSearch */
+/* @var $searchModel frontend\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+/* @var $members
+ * */
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+<div class="user-behavioral-index">
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            'first_name',
+            'last_name',
+            'email:email',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'Avatar',
+                'format' => 'html',
+                'value' => function ($data) {
+                    $img = !empty($data->avatar) ? $data->avatar : 'no-user.png';
+                    return Html::img('/users/' . $img,
+                        ['width' => '50px']);
+                },
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Actions',
+                'headerOptions' => ['style' => 'color:#337ab7'],
+                'template' => '{update}{delete}',
+            ],
         ],
     ]); ?>
+
+
 </div>

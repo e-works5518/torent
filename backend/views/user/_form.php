@@ -8,28 +8,27 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="user-form">
-
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+<div class="user-form ">
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'autocomplete' => 'off'
+        ],
+    ]); ?>
+    <div class="row">
+        <div class="col-md-6">
+            <?= $form->field($model, 'firstname')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('firstname'), 'id' => 'u_first_name', 'placeholder' => $model->getAttributeLabel('firstname')]) ?>
+            <?= $form->field($model, 'lastname')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('lastname'),'id' => 'u_last_name', 'placeholder' => $model->getAttributeLabel('lastname')]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('username'), 'autocomplete'=>"off", 'id' => 'u_name', 'placeholder' => $model->getAttributeLabel('username')]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true,'title' => $model->getAttributeLabel('password_hash'), 'autocomplete'=>"off", 'placeholder' => $model->getAttributeLabel('password_hash')]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('email'), 'placeholder' => $model->getAttributeLabel('email')]) ?>
+        </div>
+    </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <br>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

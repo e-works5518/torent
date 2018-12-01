@@ -64,7 +64,9 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
             ->select(
                 [
                     'bf.*',
-                    'u.*'
+                    'u.avatar as avatar',
+                    'u.first_name as first_name',
+                    'u.last_name as last_name',
                 ])
             ->from('behavioral_feedback as bf')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.manager_id')
@@ -92,11 +94,10 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
             ->select(
                 [
                     'bf.*',
-                    'u.id as u_id',
-                    'u.username'
+                    'u.*',
                 ])
             ->from('behavioral_feedback as bf')
-            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.manager_id')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.user_id')
             ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
             ->all();
     }
@@ -107,11 +108,10 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
             ->select(
                 [
                     'bf.*',
-                    'u.id as u_id',
-                    'u.username'
+                    'u.*',
                 ])
             ->from('behavioral_feedback as bf')
-            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.manager_id')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.user_id')
             ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
             ->all();
     }

@@ -4,18 +4,16 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\User */
+/* @var $model frontend\models\User */
 
-$this->title = 'Create User';
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Create user';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
+<div class="user-behavioral-create">
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

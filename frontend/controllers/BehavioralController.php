@@ -5,9 +5,7 @@ namespace frontend\controllers;
 use backend\models\User;
 use Yii;
 use common\models\Behavioral;
-use common\models\search\BehavioralSearch;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -52,7 +50,7 @@ class BehavioralController extends Controller
 
         return $this->render('index', [
             'model' => $model,
-            'users' => User::GetAll()
+            'users' => User::GetUsers()
         ]);
     }
 

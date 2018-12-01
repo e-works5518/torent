@@ -50,7 +50,7 @@ var behavioral = {
             url: "/ajax/beh-request-feedback",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
-
+                $(".popup-layer").removeClass("active");
             }
         });
     }
