@@ -48,7 +48,7 @@ AppAsset::register($this);
                     </a>
                 </li>
                 <li>
-                    <a href="/goals-feedback" class="transition relative">
+                    <a href="/feedback" class="transition relative">
                         <i class="far fa-check-circle"></i>feedback requests
                         <span class="has-notification">2</span>
                     </a>

@@ -70,4 +70,14 @@ class Behavioral extends \yii\db\ActiveRecord
             return false;
         }
     }
+
+    public static function GetAll()
+    {
+        return self::find()->asArray()->all();
+    }
+
+    public static function GetOneById($id)
+    {
+        return self::findOne($id);
+    }
 }

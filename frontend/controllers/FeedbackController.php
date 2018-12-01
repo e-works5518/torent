@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * BehavioralFeedbackController implements the CRUD actions for BehavioralFeedback model.
  */
-class GoalsFeedbackController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -47,6 +47,10 @@ class GoalsFeedbackController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index',[
+            'behavioral_feedbacks' => BehavioralFeedback::GetCurrentUserFeedback(),
+            'behavioral_feedbacks_provided' => BehavioralFeedback::GetCurrentUserFeedbackProvided()
+        ]);
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use backend\models\User;
 use Yii;
 use common\models\Behavioral;
 use common\models\search\BehavioralSearch;
@@ -51,6 +52,7 @@ class BehavioralController extends Controller
 
         return $this->render('index', [
             'model' => $model,
+            'users' => User::GetAll()
         ]);
     }
 
