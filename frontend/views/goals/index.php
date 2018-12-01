@@ -86,8 +86,8 @@ $this->registerJsFile('/js/goals/content.js');
             <div class="select-manager-content flex">
                 <select size="1" id="users">
                     <option value="" selected>Select manager</option>
-                    <?php foreach ($users as $user): ?>
-                        <option value="<?= $user['id'] ?>"><?= $user['username'] ?></option>
+                    <?php foreach ($users as $k => $user): ?>
+                        <option value="<?= $k ?>"><?= $user ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

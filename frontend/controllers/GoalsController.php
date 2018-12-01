@@ -53,7 +53,7 @@ class GoalsController extends Controller
 
         return $this->render('index',[
             'goals' => $goals,
-            'users' => User::GetAll(),
+            'users' => User::GetUsers(),
             'managers_comments' => $managers_comments,
         ]);
     }
