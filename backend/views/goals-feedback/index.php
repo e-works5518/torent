@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'goal_id',
-            'menager_id',
+            'manager_id',
             'status',
             'comment:ntext',
             //'date',

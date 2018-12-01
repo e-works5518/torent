@@ -52,4 +52,8 @@ class Goals extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getGoalsAndFeedback(){
+
+    }
+
 }

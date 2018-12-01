@@ -81,7 +81,12 @@ class AjaxController extends Controller
             $post = Yii::$app->request->post();
             if (!empty($post)) {
                 if ($post['type'] == 'goal') {
-                    return '';
+                    return GoalsFeedback::SaveFeedback(
+                        $post['user_id'],
+                        $post['id'],
+                        $post['comment'],
+                        $post['status']
+                    );
                 } else {
                     return BehavioralFeedback::SaveFeedback(
                         $post['user_id'],

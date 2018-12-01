@@ -28,25 +28,24 @@ $this->registerJsFile('/js/goals/content.js');
                                               rows="4"><?= $goal->user_comment; ?></textarea>
                                 </div>
                             </div>
+
                             <div class="post post-comments relative">
                                 <a href="javascript:void(0);" data-id="<?= $goal->id; ?>" class="post-edit absolute give-feedback-btn give-feedback-btn"><span>Request feedback</span><i class="fas fa-plus fa-icon-prop"></i></a>
                                 <span class="post-title semibold">Manager’s comments</span>
-                                <div class="comment-item flex">
-                                    <div class="request-to">
-                                        <img src="/main/assets/images/members/member-2.png" alt="" class="request-to-whom">
-                                        <strong>Vladislav Muradyan</strong>
-                                        <span class="request-date"><i class="far fa-clock"></i>20.08.2017</span>
-                                    </div>
-                                    <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-                                </div>
-                                <div class="comment-item flex">
-                                    <div class="request-to">
-                                        <img src="/main/assets/images/members/member-2.png" alt="" class="request-to-whom">
-                                        <strong>Vladislav Muradyan</strong>
-                                        <span class="request-date"><i class="far fa-clock"></i>20.08.2017</span>
-                                    </div>
-                                    <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.</p>
-                                </div>
+                                <?php if (!empty($managers_comments)):?>
+                                    <?php foreach ($managers_comments as $manager_comment):?>
+                                        <?php if ($manager_comment['goal_id'] == $goal->id):?>
+                                            <div class="comment-item flex">
+                                                <div class="request-to">
+                                                    <img src="/users/<?= $manager_comment['avatar'] ?>" alt="" class="request-to-whom">
+                                                    <strong><?= $manager_comment['first_name'] ?> <?= $manager_comment['last_name'] ?></strong>
+                                                    <span class="request-date"><i class="far fa-clock"></i><?= \backend\components\Helper::GetDate($manager_comment['date']) ?></span>
+                                                </div>
+                                                <p><?= $manager_comment['comment']; ?></p>
+                                            </div>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                <?php endif;?>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

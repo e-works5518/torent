@@ -12,7 +12,7 @@ $(document).ready(function () {
         );
     });
     $('.submit_feedback').click(function () {
-        feedback.SaveFeedback($(this).attr('data-user-id'), $(this).attr('data-id'), $('.comment_val').val(), $('.status_val:checked').val());
+        feedback.SaveFeedback($(this).attr('data-user-id'), $(this).attr('data-id'), $('.comment_val').val(), $('.status_val:checked').val(),$(this).attr('data-type'));
     });
 
     $(".requests-tab-title li a").click(function () {
@@ -53,10 +53,10 @@ var feedback = {
     // $post['behavioral_id'],
     // $post['comment'],
     // $post['status']
-    SaveFeedback: function (user_id, id, comment, status) {
+    SaveFeedback: function (user_id, id, comment, status, type) {
         var data = {};
-        data.type = 'behavioral';
-        data.behavioral_id = id;
+        data.type = type;
+        data.id = id;
         data.user_id = user_id;
         data.comment = comment;
         data.status = status;

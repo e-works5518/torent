@@ -20,12 +20,30 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                             <span><img src="/users/<?=$feedback['avatar']?>" alt=""
                                        class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
-                                    <span>Internal</span>
+                                    <span>External</span>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= $feedback['date'] ?></span>
                                     <span><a href="javascript:void(0);"
                                              data-type="behavioral"
                                              data-id="<?= $feedback['behavioral_id'] ?>"
+                                             data-user-id="<?= $feedback['user_id'] ?>"
+                                             class="btn give-feedback-btn inline-block transition give_feedback">Give feedback</a></span>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <?php if (!empty($goals_feedbacks)): ?>
+                            <?php foreach ($goals_feedbacks as $feedback): ?>
+                                <li class="flex">
+                            <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                                       class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
+                                    <span>Goal / Objective</span>
+                                    <span>Internal</span>
+                                    <span class="request-date"><i
+                                                class="far fa-clock"></i><?= $feedback['date'] ?></span>
+                                    <span><a href="javascript:void(0);"
+                                             data-type="goal"
+                                             data-id="<?= $feedback['goal_id'] ?>"
                                              data-user-id="<?= $feedback['user_id'] ?>"
                                              class="btn give-feedback-btn inline-block transition give_feedback">Give feedback</a></span>
                                 </li>
@@ -40,6 +58,20 @@ $this->registerJsFile('/js/feedback/feedback-src.js');
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
                                     <span>External</span>
+                                    <span class="request-date"><i
+                                                class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
+
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <?php if (!empty($goals_feedbacks_provided)): ?>
+                            <?php foreach ($goals_feedbacks_provided as $feedback): ?>
+                                <li class="flex">
+                                    <span><img src="/users/<?=$feedback['avatar']?>" alt=""
+                                               class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
+                                    <span>Goal / Objective</span>
+                                    <span>Internal</span>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 

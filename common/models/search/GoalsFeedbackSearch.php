@@ -18,7 +18,7 @@ class GoalsFeedbackSearch extends GoalsFeedback
     public function rules()
     {
         return [
-            [['id', 'goal_id', 'menager_id', 'status'], 'integer'],
+            [['id', 'goal_id', 'manager_id', 'status'], 'integer'],
             [['comment', 'date'], 'safe'],
         ];
     }
@@ -61,7 +61,7 @@ class GoalsFeedbackSearch extends GoalsFeedback
         $query->andFilterWhere([
             'id' => $this->id,
             'goal_id' => $this->goal_id,
-            'menager_id' => $this->menager_id,
+            'manager_id' => $this->manager_id,
             'status' => $this->status,
             'date' => $this->date,
         ]);

@@ -71,4 +71,60 @@ class GoalsFeedback extends \yii\db\ActiveRecord
         }
         return true;
     }
+
+    public static function GetCurrentUserFeedback()
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'gol.*',
+                    'u.*',
+                ])
+            ->from(self::tableName().' gol')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')
+            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
+            ->all();
+    }
+
+    public static function GetCurrentUserFeedbackProvided()
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'gol.*',
+                    'u.*',
+                ])
+            ->from(self::tableName().' gol')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')
+            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
+            ->all();
+    }
+
+    public static function SaveFeedback($user_id, $goal_id, $comment, $status)
+    {
+        $m = self::findOne(['user_id' => $user_id, 'manager_id' => Yii::$app->user->getId(), 'goal_id' => $goal_id]);
+        if (!empty($m)) {
+            $m->comment = $comment;
+            $m->state = self::STATE_END;
+            $m->status = $status;
+            return $m->save();
+        }
+        return true;
+    }
+
+    public static function goalCurrentUserFellByUserlId($user_id)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'gf.*',
+                    'u.avatar as avatar',
+                    'u.first_name as first_name',
+                    'u.last_name as last_name',
+                ])
+            ->from(self::tableName().' gf')
+            ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gf.manager_id')
+            ->where(['user_id' => $user_id, 'state' => self::STATE_END])
+            ->all();
+    }
 }
