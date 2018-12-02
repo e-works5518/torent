@@ -62,8 +62,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.give-feedback-btn', function () {
-        var id =  $(this).closest( ".goals-inputs-content" ).data("goals-id");
-        $('.request_feedback').attr('data-id', id);
+        $('.request_feedback').attr('data-id', $(this).attr('data-id'));
         $(".popup-layer").addClass('active');
     });
 
