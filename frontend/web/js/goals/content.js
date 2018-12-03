@@ -82,6 +82,11 @@ var goals = {
             url: "/ajax/goal-request-feedback",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
+                if (res){
+                    var goalItemContent =$("[data-goals-id = "+ data.goal_id+ "]").closest(".goal-item-content");
+                    console.log('goalItemContent',goalItemContent);
+                    $(goalItemContent).find(".post-comments").append(res);
+                }
 
             }
         });

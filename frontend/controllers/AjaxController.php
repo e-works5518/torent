@@ -8,6 +8,7 @@ use common\models\BehavioralFeedback;
 use common\models\Goals;
 use common\models\GoalsFeedback;
 use common\models\ImpactFeedback;
+use common\models\User;
 use common\models\UserBehavioral;
 use common\models\UserImpact;
 use Yii;
@@ -179,11 +180,20 @@ class AjaxController extends Controller
     public function actionGoalRequestFeedback()
     {
         if (Yii::$app->request->isAjax) {
-            \Yii::$app->response->format = Response::FORMAT_JSON;
+            \Yii::$app->response->format = Response::FORMAT_HTML;
             $post = Yii::$app->request->post();
+            $this->layout = false;
             if (!empty($post)) {
-                return GoalsFeedback::goalRequestFeedback($post['manager_id'], $post['goal_id']);
+                $goalsFeedback =  GoalsFeedback::goalRequestFeedback($post['manager_id'], $post['goal_id']);
+                $manager = User::findOne($goalsFeedback->manager_id);
+                if (!empty($goalsFeedback) && !empty($manager)){
+                    return $this->render('goal-comment',[
+                        'goalsFeedback' => $goalsFeedback,
+                        'manager' => $manager,
+                    ]);
+                }
             }
+            return false;
         }
     }
 

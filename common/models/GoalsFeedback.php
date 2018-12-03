@@ -67,7 +67,11 @@ class GoalsFeedback extends \yii\db\ActiveRecord
             $model->manager_id = $manager_id;
             $model->goal_id = $goal_id;
             $model->state = self::STATE_UPCOMING;
-            return $model->save();
+            $model->date = date("Y-m-d H:i:s");
+            if ($model->save()){
+               return  $model;
+            }
+             return false;
         }
         return true;
     }
