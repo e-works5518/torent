@@ -82,7 +82,9 @@ class GoalsFeedback extends \yii\db\ActiveRecord
             ->select(
                 [
                     'gol.*',
-                    'u.*',
+                    'u.avatar',
+                    'u.first_name',
+                    'u.last_name',
                 ])
             ->from(self::tableName().' gol')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')
@@ -96,7 +98,9 @@ class GoalsFeedback extends \yii\db\ActiveRecord
             ->select(
                 [
                     'gol.*',
-                    'u.*',
+                    'u.avatar',
+                    'u.first_name',
+                    'u.last_name',
                 ])
             ->from(self::tableName().' gol')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')

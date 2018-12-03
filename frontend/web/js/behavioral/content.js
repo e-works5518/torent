@@ -42,6 +42,7 @@ var behavioral = {
         });
     },
     RequestFeedback: function (manager_id,beh_id) {
+        var ob = this;
         var data = {};
         data.manager_id = manager_id;
         data.beh_id = beh_id;
@@ -50,6 +51,7 @@ var behavioral = {
             url: "/ajax/beh-request-feedback",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
+                ob.GetBehs();
                 $(".popup-layer").removeClass("active");
             }
         });

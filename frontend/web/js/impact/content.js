@@ -4,7 +4,7 @@ $(document).ready(function () {
         Impact.SaveUserComment($(this).attr('data-id'), $(this).val());
     });
     $(document).on('click', '.request_feedback', function () {
-        Impact.RequestFeedback($('#users').val(),$(this).attr('data-id'));
+        Impact.RequestFeedback($('#users').val(), $(this).attr('data-id'));
     })
 
 
@@ -41,7 +41,8 @@ var Impact = {
             }
         });
     },
-    RequestFeedback: function (manager_id,beh_id) {
+    RequestFeedback: function (manager_id, beh_id) {
+        var ob = this;
         var data = {};
         data.manager_id = manager_id;
         data.beh_id = beh_id;
@@ -50,6 +51,7 @@ var Impact = {
             url: "/ajax/impact-request-feedback",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
+                ob.GetBehs();
                 $(".popup-layer").removeClass("active");
             }
         });

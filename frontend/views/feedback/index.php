@@ -50,6 +50,24 @@ $this->params['feedback'] = true;
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
+
+                        <?php if (!empty($impact_feedbacks)): ?>
+                            <?php foreach ($impact_feedbacks as $feedback): ?>
+                                <li class="flex">
+                            <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
+                                       class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
+                                    <span>Impact</span>
+                                    <span>Internal</span>
+                                    <span class="request-date"><i
+                                                class="far fa-clock"></i><?= $feedback['date'] ?></span>
+                                    <span><a href="javascript:void(0);"
+                                             data-type="impact"
+                                             data-id="<?= $feedback['impact_id'] ?>"
+                                             data-user-id="<?= $feedback['user_id'] ?>"
+                                             class="btn give-feedback-btn inline-block transition give_feedback">Give feedback</a></span>
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </ul>
                     <ul class="requests-list absolute">
                         <?php if (!empty($behavioral_feedbacks_provided)): ?>
@@ -59,6 +77,10 @@ $this->params['feedback'] = true;
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
                                     <span>External</span>
+                                    <span
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
+                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </span>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 
@@ -73,6 +95,28 @@ $this->params['feedback'] = true;
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>
+                                    <span
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
+                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </span>
+                                    <span class="request-date"><i
+                                                class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
+
+                                </li>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <?php if (!empty($impact_feedbacks_provided)): ?>
+                            <?php foreach ($impact_feedbacks_provided as $feedback): ?>
+                                <li class="flex">
+                                    <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
+                                               class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
+                                    <span>Impact</span>
+                                    <span>Internal</span>
+                                    <span
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
+                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </span>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 
