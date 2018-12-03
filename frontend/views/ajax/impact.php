@@ -30,7 +30,7 @@ $impacts = \common\models\Impact::GetAll();
                     class="fas fa-plus fa-icon-prop"></i></a>
         <span class="post-title semibold">Manager’s comments</span>
         <?php if (!empty($managers_comments)): ?>
-            <?php foreach ($managers_comments as $managers_comment):?>
+            <?php foreach ($managers_comments as $managers_comment): ?>
                 <div class="comment-item flex" status="<?= $managers_comment['status'] ?>">
                     <div class="request-to">
                         <img src="/users/<?= $managers_comment['avatar'] ?>" alt="" class="request-to-whom">
