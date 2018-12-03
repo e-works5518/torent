@@ -45,6 +45,7 @@ class AjaxController extends Controller
             return $this->render('impact');
         }
     }
+
     public function actionSaveUserCommentByBehId()
     {
         if (Yii::$app->request->isAjax) {
@@ -55,6 +56,7 @@ class AjaxController extends Controller
             }
         }
     }
+
     public function actionSaveUserCommentByImpactId()
     {
         if (Yii::$app->request->isAjax) {
@@ -65,6 +67,7 @@ class AjaxController extends Controller
             }
         }
     }
+
     public function actionBehRequestFeedback()
     {
         if (Yii::$app->request->isAjax) {
@@ -75,6 +78,7 @@ class AjaxController extends Controller
             }
         }
     }
+
     public function actionImpactRequestFeedback()
     {
         if (Yii::$app->request->isAjax) {
@@ -85,6 +89,7 @@ class AjaxController extends Controller
             }
         }
     }
+
     public function actionGetObjectDataByTypeById()
     {
         if (Yii::$app->request->isAjax) {
@@ -93,10 +98,11 @@ class AjaxController extends Controller
             if (!empty($post)) {
                 if ($post['type'] == 'goal') {
                     return Goals::getGoalByIdUserId($post['id'], $post['user_id']);
-                } else {
+                } elseif ($post['type'] == 'behavioral') {
                     return UserBehavioral::GetBehavioralByUserId($post['id'], $post['user_id']);
+                } elseif ($post['type'] == 'impact') {
+                    return UserImpact::GetImpactByUserId($post['id'], $post['user_id']);
                 }
-
             }
         }
     }
@@ -114,53 +120,62 @@ class AjaxController extends Controller
                         $post['comment'],
                         $post['status']
                     );
-                } else {
+                } elseif ($post['type'] == 'behavioral') {
                     return BehavioralFeedback::SaveFeedback(
                         $post['user_id'],
                         $post['id'],
                         $post['comment'],
                         $post['status']
                     );
-                }
-
+                } elseif ($post['type'] == 'impact') {
+                    return ImpactFeedback::SaveFeedback(
+                        $post['user_id'],
+                        $post['id'],
+                        $post['comment'],
+                        $post['status']
+                    );
+                };
             }
         }
     }
 
-    public function actionGetGoalsInputContent(){
+    public function actionGetGoalsInputContent()
+    {
         if (Yii::$app->request->isAjax) {
             \Yii::$app->response->format = Response::FORMAT_HTML;
             $contentLength = Yii::$app->request->post('contentLength');
             $this->layout = false;
-            if (!empty($contentLength)){
-                return $this->render('goals',[
+            if (!empty($contentLength)) {
+                return $this->render('goals', [
                     'contentLength' => $contentLength
                 ]);
-            }
-           return false;
-        }
-    }
-
-    public function actionCreateGoal(){
-        if (Yii::$app->request->isAjax) {
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            $post = Yii::$app->request->post();
-            $description = $post['description'];
-            $userComment = $post['userComment'];
-            if (!empty($description) || !empty($userComment)){
-                $model = new Goals();
-                $model->user_id = Yii::$app->user->identity->getId();
-                $model->description = $description;
-                $model->user_comment = $userComment;
-                if ($model->save()){
-                    return $model->id;
-                } ;
             }
             return false;
         }
     }
 
-    public function actionEditGoal(){
+    public function actionCreateGoal()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            $description = $post['description'];
+            $userComment = $post['userComment'];
+            if (!empty($description) || !empty($userComment)) {
+                $model = new Goals();
+                $model->user_id = Yii::$app->user->identity->getId();
+                $model->description = $description;
+                $model->user_comment = $userComment;
+                if ($model->save()) {
+                    return $model->id;
+                };
+            }
+            return false;
+        }
+    }
+
+    public function actionEditGoal()
+    {
         if (Yii::$app->request->isAjax) {
             $post = Yii::$app->request->post();
             $goalsId = $post['goalsId'];
@@ -169,9 +184,9 @@ class AjaxController extends Controller
             $model = Goals::findOne($goalsId);
             $model->description = $description;
             $model->user_comment = $userComment;
-            if ($model->save()){
+            if ($model->save()) {
                 return true;
-            } ;
+            };
             return false;
         }
     }

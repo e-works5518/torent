@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\GoalsFeedback;
+use common\models\ImpactFeedback;
 use Yii;
 use common\models\BehavioralFeedback;
 use common\models\search\BehavioralFeedbackSearch;
@@ -49,19 +50,13 @@ class FeedbackController extends Controller
     public function actionIndex()
     {
 
-            $goals_feedbacks = GoalsFeedback::GetCurrentUserFeedback();
-            $goals_feedbacks_provided = GoalsFeedback::GetCurrentUserFeedbackProvided();
-            $behavioral_feedbacks = BehavioralFeedback::GetCurrentUserFeedback();
-            $behavioral_feedbacks_provided = BehavioralFeedback::GetCurrentUserFeedbackProvided();
-
-//            $feedbacks = array_merge($array1, $array2);
-//            dd($goals_feedbacks);
-
         return $this->render('index',[
             'goals_feedbacks' => GoalsFeedback::GetCurrentUserFeedback(),
             'goals_feedbacks_provided' => GoalsFeedback::GetCurrentUserFeedbackProvided(),
             'behavioral_feedbacks' => BehavioralFeedback::GetCurrentUserFeedback(),
-            'behavioral_feedbacks_provided' => BehavioralFeedback::GetCurrentUserFeedbackProvided()
+            'behavioral_feedbacks_provided' => BehavioralFeedback::GetCurrentUserFeedbackProvided(),
+            'impact_feedbacks' => ImpactFeedback::GetCurrentUserFeedback(),
+            'impact_feedbacks_provided' => ImpactFeedback::GetCurrentUserFeedbackProvided()
         ]);
     }
 

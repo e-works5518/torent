@@ -28,6 +28,17 @@ class Helper
     public static function GetDateFoSql($date)
     {
         return date("Y-m-d", strtotime($date));
+    }
 
+    public static function GetFeedbackStatus($feedback)
+    {
+        $status = $feedback['status'] == 0 ? 'strongly-agree' : 'agree';
+        $status = $feedback['status'] == 2 ? 'strongly-agree' : '' ? "disagree" : $status;
+        $status_mess = $feedback['status'] == 0 ? 'Strongly agree' : 'Agree';
+        $status_mess = $feedback['status'] == 2 ? 'Disagree' : $status_mess;
+        return [
+            'class' => $status,
+            'label' => $status_mess
+        ];
     }
 }
