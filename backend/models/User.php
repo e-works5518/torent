@@ -153,7 +153,7 @@ class User extends \yii\db\ActiveRecord
      */
     public static function GetUsers()
     {
-        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->where(['<>','id',Yii::$app->user->identity->getId()])->indexBy('id')->column();
+        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->where(['<>','id',Yii::$app->user->identity->getId()])->andWhere(['<>','role', 1])->indexBy('id')->column();
     }
 
     public static function GetCurrentUserName()
