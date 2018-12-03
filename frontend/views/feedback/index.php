@@ -89,7 +89,7 @@ $this->params['feedback'] = true;
     <div class="popup relative">
         <a href="javascript:void(0);" class="popup-close absolute" title="Close popup"></a>
         <div class="request-to">
-            <img src="/main/assets/images/members/member-2.png" alt="" class="request-to-whom">
+            <img src="" alt="" class="request-to-whom">
             <strong></strong>
             <span class="request-date"><i class="far fa-clock"></i><span class="date"></span></span>
         </div>
@@ -103,7 +103,7 @@ $this->params['feedback'] = true;
         </div>
         <div class="request-options">
             <label>
-                <input class="status_val" type="radio" value="0" name="status" checked><i
+                <input class="status_val " type="radio" value="0" name="status" checked><i
                         class="fas fa-check transition fa-icon-prop"></i>Objective
                 was
                 achieved</label>
