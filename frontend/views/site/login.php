@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => [
                                     'class' => 'form-username',
                                  ],
-                            ])->textInput(["placeholder" => "Username / Email", 'class' => 'uppercase'])->label(false) ?>
+                            ])->textInput(["placeholder" => "Username / Email"])->label(false) ?>
                     </label>
                 </div>
                 <div class="access-form-row">
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'options' => [
                                 'class' => 'form-username',
                             ],
-                        ])->passwordInput(["placeholder" => "Password", 'class' => 'uppercase'])->label(false) ?>
+                        ])->passwordInput(["placeholder" => "Password"])->label(false) ?>
                     </label>
                 </div>
                 <div class="access-form-row">

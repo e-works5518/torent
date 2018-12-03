@@ -113,11 +113,14 @@ body {
 							font-size: 9px;
 							text-align: center;
 							line-height: 15px;
+							right: -15px;
 						}
 					
 					.nav-menu a:hover,
 					.nav-menu a.active {
 						border-bottom:1px rgba(255, 255, 255, 1) solid;
+						color: #fff;
+						text-decoration: none;
 					}
 				
 			.user-options {
@@ -126,6 +129,8 @@ body {
 				
 				.user-options a {
 					align-items: center;
+					text-decoration: none;
+					color:#fff;
 				}
 				
 					.user-options img {
@@ -262,6 +267,11 @@ body {
 						color:#512178;
 					}
 					
+					.post-edit:focus,
+					.post-edit:hover {
+						text-decoration: none;
+					}
+					
 						.post-edit span {
 							margin-right:14px;
 						}
@@ -352,10 +362,14 @@ body {
 						}
 
 							.comment-item .request-to .btn {
-								width: 112px;
+								/*width: 112px;*/
 								padding: 0;
 								margin: 0;
 								margin-top: 10px;
+								padding-left: 10px;
+								padding-right: 10px;
+								color: #fff;
+								pointer-events: none;
 							}
 							
 							.comment-item .request-to .btn.strongly-agree {
@@ -380,6 +394,11 @@ body {
 					background:#e8e8e8;
 					height:43px;
 					color:#512178;
+				}
+				
+				.load-more-btn:hover {
+					color: #512178;
+					text-decoration: none !important;
 				}
 				
 					.load-more-btn i {
@@ -409,6 +428,11 @@ body {
 						font-weight:700;
 						line-height:32px;
 					}
+					
+					.post-type-by-date > li > a:hover {
+						color:#fff;
+						text-decoration:none;
+					}
 				
 					.post-type-by-date ul {
 						background:#00adc6;
@@ -426,6 +450,8 @@ body {
 						.post-type-by-date ul li a:hover,
 						.post-type-by-date ul li a.active {
 							font-weight:bold;
+							color:#fff;
+							text-decoration:none;
 						}
 						
 	.popup-layer {
@@ -500,13 +526,14 @@ body {
 				}
 				
 				input[type="text"],
+				input[type="password"],
 				select {
 					border:1px #e8e8e8 solid;
 					border-radius:4px;
 					padding-left:10px;
 					padding-right:10px;
 					line-height:30px;
-					height:30px;
+					height:30px !important;
 					color:#8d8d8d;
 				}
 				
