@@ -8,9 +8,6 @@ $(document).ready(function () {
         } else {
             contentLength = contentLength + 1;
         }
-
-
-        console.log('contentLength', contentLength)
         $.ajax({
             type: "POST",
             url: "/ajax/get-goals-input-content",

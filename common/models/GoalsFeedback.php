@@ -124,7 +124,7 @@ class GoalsFeedback extends \yii\db\ActiveRecord
                 ])
             ->from(self::tableName().' gf')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gf.manager_id')
-            ->where(['user_id' => $user_id, 'state' => self::STATE_END])
+            ->where(['user_id' => $user_id])
             ->all();
     }
 }
