@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\LoginForm;
 
+
 /**
  * Site controller
  */
@@ -60,7 +61,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        dd('ok');
         return $this->render('index');
     }
 
