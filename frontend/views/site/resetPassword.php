@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'options' => [
                             'class' => 'form-username',
                         ],
-                    ])->textInput(["placeholder" => "Password", 'class' => 'uppercase'])->label(false) ?>
+                    ])->passwordInput(["placeholder" => "Password", 'class' => ''])->label(false) ?>
                 </label>
             </div>
             <div>
