@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Grant Thornton | Performance Appraisal System';
+$this->title = 'Grant Thornton | myPerformance';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

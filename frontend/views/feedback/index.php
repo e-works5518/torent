@@ -25,7 +25,7 @@ $flag_p = true;
                                     <span>Behavioral competence</span>
                                     <span>External</span>
                                     <span class="request-date"><i
-                                                class="far fa-clock"></i><?= $feedback['date'] ?></span>
+                                                class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
                                     <span><a href="javascript:void(0);"
                                              data-type="behavioral"
                                              data-id="<?= $feedback['behavioral_id'] ?>"
@@ -43,7 +43,7 @@ $flag_p = true;
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>
                                     <span class="request-date"><i
-                                                class="far fa-clock"></i><?= $feedback['date'] ?></span>
+                                                class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
                                     <span><a href="javascript:void(0);"
                                              data-type="goal"
                                              data-id="<?= $feedback['goal_id'] ?>"
@@ -61,7 +61,7 @@ $flag_p = true;
                                     <span>Impact</span>
                                     <span>Internal</span>
                                     <span class="request-date"><i
-                                                class="far fa-clock"></i><?= $feedback['date'] ?></span>
+                                                class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
                                     <span><a href="javascript:void(0);"
                                              data-type="impact"
                                              data-id="<?= $feedback['impact_id'] ?>"
@@ -84,8 +84,8 @@ $flag_p = true;
                                     <span>Behavioral competence</span>
                                     <span>External</span>
                                     <a
-                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback , 'behavioral')['class'] ?> inline-block transition">
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback, 'behavioral')['label'] ?>
                                     </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
@@ -102,8 +102,8 @@ $flag_p = true;
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>
                                     <a
-                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback , 'goals')['class'] ?> inline-block transition">
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback , 'goals')['label'] ?>
                                     </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
@@ -120,8 +120,8 @@ $flag_p = true;
                                     <span>Impact</span>
                                     <span>Internal</span>
                                     <a
-                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                            class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback , 'impact')['class'] ?> inline-block transition">
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback , 'impact')['label'] ?>
                                     </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>

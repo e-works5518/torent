@@ -39,8 +39,8 @@ $behs = \common\models\Behavioral::GetAll();
                                     class="far fa-clock"></i><?= \backend\components\Helper::GetDate($managers_comment['date']) ?></span>
                         <?php if ($managers_comment['state'] == 1): ?>
                             <a
-                                    class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['class'] ?> inline-block transition">
-                                <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['label'] ?>
+                                    class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment ,'behavioral')['class'] ?> inline-block transition">
+                                <?= \backend\components\Helper::GetFeedbackStatus($managers_comment, 'behavioral')['label'] ?>
                             </a>
                         <?php else: ?>
                             <a href="javascript:void(0);"
