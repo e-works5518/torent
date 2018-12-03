@@ -19,7 +19,7 @@ $behs = \common\models\Behavioral::GetAll();
     </div>
     <div class="post has-border relative">
         <a href="javascript:void(0);" class="post-edit absolute"><i
-                    class="fas fa-pencil-alt fa-icon-prop"></i></a>
+                    class="fas fa-pencil-alt fa-icon-prop edit-d"></i></a>
         <span class="post-title semibold">Employee comments</span>
         <textarea readonly data-id="<?= $beh['id'] ?>" class="user_comment"><?= $employee_comments['user_comment'] ?></textarea>
     </div>

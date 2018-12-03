@@ -1,16 +1,16 @@
 $(document).ready(function () {
-    $(document).on('click', '.fa-icon-prop', function () {
+    $(document).on('click', '.edit-d', function () {
         EditIconState($(this));
     })
     $(document).on('click', '.fa-save', function () {
         SaveIconState($(this));
         $("textarea").each(function (textarea) {
-            $(this).height($(this)[0].scrollHeight - 40);
+            $(this).height($(this)[0].scrollHeight - 20);
         });
     })
 
     $("textarea").each(function (textarea) {
-        $(this).height($(this)[0].scrollHeight - 40);
+        $(this).height($(this)[0].scrollHeight - 20);
     });
 
 })
