@@ -27,7 +27,6 @@ class User extends \yii\db\ActiveRecord
      * @var UploadedFile
      */
     public $imageFile;
-    const USER_ROLE = 0;
 
 
     /**
@@ -123,7 +122,6 @@ class User extends \yii\db\ActiveRecord
         $user->last_name = $this->last_name;
         $user->avatar = $this->avatar;
         $user->status = $this->status;
-        $user->role = self::USER_ROLE;
         $user->setPassword($this->password_hash);
         return $user->save() ? $user->getId() : false;
     }
@@ -155,7 +153,7 @@ class User extends \yii\db\ActiveRecord
      */
     public static function GetUsers()
     {
-        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->where(['<>','id',Yii::$app->user->identity->getId()])->indexBy('id')->column();
+        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->where(['<>','id',Yii::$app->user->identity->getId()])->andWhere(['<>','role', 1])->indexBy('id')->column();
     }
 
     public static function GetCurrentUserName()
