@@ -754,3 +754,6 @@ i.fas.fa-pencil-alt.fa-icon-prop{
 .select-manager-content select{
 	width: 100%;
 }
+.user-options .dropdown-toggle{
+	cursor: pointer;
+}

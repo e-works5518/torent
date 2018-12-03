@@ -10,13 +10,18 @@ use  common\models\BehavioralFeedback;
 use  common\models\GoalsFeedback;
 
 AppAsset::register($this);
-$beh_count = count(BehavioralFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => BehavioralFeedback::STATE_UPCOMING]));
-$goals_count = count(GoalsFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => GoalsFeedback::STATE_UPCOMING]));
-$upcoming_feel = $beh_count + $goals_count;
+if (!Yii::$app->user->isGuest) {
+    $beh_count = count(BehavioralFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => BehavioralFeedback::STATE_UPCOMING]));
+    $goals_count = count(GoalsFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => GoalsFeedback::STATE_UPCOMING]));
+    $upcoming_feel = $beh_count + $goals_count;
+} else {
+    $upcoming_feel = 0;
+}
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" >
+<html lang="<?= Yii::$app->language ?>">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
