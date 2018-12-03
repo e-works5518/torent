@@ -30,6 +30,24 @@ $(document).ready(function () {
 
 var feedback = {
     GetObjectData: function (type, id, user_id) {
+        if (type == 'goal'){
+            $(".popup-layer  .comment-type-4").css('display','none');
+            $(".popup-layer .comment-type-1 span").text('Objective was achieved');
+            $(".popup-layer .comment-type-2 span").text('Objective was partially achieved');
+            $(".popup-layer .comment-type-3 span").text('Objective wasn’t achieved');
+        } else if (type == 'behavioral'){
+            $(".popup-layer .comment-type-1 span").text('Strongly agree');
+            $(".popup-layer .comment-type-2 span").text('Agree');
+            $(".popup-layer .comment-type-3 span").text('Disagree');
+            $(".popup-layer .comment-type-4 span").text('Strongly disagree');
+            $(".popup-layer .comment-type-4").css('display','block');
+        }else if (type == 'impact'){
+            $(".popup-layer .comment-type-1 span").text('Strongly agree');
+            $(".popup-layer .comment-type-2 span").text('Agree');
+            $(".popup-layer .comment-type-3 span").text('Disagree');
+            $(".popup-layer .comment-type-4 span").text('Strongly disagree');
+            $(".popup-layer .comment-type-4").css('display','block');
+        }
         var data = {};
         data.type = type;
         data.id = id;
@@ -46,24 +64,7 @@ var feedback = {
                     $('.popup-layer .description').html(res.description);
                     $('.popup-layer .comment').html(res.user_comment);
 
-                    if (data.type == 'goal'){
-                        $(".popup-layer  .comment-type-4").css('display','none');
-                        $(".popup-layer .comment-type-1 span").text('Objective was achieved');
-                        $(".popup-layer .comment-type-2 span").text('Objective was partially achieved');
-                        $(".popup-layer .comment-type-3 span").text('Objective wasn’t achieved');
-                    } else if (data.type == 'behavioral'){
-                        $(".popup-layer .comment-type-1 span").text('Strongly agree');
-                        $(".popup-layer .comment-type-2 span").text('Agree');
-                        $(".popup-layer .comment-type-3 span").text('Disagree');
-                        $(".popup-layer .comment-type-4 span").text('Strongly disagree');
-                        $(".popup-layer .comment-type-4").css('display','block');
-                    }else if (data.type == 'impact'){
-                        $(".popup-layer .comment-type-1 span").text('Strongly agree');
-                        $(".popup-layer .comment-type-2 span").text('Agree');
-                        $(".popup-layer .comment-type-3 span").text('Disagree');
-                        $(".popup-layer .comment-type-4 span").text('Strongly disagree');
-                        $(".popup-layer .comment-type-4").css('display','block');
-                    }
+
                 }
             }
         });

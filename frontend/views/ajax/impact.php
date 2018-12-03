@@ -13,8 +13,7 @@ $impacts = \common\models\Impact::GetAll();
     $managers_comments = \common\models\ImpactFeedback::GetCurrentUserFellByBehId($beh['id']);
     ?>
     <div class="post has-border collaboration-post relative" style="border-color:<?= $beh['color'] ?>">
-        <span class="post-title semibold" style="color: <?= $beh['color'] ?>;"><img src="/logos/<?= $beh['icon'] ?>"
-                                                                                    alt=""><?= $beh['title'] ?></span>
+        <span class="post-title semibold" style="color: <?= $beh['color'] ?>;"><?= $beh['title'] ?></span>
         <p><?= $beh['description'] ?></p>
     </div>
     <div class="post has-border relative">

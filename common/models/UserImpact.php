@@ -75,6 +75,13 @@ class UserImpact extends \yii\db\ActiveRecord
 
     public static function GetImpactByUserId($impact_id, $user_id)
     {
+        $model = self::findOne(['impact_id' => $impact_id, 'user_id' => $user_id]);
+        if (empty($model)) {
+            $m = new self();
+            $m->user_id = $user_id;
+            $m->impact_id = $impact_id;
+            $m->save();
+        }
         return (new \yii\db\Query())
             ->select(
                 [

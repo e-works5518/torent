@@ -98,6 +98,7 @@ class AjaxController extends Controller
             \Yii::$app->response->format = Response::FORMAT_JSON;
             $post = Yii::$app->request->post();
             if (!empty($post)) {
+
                 if ($post['type'] == 'goal') {
                     return Goals::getGoalByIdUserId($post['id'], $post['user_id']);
                 } elseif ($post['type'] == 'behavioral') {
