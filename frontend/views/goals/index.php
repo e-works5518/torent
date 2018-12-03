@@ -13,7 +13,7 @@ $this->params['goals'] = true;
                         <?php if (!empty($goals)): ?>
                             <?php $i = 0;
                             foreach ($goals as $goal): $i++; ?>
-
+                                <div class="goal-item-content">
                                 <div class="goals-inputs-content" data-goals-id="<?= $goal->id; ?>">
                                     <div class="post has-border objective-post relative description-content">
                                         <label for="goals-description" class="post-edit absolute"><i
@@ -44,14 +44,17 @@ $this->params['goals'] = true;
                                                         <img src="/users/<?= $manager_comment['avatar'] ?>" alt=""
                                                              class="request-to-whom">
                                                         <strong><?= $manager_comment['first_name'] ?> <?= $manager_comment['last_name'] ?></strong>
-                                                        <span class="request-date"><i
-                                                                    class="far fa-clock"></i><?= \backend\components\Helper::GetDate($manager_comment['date']) ?></span>
+                                                        <span class="request-date"><i class="far fa-clock"></i><?= \backend\components\Helper::GetDate($manager_comment['date']) ?></span>
+                                                        <?php if ($manager_comment['state'] == 0): ?>
+                                                            <a href="javascript:void(0);" class="btn disagree inline-block transition">Pending approval</a>
+                                                        <?php endif; ?>
                                                     </div>
                                                     <p><?= $manager_comment['comment']; ?></p>
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
+                                </div>
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>

@@ -67,7 +67,11 @@ class GoalsFeedback extends \yii\db\ActiveRecord
             $model->manager_id = $manager_id;
             $model->goal_id = $goal_id;
             $model->state = self::STATE_UPCOMING;
-            return $model->save();
+            $model->date = date("Y-m-d H:i:s");
+            if ($model->save()){
+               return  $model;
+            }
+             return false;
         }
         return true;
     }
@@ -128,7 +132,7 @@ class GoalsFeedback extends \yii\db\ActiveRecord
                 ])
             ->from(self::tableName().' gf')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gf.manager_id')
-            ->where(['user_id' => $user_id, 'state' => self::STATE_END])
+            ->where(['user_id' => $user_id])
             ->all();
     }
 }

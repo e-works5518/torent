@@ -8,9 +8,6 @@ $(document).ready(function () {
         } else {
             contentLength = contentLength + 1;
         }
-
-
-        console.log('contentLength', contentLength)
         $.ajax({
             type: "POST",
             url: "/ajax/get-goals-input-content",
@@ -85,6 +82,11 @@ var goals = {
             url: "/ajax/goal-request-feedback",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
+                if (res){
+                    var goalItemContent =$("[data-goals-id = "+ data.goal_id+ "]").closest(".goal-item-content");
+                    console.log('goalItemContent',goalItemContent);
+                    $(goalItemContent).find(".post-comments").append(res);
+                }
 
             }
         });
