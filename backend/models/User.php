@@ -27,6 +27,7 @@ class User extends \yii\db\ActiveRecord
      * @var UploadedFile
      */
     public $imageFile;
+    const USER_ROLE = 0;
 
 
     /**
@@ -122,6 +123,7 @@ class User extends \yii\db\ActiveRecord
         $user->last_name = $this->last_name;
         $user->avatar = $this->avatar;
         $user->status = $this->status;
+        $user->role = self::USER_ROLE;
         $user->setPassword($this->password_hash);
         return $user->save() ? $user->getId() : false;
     }
