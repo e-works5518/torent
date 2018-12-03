@@ -30,15 +30,62 @@ class Helper
         return date("Y-m-d", strtotime($date));
     }
 
-    public static function GetFeedbackStatus($feedback)
+    public static function GetFeedbackStatus($feedback, $type)
     {
-        $status = $feedback['status'] == 0 ? 'strongly-agree' : 'agree';
-        $status = $feedback['status'] == 2 ? 'strongly-agree' : '' ? "disagree" : $status;
-        $status_mess = $feedback['status'] == 0 ? 'Strongly agree' : 'Agree';
-        $status_mess = $feedback['status'] == 2 ? 'Disagree' : $status_mess;
+        if ($type == 'goals'){
+
+            if ($feedback['status'] == 0){
+                $label = 'Objective was achieved';
+                $status = 'strongly-agree';
+            }
+            if ($feedback['status'] == 1){
+                $label = 'Objective was partially achieved';
+                $status = 'agree';
+            }
+            if ($feedback['status'] == 2){
+                $label = 'Objective wasn’t achieved';
+                $status = 'disagree';
+            }
+        } else if ($type == 'behavioral'){
+
+            if ($feedback['status'] == 0){
+                $label = 'Strongly agree';
+                $status = 'strongly-agree';
+            }
+            if ($feedback['status'] == 1){
+                $label = 'Agree';
+                $status = 'agree';
+            }
+            if ($feedback['status'] == 2){
+                $label = 'Disagree';
+                $status = 'disagree';
+            }
+            if ($feedback['status'] == 3){
+                $label = 'Strongly disagree';
+                $status = 'disagree';
+            }
+
+        }else if ($type == 'impact'){
+            if ($feedback['status'] == 0){
+                $label = 'Strongly agree';
+                $status = 'strongly-agree';
+            }
+            if ($feedback['status'] == 1){
+                $label = 'Agree';
+                $status = 'agree';
+            }
+            if ($feedback['status'] == 2){
+                $label = 'Disagree';
+                $status = 'disagree';
+            }
+            if ($feedback['status'] == 3){
+                $label = 'Strongly disagree';
+                $status = 'disagree';
+            }
+        }
         return [
             'class' => $status,
-            'label' => $status_mess
+            'label' => $label
         ];
     }
 }

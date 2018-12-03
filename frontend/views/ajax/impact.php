@@ -39,8 +39,8 @@ $impacts = \common\models\Impact::GetAll();
                                     class="far fa-clock"></i><?= \backend\components\Helper::GetDate($managers_comment['date']) ?></span>
                         <?php if ($managers_comment['state'] == 1): ?>
                             <a href="javascript:void(0);"
-                               class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['class'] ?> inline-block transition">
-                                <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['label'] ?>
+                               class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment , 'impact')['class'] ?> inline-block transition">
+                                <?= \backend\components\Helper::GetFeedbackStatus($managers_comment ,'impact')['label'] ?>
                             </a>
                         <?php else: ?>
                             <a href="javascript:void(0);"
