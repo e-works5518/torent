@@ -12,7 +12,7 @@ $(document).ready(function () {
         );
     });
     $('.submit_feedback').click(function () {
-        feedback.SaveFeedback($(this).attr('data-user-id'), $(this).attr('data-id'), $('.comment_val').val(), $('.status_val:checked').val(),$(this).attr('data-type'));
+        feedback.SaveFeedback($(this).attr('data-user-id'), $(this).attr('data-id'), $('.comment_val').val(), $('.status_val:checked').val(), $(this).attr('data-type'));
     });
 
     $(".requests-tab-title li a").click(function () {
@@ -30,23 +30,23 @@ $(document).ready(function () {
 
 var feedback = {
     GetObjectData: function (type, id, user_id) {
-        if (type == 'goal'){
-            $(".popup-layer  .comment-type-4").css('display','none');
+        if (type == 'goal') {
+            $(".popup-layer  .comment-type-4").css('display', 'none');
             $(".popup-layer .comment-type-1 span").text('Objective was achieved');
             $(".popup-layer .comment-type-2 span").text('Objective was partially achieved');
             $(".popup-layer .comment-type-3 span").text('Objective wasn’t achieved');
-        } else if (type == 'behavioral'){
+        } else if (type == 'behavioral') {
             $(".popup-layer .comment-type-1 span").text('Strongly agree');
             $(".popup-layer .comment-type-2 span").text('Agree');
             $(".popup-layer .comment-type-3 span").text('Disagree');
             $(".popup-layer .comment-type-4 span").text('Strongly disagree');
-            $(".popup-layer .comment-type-4").css('display','block');
-        }else if (type == 'impact'){
+            $(".popup-layer .comment-type-4").css('display', 'block');
+        } else if (type == 'impact') {
             $(".popup-layer .comment-type-1 span").text('Strongly agree');
             $(".popup-layer .comment-type-2 span").text('Agree');
             $(".popup-layer .comment-type-3 span").text('Disagree');
             $(".popup-layer .comment-type-4 span").text('Strongly disagree');
-            $(".popup-layer .comment-type-4").css('display','block');
+            $(".popup-layer .comment-type-4").css('display', 'block');
         }
         var data = {};
         data.type = type;
@@ -58,10 +58,16 @@ var feedback = {
             data: data,
             success: function (res) {
                 if (res) {
-                    $('.popup-layer .request-to img').attr('src','/users/'+res.avatar);
-                    $('.popup-layer .request-to strong').html(res.first_name +' '+ res.last_name);
+                    var des = '';
+                    if (res.description) {
+                        des = res.description;
+                    } else {
+                        des = res.title;
+                    }
+                    $('.popup-layer .request-to img').attr('src', '/users/' + res.avatar);
+                    $('.popup-layer .request-to strong').html(res.first_name + ' ' + res.last_name);
                     $('.popup-layer .request-to .request-date .date').html(res.date);
-                    $('.popup-layer .description').html(res.description);
+                    $('.popup-layer .description').html(des);
                     $('.popup-layer .comment').html(res.user_comment);
 
 

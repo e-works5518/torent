@@ -87,6 +87,7 @@ class UserImpact extends \yii\db\ActiveRecord
                 [
                     'ub.*',
                     'b.description',
+                    'b.title',
                     'u.*',
                 ])
             ->from('user_impact as ub')
