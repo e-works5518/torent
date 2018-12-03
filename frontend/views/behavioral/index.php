@@ -9,7 +9,7 @@ $this->params['goals'] = true;
 <div class="main-content">
     <div class="container flex">
         <div class="main-left">
-            <h1 class="content-title">Behavioral competencies | 2018</h1>
+            <h1 class="content-title">Behavioral competencies | 2019</h1>
             <div id="behavioral"></div>
         </div>
         <?php echo $this->render('@app/views/layouts/_right-menu.php',['active' => 'behavioral']); ?>

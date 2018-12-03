@@ -133,7 +133,7 @@ $this->params['feedback'] = true;
     <div class="popup relative">
         <a href="javascript:void(0);" class="popup-close absolute" title="Close popup"></a>
         <div class="request-to">
-            <img src="/main/assets/images/members/member-2.png" alt="" class="request-to-whom">
+            <img src="" alt="" class="request-to-whom">
             <strong></strong>
             <span class="request-date"><i class="far fa-clock"></i><span class="date"></span></span>
         </div>
@@ -146,20 +146,26 @@ $this->params['feedback'] = true;
             <textarea class="comment_val" placeholder="Leave your comment (max. 250 chars)"></textarea>
         </div>
         <div class="request-options">
-            <label>
-                <input class="status_val" type="radio" value="0" name="status" checked><i
-                        class="fas fa-check transition fa-icon-prop"></i>Objective
-                was
-                achieved</label>
-            <label>
-                <input class="status_val" type="radio" value="1" name="status"><i
-                        class="fas fa-check transition fa-icon-prop"></i>Objective was
-                partially
-                achieved</label>
-            <label>
-                <input class="status_val" type="radio" value="2" name="status"><i
-                        class="fas fa-check transition fa-icon-prop"></i>Objective
-                wasn’t achieved</label>
+            <label class="comment-type-1">
+                <input class="status_val" type="radio" value="0" name="status" checked>
+                <i class="fas fa-check transition fa-icon-prop"></i>
+                <span class="type-title"></span>
+            </label>
+            <label class="comment-type-2">
+                <input class="status_val" type="radio" value="1" name="status">
+                <i class="fas fa-check transition fa-icon-prop"></i>
+                <span class="type-title"></span>
+            </label>
+            <label class="comment-type-3">
+                <input class="status_val" type="radio" value="2" name="status">
+                <i class="fas fa-check transition fa-icon-prop"></i>
+                <span class="type-title"></span>
+            </label>
+            <label class="comment-type-4">
+                <input class="status_val" style="display: none" type="radio" value="3" name="status">
+                <i class="fas fa-check transition fa-icon-prop"></i>
+                <span class="type-title"></span>
+            </label>
         </div>
         <div align="center">
             <button class="submit-btn transition submit_feedback">Submit feedback</button>
