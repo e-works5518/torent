@@ -2,6 +2,8 @@
 $this->registerJsFile('/js/jq.js');
 $this->registerJsFile('/js/feedback/feedback-src.js');
 $this->params['feedback'] = true;
+$flag = true;
+$flag_p = true;
 ?>
 
 <div class="main-content">
@@ -15,7 +17,7 @@ $this->params['feedback'] = true;
                 </ul>
                 <div class="relative">
                     <ul class="requests-list active absolute">
-                        <?php if (!empty($behavioral_feedbacks)): ?>
+                        <?php if (!empty($behavioral_feedbacks)): $flag = false; ?>
                             <?php foreach ($behavioral_feedbacks as $feedback): ?>
                                 <li class="flex">
                             <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
@@ -33,7 +35,7 @@ $this->params['feedback'] = true;
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <?php if (!empty($goals_feedbacks)): ?>
+                        <?php if (!empty($goals_feedbacks)): $flag = false; ?>
                             <?php foreach ($goals_feedbacks as $feedback): ?>
                                 <li class="flex">
                             <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
@@ -51,7 +53,7 @@ $this->params['feedback'] = true;
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <?php if (!empty($impact_feedbacks)): ?>
+                        <?php if (!empty($impact_feedbacks)): $flag = false; ?>
                             <?php foreach ($impact_feedbacks as $feedback): ?>
                                 <li class="flex">
                             <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
@@ -68,19 +70,23 @@ $this->params['feedback'] = true;
                                 </li>
                             <?php endforeach; ?>
                         <?php endif; ?>
+
+                        <?php if ($flag): ?>
+                            <li class="no-data">No data</li>
+                        <?php endif; ?>
                     </ul>
                     <ul class="requests-list absolute">
-                        <?php if (!empty($behavioral_feedbacks_provided)): ?>
+                        <?php if (!empty($behavioral_feedbacks_provided)): $flag_p = false; ?>
                             <?php foreach ($behavioral_feedbacks_provided as $feedback): ?>
                                 <li class="flex">
                                     <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Behavioral competence</span>
                                     <span>External</span>
-                                    <span
+                                    <a
                                             class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
-                                    </span>
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 
@@ -88,17 +94,17 @@ $this->params['feedback'] = true;
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <?php if (!empty($goals_feedbacks_provided)): ?>
+                        <?php if (!empty($goals_feedbacks_provided)): $flag_p = false; ?>
                             <?php foreach ($goals_feedbacks_provided as $feedback): ?>
                                 <li class="flex">
                                     <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Goal / Objective</span>
                                     <span>Internal</span>
-                                    <span
+                                    <a
                                             class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
-                                    </span>
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 
@@ -106,22 +112,25 @@ $this->params['feedback'] = true;
                             <?php endforeach; ?>
                         <?php endif; ?>
 
-                        <?php if (!empty($impact_feedbacks_provided)): ?>
+                        <?php if (!empty($impact_feedbacks_provided)): $flag_p = false; ?>
                             <?php foreach ($impact_feedbacks_provided as $feedback): ?>
                                 <li class="flex">
                                     <span><img src="/users/<?= $feedback['avatar'] ?>" alt=""
                                                class="request-to-whom"><?= $feedback['first_name'] ?> <?= $feedback['last_name'] ?></span>
                                     <span>Impact</span>
                                     <span>Internal</span>
-                                    <span
+                                    <a
                                             class="btn <?= \backend\components\Helper::GetFeedbackStatus($feedback)['class'] ?> inline-block transition">
-                                      <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
-                                    </span>
+                                        <?= \backend\components\Helper::GetFeedbackStatus($feedback)['label'] ?>
+                                    </a>
                                     <span class="request-date"><i
                                                 class="far fa-clock"></i><?= \backend\components\Helper::GetDate($feedback['date']) ?></span>
 
                                 </li>
                             <?php endforeach; ?>
+                        <?php endif; ?>
+                        <?php if ($flag_p): ?>
+                            <li class="no-data">No data</li>
                         <?php endif; ?>
                     </ul>
                 </div>

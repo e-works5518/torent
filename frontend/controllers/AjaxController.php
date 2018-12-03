@@ -11,6 +11,7 @@ use common\models\ImpactFeedback;
 use common\models\User;
 use common\models\UserBehavioral;
 use common\models\UserImpact;
+use frontend\components\Mail;
 use Yii;
 use yii\web\Controller;
 use \yii\web\Response;
@@ -114,6 +115,7 @@ class AjaxController extends Controller
             \Yii::$app->response->format = Response::FORMAT_JSON;
             $post = Yii::$app->request->post();
             if (!empty($post)) {
+                Mail::SandFeedbackAcceptEmail($post['user_id']);
                 if ($post['type'] == 'goal') {
                     return GoalsFeedback::SaveFeedback(
                         $post['user_id'],

@@ -8,12 +8,15 @@ use yii\helpers\Html;
 use frontend\assets\AppAsset;
 use  common\models\BehavioralFeedback;
 use  common\models\GoalsFeedback;
+use common\models\ImpactFeedback;
+
 
 AppAsset::register($this);
 if (!Yii::$app->user->isGuest) {
     $beh_count = count(BehavioralFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => BehavioralFeedback::STATE_UPCOMING]));
     $goals_count = count(GoalsFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => GoalsFeedback::STATE_UPCOMING]));
-    $upcoming_feel = $beh_count + $goals_count;
+    $impact_count = count(ImpactFeedback::findAll(['manager_id' => Yii::$app->user->getId(), 'state' => ImpactFeedback::STATE_UPCOMING]));
+    $upcoming_feel = $beh_count + $goals_count + $impact_count;
 } else {
     $upcoming_feel = 0;
 }
