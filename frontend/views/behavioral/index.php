@@ -1,6 +1,7 @@
 <?php
 
 $this->registerJsFile('/js/jq.js');
+$this->registerJsFile('/js/common.js');
 $this->registerJsFile('/js/behavioral/content.js');
 $this->registerJsFile('/js/custom.js');
 $this->params['goals'] = true;

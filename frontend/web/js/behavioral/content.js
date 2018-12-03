@@ -19,16 +19,6 @@ $(document).ready(function () {
 
 });
 
-function EditIconState() {
-    $('.fa-icon-prop').removeClass('fa-icon-prop').addClass('fa-save');
-    $('.fa-icon-prop').closest('.has-border').find('textarea').addClass('active-text');
-}
-
-function SaveIconState() {
-    $('.fa-icon-prop').removeClass('fa-icon-prop').addClass('fa-save');
-    $('.fa-icon-prop').closest('.has-border').find('textarea').addClass('active-text');
-}
-
 var behavioral = {
     GetBehs: function () {
         $.ajax({
@@ -37,6 +27,9 @@ var behavioral = {
             data: null,
             success: function (res) {
                 $('#behavioral').html(res);
+                $("textarea").each(function (textarea) {
+                    $(this).height($(this)[0].scrollHeight -20);
+                });
             }
         });
     },
@@ -49,7 +42,7 @@ var behavioral = {
             url: "/ajax/save-user-comment-by-beh-id",  //actionGetCurrentUserBeh
             data: data,
             success: function (res) {
-
+                // SaveIconState();
             }
         });
     },

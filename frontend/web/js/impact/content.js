@@ -25,6 +25,10 @@ var Impact = {
             data: null,
             success: function (res) {
                 $('#Impact').html(res);
+                $("textarea").each(function (textarea) {
+                    console.log('okk')
+                    $(this).height($(this)[0].scrollHeight - 20);
+                });
             }
         });
     },
