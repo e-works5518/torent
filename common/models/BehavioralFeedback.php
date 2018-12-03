@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use frontend\components\Mail;
 use Yii;
 
 /**
@@ -78,6 +79,7 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
     {
         $m = self::findOne(['user_id' => Yii::$app->user->getId(), 'manager_id' => $manager_id, 'behavioral_id' => $behavioral_id]);
         if (empty($m)) {
+            Mail::SandFeedbackEmail($manager_id,Yii::$app->user->getId());
             $model = new self();
             $model->user_id = Yii::$app->user->getId();
             $model->manager_id = $manager_id;
