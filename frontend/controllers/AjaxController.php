@@ -7,7 +7,9 @@ use common\models\Behavioral;
 use common\models\BehavioralFeedback;
 use common\models\Goals;
 use common\models\GoalsFeedback;
+use common\models\ImpactFeedback;
 use common\models\UserBehavioral;
+use common\models\UserImpact;
 use Yii;
 use yii\web\Controller;
 use \yii\web\Response;
@@ -35,7 +37,14 @@ class AjaxController extends Controller
         }
     }
 
-
+    public function actionGetAllImpacts()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_HTML;
+            $this->layout = false;
+            return $this->render('impact');
+        }
+    }
     public function actionSaveUserCommentByBehId()
     {
         if (Yii::$app->request->isAjax) {
@@ -46,7 +55,16 @@ class AjaxController extends Controller
             }
         }
     }
-
+    public function actionSaveUserCommentByImpactId()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            if (!empty($post)) {
+                return UserImpact::SaveUserComment($post['id'], $post['comment']);
+            }
+        }
+    }
     public function actionBehRequestFeedback()
     {
         if (Yii::$app->request->isAjax) {
@@ -57,7 +75,16 @@ class AjaxController extends Controller
             }
         }
     }
-
+    public function actionImpactRequestFeedback()
+    {
+        if (Yii::$app->request->isAjax) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $post = Yii::$app->request->post();
+            if (!empty($post)) {
+                return ImpactFeedback::BehRequestFeedback($post['manager_id'], $post['beh_id']);
+            }
+        }
+    }
     public function actionGetObjectDataByTypeById()
     {
         if (Yii::$app->request->isAjax) {
