@@ -21,7 +21,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#">myPerformance</a>
+        <a href="#"><b>myPerformance</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -49,7 +49,6 @@ $fieldOptions2 = [
             </div>
             <!-- /.col -->
         </div>
-
 
         <?php ActiveForm::end(); ?>
 

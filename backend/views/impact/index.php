@@ -7,16 +7,13 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\Impactearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Impact';
+$this->title = 'Impacts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="behavioral-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <p>
-        <?= Html::a('Create Behavioral', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create impact', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -32,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'icon',
             'date',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',   'template' => '{update}{delete}',],
         ],
     ]); ?>
 </div>

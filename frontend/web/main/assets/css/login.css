@@ -72,25 +72,32 @@ input::placeholder {
 					font-size:15px;
 				}
 					
-						.access-form input[type="text"] {
+						.access-form input[type="text"],
+						.access-form input[type="password"] {
+							padding-left: 0;
+							padding-right: 0;
 							border:0;
-							border-bottom:1px #e9edf8 solid;
+							border-bottom:1px #e9edf8 solid !important;
 							width:100%;
 							background:transparent;
 							font-size:16px;
 							font-weight:100;
 							line-height:42px;
+							border-radius: 0;
+							box-shadow: none !important;
+							color: #fff;
 						}
 
-						.access-form input[type="password"] {
-							border:0;
-							border-bottom:1px #e9edf8 solid;
-							width:100%;
-							background:transparent;
-							font-size:16px;
-							font-weight:100;
-							line-height:42px;
+						.access-form input[type="text"]::placeholder,
+						.access-form input[type="password"]::placeholder {
+							color:#fff;
 						}
+
+						.access-form .help-block-error {
+							font-weight: 300;
+							color: #f00;
+						}
+						
 						
 						.access-form-row:nth-of-type(4) {
 							display: flex;
@@ -130,6 +137,7 @@ input::placeholder {
 								
 							.access-form-row:nth-of-type(4) a:hover {
 								border-color:transparent;
+								color: #fff;
 							}
 					
 						.access-form-row label > a {
@@ -147,6 +155,7 @@ input::placeholder {
 					.access-form button {
 						border:0;
 						border-radius:20px;
+						margin:0;
 						margin-top:28px;
 						width:156px;
 						padding-top:0;
@@ -156,9 +165,12 @@ input::placeholder {
 						font-size:18px;
 						font-weight:300;
 						cursor:pointer;
+						outline:none !important;
 					}
 					
 					.access-form button:hover {
+						opacity: 1;
+						background: #512178;
 						color:rgba(255, 255, 255, .5);
 					}
 					

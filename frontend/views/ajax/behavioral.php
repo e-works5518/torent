@@ -30,7 +30,7 @@ $behs = \common\models\Behavioral::GetAll();
                     class="fas fa-plus fa-icon-prop"></i></a>
         <span class="post-title semibold">Manager’s comments</span>
         <?php if (!empty($managers_comments)): ?>
-            <?php foreach ($managers_comments as $managers_comment):?>
+            <?php foreach ($managers_comments as $managers_comment): ?>
                 <div class="comment-item flex" status="<?= $managers_comment['status'] ?>">
                     <div class="request-to">
                         <img src="/users/<?= $managers_comment['avatar'] ?>" alt="" class="request-to-whom">
@@ -38,13 +38,13 @@ $behs = \common\models\Behavioral::GetAll();
                         <span class="request-date"><i
                                     class="far fa-clock"></i><?= \backend\components\Helper::GetDate($managers_comment['date']) ?></span>
                         <?php if ($managers_comment['state'] == 1): ?>
-                            <a href="javascript:void(0);"
-                               class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['class'] ?> inline-block transition">
+                            <a
+                                    class="btn <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['class'] ?> inline-block transition">
                                 <?= \backend\components\Helper::GetFeedbackStatus($managers_comment)['label'] ?>
                             </a>
                         <?php else: ?>
-                        <a href="javascript:void(0);"
-                           class="btn disagree inline-block transition">Pending approval</a>
+                            <a href="javascript:void(0);"
+                               class="btn disagree inline-block transition">Pending approval</a>
                         <?php endif; ?>
                     </div>
                     <p><?= $managers_comment['comment'] ?></p>

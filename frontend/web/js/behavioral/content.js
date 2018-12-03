@@ -4,7 +4,7 @@ $(document).ready(function () {
         behavioral.SaveUserComment($(this).attr('data-id'), $(this).val());
     });
     $(document).on('click', '.request_feedback', function () {
-        behavioral.RequestFeedback($('#users').val(),$(this).attr('data-id'));
+        behavioral.RequestFeedback($('#users').val(), $(this).attr('data-id'));
     })
 
 
@@ -15,8 +15,20 @@ $(document).ready(function () {
     $(".popup-close").click(function () {
         $(".popup-layer").removeClass("active");
     });
+// <i class="far fa-save"></i>
 
 });
+
+function EditIconState() {
+    $('.fa-icon-prop').removeClass('fa-icon-prop').addClass('fa-save');
+    $('.fa-icon-prop').closest('.has-border').find('textarea').addClass('active-text');
+}
+
+function SaveIconState() {
+    $('.fa-icon-prop').removeClass('fa-icon-prop').addClass('fa-save');
+    $('.fa-icon-prop').closest('.has-border').find('textarea').addClass('active-text');
+}
+
 var behavioral = {
     GetBehs: function () {
         $.ajax({
@@ -41,7 +53,7 @@ var behavioral = {
             }
         });
     },
-    RequestFeedback: function (manager_id,beh_id) {
+    RequestFeedback: function (manager_id, beh_id) {
         var ob = this;
         var data = {};
         data.manager_id = manager_id;

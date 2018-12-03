@@ -41,6 +41,26 @@ class Mail extends Component
         return true;
     }
 
+    public static function SandFeedbackAcceptEmail($user_id)
+    {
+        if (!empty($user_id)) {
+            $user = User::GetUserById($user_id);
+            $manager = User::GetUserById(\Yii::$app->user->getId());
+            \Yii::$app->mailer
+                ->compose([
+                    'html' => 'feedback_accept',
+                    'text' => 'feedback_accept'
+                ], [
+                    'user' => $manager,
+                ])
+                ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+                ->setTo($user->email)
+                ->setSubject($manager->first_name . ' ' . $manager->last_name . '  gave you a feedback')
+                ->send();
+
+        }
+        return true;
+    }
 
     public static function SandMail($email = null, $title = '', $text = '')
     {

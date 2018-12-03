@@ -12,7 +12,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-//        'css/site.css',
+        'css/site.css',
         "/main/assets/css/reset.css",
         "/main/assets/css/style.css",
         "//use.fontawesome.com/releases/v5.3.1/css/all.css",

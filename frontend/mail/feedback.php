@@ -5,4 +5,4 @@
 </p>
 
 
-<a href="<?= \Yii::$app->params['domain'] ?>">Check here</a>
+<a href="<?= \Yii::$app->params['domain'] ?>/feedback">Check here</a>
