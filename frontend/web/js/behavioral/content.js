@@ -4,7 +4,13 @@ $(document).ready(function () {
         behavioral.SaveUserComment($(this).attr('data-id'), $(this).val());
     });
     $(document).on('click', '.request_feedback', function () {
-        behavioral.RequestFeedback($('#users').val(), $(this).attr('data-id'));
+        if ($('#users').val()) {
+            behavioral.RequestFeedback($('#users').val(), $(this).attr('data-id'));
+            $(".popup-layer").removeClass('active');
+        } else {
+            behavioral.RequestFeedback($('#manager-name').attr('data-id'), $(this).attr('data-id'));
+            $(".popup-layer").removeClass('active');
+        }
     })
 
 
@@ -28,7 +34,7 @@ var behavioral = {
             success: function (res) {
                 $('#behavioral').html(res);
                 $("textarea").each(function (textarea) {
-                    $(this).height($(this)[0].scrollHeight -20);
+                    $(this).height($(this)[0].scrollHeight -32);
                 });
             }
         });

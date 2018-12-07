@@ -20,6 +20,8 @@ $(document).ready(function () {
     });
 
     $(".give-feedback-btn").click(function () {
+        $(".popup-layer .popup").hide();
+        $(".popup-layer-loader").show();
         $(".popup-layer").addClass("active");
     });
 
@@ -69,8 +71,8 @@ var feedback = {
                     $('.popup-layer .request-to .request-date .date').html(res.date);
                     $('.popup-layer .description').html(des);
                     $('.popup-layer .comment').html(res.user_comment);
-
-
+                    $(".popup-layer-loader").hide();
+                    $(".popup-layer .popup").show();
                 }
             }
         });

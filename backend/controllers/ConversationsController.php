@@ -2,22 +2,20 @@
 
 namespace backend\controllers;
 
-
 use Yii;
-use backend\models\User;
-use backend\models\UserSearch;
+use common\models\Conversations;
+use common\models\search\ConversationsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * ConversationsController implements the CRUD actions for Conversations model.
  */
-class UserController extends Controller
+class ConversationsController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -32,12 +30,12 @@ class UserController extends Controller
     }
 
     /**
-     * Lists all User models.
+     * Lists all Conversations models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new ConversationsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,84 +44,84 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Displays a single Conversations model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
-     * Creates a new User model.
+     * Creates a new Conversations model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new User();
-        if (Yii::$app->request->isPost) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $name = $model->upload();
-            if (!empty($name)) {
-                $model->avatar = (string)$name;
-            }
+        $model = new Conversations();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        if ($model->load(Yii::$app->request->post())) {
-            $id = $model->SaveUser();
-            return $this->redirect(['update', 'id' => $id]);
-        }
         return $this->render('create', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Conversations model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if (Yii::$app->request->isPost) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $name = $model->upload();
-            if (!empty($name)) {
-                $model->avatar = (string)$name;
-            }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->UpdateUser($id);
-            return $this->redirect(['index']);
-        }
         return $this->render('update', [
             'model' => $model,
         ]);
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Conversations model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
+     * @return mixed   public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+    $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+    return $this->redirect(['index']);
     }
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Conversations model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Conversations the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = Conversations::findOne($id)) !== null) {
             return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
         }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

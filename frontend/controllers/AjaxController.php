@@ -171,6 +171,7 @@ class AjaxController extends Controller
                 $model->description = $description;
                 $model->user_comment = $userComment;
                 if ($model->save()) {
+                    Mail::SandNewGoal($model);
                     return $model->id;
                 };
             }
@@ -202,10 +203,10 @@ class AjaxController extends Controller
             $post = Yii::$app->request->post();
             $this->layout = false;
             if (!empty($post)) {
-                $goalsFeedback =  GoalsFeedback::goalRequestFeedback($post['manager_id'], $post['goal_id']);
+                $goalsFeedback = GoalsFeedback::goalRequestFeedback($post['manager_id'], $post['goal_id']);
                 $manager = User::findOne($goalsFeedback->manager_id);
-                if (!empty($goalsFeedback) && !empty($manager)){
-                    return $this->render('goal-comment',[
+                if (!empty($goalsFeedback) && !empty($manager)) {
+                    return $this->render('goal-comment', [
                         'goalsFeedback' => $goalsFeedback,
                         'manager' => $manager,
                     ]);

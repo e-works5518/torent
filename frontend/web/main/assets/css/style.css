@@ -168,24 +168,39 @@ body {
 			}
 			
 			.requests-tab-title {
+				display: flex;
 				padding-bottom:7px;
 				font-size:15px;
 				font-weight:500;
 				border-bottom:2px #512178 solid;
 			}
 			
-				.requests-tab-title li:not(:first-child) a {
-					margin-left:30px;
+				.requests-tab-title li:first-child a {
+					margin-right:30px;
 				}
 			
 				.requests-tab-title a {
 					color:rgba(0, 0, 0, .4);
+					text-decoration: none;
 				}
 
 				.requests-tab-title a:hover,							
 				.requests-tab-title a.active {
 					color:#512178;
 				}
+				
+				.requests-tab-title li {
+					display: flex;
+					align-items: center;
+				}
+				
+				.requests-tab-title li.add-conversation {
+					margin-left: auto;
+				}
+				
+					.requests-tab-title li.add-conversation a.load-more-btn {
+						height: auto;
+					}
 			
 			.requests-list {
 				height:0;
@@ -202,20 +217,33 @@ body {
 			}
 
 				.requests-list li {
-					align-items: center;
+					/*align-items: center;*/
 					justify-content: space-between;
 					padding-top:18px;
 					padding-bottom:18px;
 					border-bottom:1px #e8e8e8 solid;
 				}
 				
-					.requests-list li span {
+					.requests-list li span:nth-of-type(2) {
 						flex:1.5;
+						margin-left: 15px;
+						margin-right: 15px;
 					}
 					
 					.requests-list li span + span + span,
 					.requests-list li > a {
 						flex:1;
+					}
+					
+					.requests-list li span.request-date,
+					.requests-list li span:last-of-type,
+					.requests-list li span:nth-last-of-type(3) {
+						flex:.5;
+					}
+					
+					.requests-list li a.btn {
+						color: #fff !important;
+						transition: all .5s;
 					}
 				
 						img.request-to-whom {
@@ -227,7 +255,8 @@ body {
 						}
 				
 						.requests-list li img {
-							margin-right:20px;
+							margin-right:10px;
+							vertical-align: text-top;
 						}
 
 						.requests-list li span:last-child {
@@ -509,6 +538,46 @@ body {
 				right: 13px;
 			}
 			
+			.popup h2.conversations-title {
+				margin-bottom: 15px;
+				font-weight: bold;
+				font-size: 18px;
+			}
+			
+			.popup .add-user {
+				margin-bottom: 15px;
+			}
+			
+				.popup .form-group label,
+				.popup .add-user label,
+				.user-form label {
+					margin-bottom: 3px;
+				}
+				
+				.popup .form-group textarea {
+					border-color: #ccc;
+				}
+				
+				.user-form .attachment {
+					margin-bottom: 27px;
+				}
+				
+			.popup .select-manager-content span#manager-name,
+			.popup .select-manager-content span.select2-container {
+				flex: 1;
+			}
+			
+			.popup .select-manager-content span.or {
+				margin-left:10px;
+				margin-right:10px;
+			}
+			
+			.popup .select-manager-content span#manager-name,
+			.popup .select-manager-content span.or {
+				display: flex;
+				align-items: center;
+			}
+			
 			.request-to {
 				overflow: hidden;
 				margin-bottom: 15px;
@@ -552,8 +621,9 @@ body {
 				}
 				
 				textarea {
+					line-height: 22px;
 					width:100%;
-					height:140px;
+					/*height:140px;*/
 					border:1px #e8e8e8 solid;
 					border-radius:4px;
 					padding:16px;
@@ -775,16 +845,12 @@ body {
 i.fas.fa-pencil-alt.fa-icon-prop{
 	cursor: pointer;
 }
-#goals-form textarea{
-	border: none;
-	margin-bottom: 0;
-	height: auto;
-	padding: 0;
-}
+
 #goals-form .form-group{
 	margin-bottom: 0!important;
 }
-#goals-form .post textarea{
+#goals-form .post textarea {
+	height: auto;
 	font-weight: 300;
 	line-height: 22px;
 	color: rgba(0, 0, 0, .6);

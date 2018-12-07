@@ -57,4 +57,11 @@ class GoalsController extends Controller
             'managers_comments' => $managers_comments,
         ]);
     }
+
+    public function actionDelete($id)
+    {
+        Goals::findOne($id)->delete();
+        Yii::$app->session->setFlash('success', "Deleted...", true);
+        return $this->redirect(['index']);
+    }
 }

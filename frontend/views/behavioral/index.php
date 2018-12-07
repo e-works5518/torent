@@ -25,13 +25,22 @@ $this->params['goals'] = true;
             <div class="request-msg">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
                 a piece of classical Latin literature from 45 BC, making it over 2000 years old.
             </div>
-            <div class="request-feedback flex">
-                <select size="1" id="users">
-                    <option selected>Select manager</option>
-                    <?php foreach ($users as $k => $user): ?>
-                        <option value="<?= $k ?>"><?= $user ?></option>
-                    <?php endforeach; ?>
-                </select>
+            <div class="select-manager-content flex">
+                <span id="manager-name" data-id="<?=Yii::$app->user->identity->manager_id?>"><?= \backend\models\User::GetManagerName() ?></span>
+                <span class="or">or</span>
+                <?= \kartik\select2\Select2::widget([
+//                    'model' => $model,
+                    'name' => 'user_id',
+                    'attribute' => 'user_id',
+                    'data' => $users,
+                    'maintainOrder' => true,
+                    'options' => ['placeholder' => 'Users ...', 'id' => 'users', 'multiple' => false],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]);
+                ?>
             </div>
         </div>
         <div align="center">

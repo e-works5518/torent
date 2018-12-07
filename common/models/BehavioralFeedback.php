@@ -102,7 +102,7 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
                 ])
             ->from('behavioral_feedback as bf')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.user_id')
-            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
+            ->where(['bf.manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
             ->all();
     }
 
@@ -118,7 +118,7 @@ class BehavioralFeedback extends \yii\db\ActiveRecord
                 ])
             ->from('behavioral_feedback as bf')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = bf.user_id')
-            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
+            ->where(['bf.manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
             ->all();
     }
 

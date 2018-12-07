@@ -18,6 +18,8 @@ use yii\web\UploadedFile;
  * @property string $last_name
  * @property string $avatar
  * @property int $status
+ * @property int $department_id
+ * @property int $manager_id
  * @property int $created_at
  * @property int $updated_at
  */
@@ -27,7 +29,7 @@ class User extends \yii\db\ActiveRecord
      * @var UploadedFile
      */
     public $imageFile;
-
+    public $password_repeat;
 
     /**
      * @inheritdoc
@@ -58,7 +60,7 @@ class User extends \yii\db\ActiveRecord
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\backend\models\User', 'message' => 'This email address has already been.'],
 
-            ['password_hash', 'required'],
+//            ['password_hash', 'required'],
             ['password_hash', 'string', 'min' => 6],
 
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
@@ -67,6 +69,9 @@ class User extends \yii\db\ActiveRecord
             [['last_name', 'first_name', 'password_reset_token', 'email', 'avatar'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
+
+            [['department_id', 'manager_id'], 'integer'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password_hash', 'message' => "Passwords don't match"],
         ];
     }
 
@@ -77,7 +82,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'User name',
+            'username' => 'Username',
             'last_name' => 'Last name',
             'first_name' => 'First name',
             'auth_key' => 'Auth Key',
@@ -87,7 +92,9 @@ class User extends \yii\db\ActiveRecord
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-
+            'department_id' => 'Department',
+            'manager_id' => 'Manager',
+            'password_repeat' => 'Confirm password',
 
         ];
     }
@@ -113,6 +120,8 @@ class User extends \yii\db\ActiveRecord
     public function SaveUser()
     {
         if (!$this->validate()) {
+            print_r($this->getErrors());
+            exit;
             return false;
         }
         $user = new \common\models\User();
@@ -122,6 +131,8 @@ class User extends \yii\db\ActiveRecord
         $user->last_name = $this->last_name;
         $user->avatar = $this->avatar;
         $user->status = $this->status;
+        $user->manager_id = $this->manager_id;
+        $user->department_id = $this->department_id;
         $user->setPassword($this->password_hash);
         return $user->save() ? $user->getId() : false;
     }
@@ -143,7 +154,12 @@ class User extends \yii\db\ActiveRecord
             $user->last_name = $this->last_name;
             $user->avatar = $this->avatar;
             $user->status = $this->status;
-            return $user->save() ? $user->id : false;
+            $user->manager_id = $this->manager_id;
+            $user->department_id = $this->department_id;
+            if (!empty($user->password_hash)) {
+                $user->password_hash = Yii::$app->security->generatePasswordHash($this->password_hash);
+            }
+            return $user->save();
         }
         return false;
     }
@@ -153,7 +169,13 @@ class User extends \yii\db\ActiveRecord
      */
     public static function GetUsers()
     {
-        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->where(['<>','id',Yii::$app->user->identity->getId()])->andWhere(['<>','role', 1])->indexBy('id')->column();
+        return self::find()
+            ->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])
+            ->where(['<>', 'id', Yii::$app->user->identity->getId()])
+            ->andWhere(['<>', 'id', Yii::$app->user->identity->manager_id])
+            ->andWhere(['<>', 'role', 1])
+            ->indexBy('id')
+            ->column();
     }
 
     public static function GetCurrentUserName()
@@ -166,6 +188,20 @@ class User extends \yii\db\ActiveRecord
         return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->indexBy('id')->where(['id' => 1])->column();
     }
 
+    public static function GetAllUsersIndex()
+    {
+        return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->indexBy('id')->column();
+    }
+
+    public static function GetUsersWhichManagerI()
+    {
+        return self::find()
+            ->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])
+            ->where(['manager_id' => Yii::$app->user->getId()])
+            ->andWhere(['<>', 'id', Yii::$app->user->identity->getId()])
+            ->indexBy('id')
+            ->column();
+    }
 
     /**
      * @param $id
@@ -214,5 +250,14 @@ class User extends \yii\db\ActiveRecord
     public static function GetAll()
     {
         return self::find()->asArray()->where(['not in', 'id', Yii::$app->user->getId()])->all();
+    }
+
+    public static function GetManagerName()
+    {
+        return self::find()
+            ->select(["CONCAT(`first_name`,' ',`last_name`) as name"])
+            ->asArray()->where(['id' => Yii::$app->user->identity->manager_id])
+            ->one()['name'];
+
     }
 }

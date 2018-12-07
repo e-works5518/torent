@@ -90,7 +90,7 @@ class GoalsFeedback extends \yii\db\ActiveRecord
                 ])
             ->from(self::tableName().' gol')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')
-            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
+            ->where(['gol.manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_UPCOMING])
             ->all();
     }
 
@@ -106,7 +106,7 @@ class GoalsFeedback extends \yii\db\ActiveRecord
                 ])
             ->from(self::tableName().' gol')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = gol.user_id')
-            ->where(['manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
+            ->where(['gol.manager_id' => Yii::$app->user->getId(), 'state' => self::STATE_END])
             ->all();
     }
 

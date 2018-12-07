@@ -1,6 +1,29 @@
-#login-form input{
+#login-form input {
     padding: 10px;
 }
-.active-text{
+
+.active-text {
     border: 1px #00adc6 solid;
+    color: black !important;
+}
+
+.requests-list a {
+    color: #7f4b9b !important;;
+}
+
+.fa-trash-alt {
+    color: #de012f;
+}
+
+.edit-d {
+    cursor: pointer;
+}
+
+.popup-layer-loader {
+    width: 100px;
+    margin: 20% auto auto;
+}
+span.select2-selection__clear{
+    right: 2rem!important;
+    top: 4px!important;
 }

@@ -29,6 +29,7 @@ if (!Yii::$app->user->isGuest) {
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -66,9 +67,9 @@ if (!Yii::$app->user->isGuest) {
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0);" class="transition relative">
-                        <i class="far fa-comment-dots"></i>conversation requests
-                        <span class="has-notification">1</span>
+                    <a href="/conversations" class="transition relative <?= !empty($this->params['conversations']) ? 'active' : '' ?>">
+                        <i class="far fa-comment-dots"></i>Coaching conversations
+<!--                        <span class="has-notification">1</span>-->
                     </a>
                 </li>
             </ul>
@@ -87,13 +88,13 @@ if (!Yii::$app->user->isGuest) {
                     </li>
                 </ul>
             <?php else: ?>
-
                 <div class="dropdown">
                     <a class="dropdown-toggle flex" type="button" data-toggle="dropdown">
                         <img src="/users/<?= Yii::$app->user->identity->avatar ?>" alt="">
                         <span class="inline-block"><?= \backend\models\User::GetCurrentUserName() ?></span>
                         <i class="fas fa-angle-down"></i></a>
                     <ul class="dropdown-menu">
+                        <li><a data-method="post" href="/user">User profile</a></li>
                         <li><a data-method="post" href="/site/logout">Logout</a></li>
                     </ul>
                 </div>

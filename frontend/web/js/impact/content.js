@@ -4,7 +4,13 @@ $(document).ready(function () {
         Impact.SaveUserComment($(this).attr('data-id'), $(this).val());
     });
     $(document).on('click', '.request_feedback', function () {
-        Impact.RequestFeedback($('#users').val(), $(this).attr('data-id'));
+        if ($('#users').val()) {
+            Impact.RequestFeedback($('#users').val(), $(this).attr('data-id'));
+            $(".popup-layer").removeClass('active');
+        } else {
+            Impact.RequestFeedback($('#manager-name').attr('data-id'), $(this).attr('data-id'));
+            $(".popup-layer").removeClass('active');
+        }
     })
 
 

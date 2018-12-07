@@ -62,6 +62,26 @@ class Mail extends Component
         return true;
     }
 
+    public static function SandNewGoal($goal)
+    {
+        $user = User::GetUserById(\Yii::$app->user->getId());
+        $manager = User::GetUserById(\Yii::$app->user->identity->manager_id);
+        return \Yii::$app->mailer
+            ->compose([
+                'html' => 'new_goal',
+                'text' => 'new_goal'
+            ], [
+                'user' => $user,
+                'goal' => $goal,
+            ])
+            ->setFrom([\Yii::$app->params['supportEmail'] => 'GT myPerformance'])
+            ->setTo($manager->email)
+            ->setSubject($user->first_name . ' ' . $user->last_name . '  gave you a feedback')
+            ->send();
+
+
+    }
+
     public static function SandMail($email = null, $title = '', $text = '')
     {
         return \Yii::$app

@@ -17,9 +17,9 @@ $impacts = \common\models\Impact::GetAll();
         <p><?= $beh['description'] ?></p>
     </div>
     <div class="post has-border relative">
-        <a href="javascript:void(0);" class="post-edit absolute"><i
-                    class="fas fa-pencil-alt fa-icon-prop"></i></a>
-        <span class="post-title semibold">Employee comments</span>
+        <a href="javascript:void(0);" class="post-edit absolute"><em>Edit</em><i
+                    class="fas fa-pencil-alt fa-icon-prop edit-d"></i></a>
+        <span class="post-title semibold">My comments</span>
         <textarea readonly data-id="<?= $beh['id'] ?>" class="user_comment"><?= $employee_comments['user_comment'] ?></textarea>
     </div>
     <div class="post post-comments relative">

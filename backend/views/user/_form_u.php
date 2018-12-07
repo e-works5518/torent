@@ -5,22 +5,16 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $user_rules
-/* @var $select_countries
+ * /* @var $select_countries
  * /* @var $countries
  * /* @var $companies
  * /* @var $select_countries
  * /* @var $model
- * /* @var $model frontend\models\User
+ * /* @var $model backend\models\User
  */
 /* @var $form yii\widgets\ActiveForm */
-
+$model->password_hash = null;
 ?>
-<style>
-    #user-ebrd{
-        display: inherit;
-    }
-</style>
-
 <div class="user-form">
     <?php $form = ActiveForm::begin([
         'options' => [
@@ -29,21 +23,66 @@ use yii\widgets\ActiveForm;
     ]); ?>
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('first_name'), 'placeholder' => $model->getAttributeLabel('first_name')]) ?>
-            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('last_name'), 'placeholder' => $model->getAttributeLabel('last_name')]) ?>
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true,'disabled' => 'disabled', 'title' => $model->getAttributeLabel('username'), 'placeholder' => $model->getAttributeLabel('username')]) ?>
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('email'), 'placeholder' => $model->getAttributeLabel('email')]) ?>
-            <?= $form->field($model, 'status')->dropDownList(['10' => 'Active', '0' => 'Inactive'],['title' => $model->getAttributeLabel('status')]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'disabled' => 'disabled', 'title' => $model->getAttributeLabel('username'), 'placeholder' => $model->getAttributeLabel('username')]) ?>
+            <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('first_name'), 'placeholder' => $model->getAttributeLabel('first_name')]) ?>
+            <?= $form->field($model, 'last_name')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('last_name'), 'placeholder' => $model->getAttributeLabel('last_name')]) ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('email'), 'placeholder' => $model->getAttributeLabel('email')]) ?>
+            <?= $form->field($model, 'password_hash')
+                ->passwordInput(['maxlength' => true,
+                    'title' => $model->getAttributeLabel('password_hash'),
+                    'placeholder' => $model->getAttributeLabel('password_hash')]) ?>
+            <?= $form->field($model, 'password_repeat')
+                ->passwordInput(['maxlength' => true,
+                    'title' => $model->getAttributeLabel('password_repeat'),
+                    'placeholder' => $model->getAttributeLabel('password_repeat')]) ?>
+
         </div>
         <div class="col-md-6">
-            <?php if (!empty($model->image_url)): ?>
+            <?php if (!empty($model->avatar)): ?>
                 <div class="field-user-imagefile attachment gray-bg padding-5 margin-btn-5">
                     <div class="attachment-img">
-                        <img width="100px" src="/uploads/<?= $model->image_url ?>" alt="">
+                        <img width="25%" src="/users/<?= $model->avatar ?>" alt="">
                     </div>
                 </div>
             <?php endif; ?>
-            <?= $form->field($model, 'imageFile')->fileInput() ?>
+            <?= $form->field($model, 'imageFile')->fileInput()->label('Avatar') ?>
+            <div class="form-group add-Departments">
+                <label class="control-label" for="documents-category">Department</label>
+                <?= \kartik\select2\Select2::widget([
+                    'model' => $model,
+                    'name' => 'department_id',
+                    'attribute' => 'department_id',
+                    'data' => \common\models\Departments::GetAll(),
+                    'maintainOrder' => true,
+                    'options' => ['placeholder' => 'Departments ...', 'id' => 'add-Departments', 'multiple' => false],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]);
+                ?>
+            </div>
+            <div class="form-group add-Manager">
+                <label class="control-label" for="documents-category">Manager</label>
+                <?= \kartik\select2\Select2::widget([
+                    'model' => $model,
+                    'name' => 'manager_id',
+                    'attribute' => 'manager_id',
+                    'data' => \backend\models\User::GetAllUsersIndex(),
+                    'maintainOrder' => true,
+                    'options' => [
+
+                        'placeholder' => 'Managers ...',
+                        'id' => 'add-Manager',
+                        'multiple' => false
+                    ],
+                    'pluginOptions' => [
+                        'tags' => true,
+                        'allowClear' => true,
+                    ],
+                ]);
+                ?>
+            </div>
         </div>
     </div>
     <div class="row">
