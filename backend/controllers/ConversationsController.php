@@ -14,9 +14,6 @@ use yii\filters\VerbFilter;
  */
 class ConversationsController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -24,6 +21,18 @@ class ConversationsController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => [],
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
                 ],
             ],
         ];
