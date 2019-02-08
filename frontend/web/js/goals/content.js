@@ -20,20 +20,25 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('focusout', 'textarea', function () {
+    $(document).on('change', 'textarea', function () {
         var ob = $(this);
         var content = $(this).closest(".goals-inputs-content");
         var description = $(content).find('.description').val();
         var userComment = $(content).find('.user_comment').val();
         if (description || userComment) {
             var goalsId = $(content).data('goals-id');
-            var data = {goalsId: goalsId, description: description, userComment: userComment};
-            console.log('goalsId', goalsId)
+            var data = {
+                goalsId: goalsId,
+                description: description,
+                userComment: userComment,
+                year: _Year
+            };
+            console.log('goalsId', goalsId);
             if (goalsId) {
                 $.ajax({
                     type: "POST",
                     url: "/ajax/edit-goal",
-                    data: data,
+                    data: data
                 });
             } else {
                 $.ajax({
@@ -75,8 +80,8 @@ $(document).ready(function () {
 });
 var goals = {
     RequestFeedback: function (manager_id, goal_id) {
-        console.log('manager_id', manager_id)
-        console.log('goal_id', goal_id)
+        console.log('manager_id', manager_id);
+        console.log('goal_id', goal_id);
         var data = {};
         data.manager_id = manager_id;
         data.goal_id = goal_id;
@@ -94,4 +99,4 @@ var goals = {
             }
         });
     }
-}
+};

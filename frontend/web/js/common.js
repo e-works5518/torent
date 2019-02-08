@@ -13,6 +13,12 @@ $(document).ready(function () {
         $(this).height($(this)[0].scrollHeight - 32);
     });
 
+
+    $('.accordion-m .date').click(function () {
+        $(this).closest('.accordion-m').find('ul').toggleClass('hide-a');
+    });
+    // $('.accordion-m .active').closest('ul').removeClass('hide-a');
+
 })
 
 function EditIconState(ob) {
@@ -26,3 +32,9 @@ function SaveIconState(ob) {
     ob.closest('.has-border').find('textarea').removeClass('active-text').prop('readonly', true);
     ob.closest('.has-border').find('em:first').html('Edit');
 }
+
+
+
+
+
+

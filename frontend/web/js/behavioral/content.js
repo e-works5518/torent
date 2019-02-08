@@ -27,14 +27,16 @@ $(document).ready(function () {
 
 var behavioral = {
     GetBehs: function () {
+        var data = {};
+        data.year = _Year;
         $.ajax({
             type: "POST",
             url: "/ajax/get-all-behs",  //actionGetCurrentUserBeh
-            data: null,
+            data: data,
             success: function (res) {
                 $('#behavioral').html(res);
                 $("textarea").each(function (textarea) {
-                    $(this).height($(this)[0].scrollHeight -32);
+                    $(this).height($(this)[0].scrollHeight - 32);
                 });
             }
         });

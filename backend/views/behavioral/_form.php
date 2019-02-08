@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
         <div class="col-md-6">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'year')->dropDownList(\common\models\Years::GetAll()) ?>
 
         </div>
         <div class="col-md-6">

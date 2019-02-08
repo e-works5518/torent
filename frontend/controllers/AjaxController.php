@@ -11,6 +11,7 @@ use common\models\ImpactFeedback;
 use common\models\User;
 use common\models\UserBehavioral;
 use common\models\UserImpact;
+use common\models\Years;
 use frontend\components\Mail;
 use Yii;
 use yii\web\Controller;
@@ -34,8 +35,14 @@ class AjaxController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             \Yii::$app->response->format = Response::FORMAT_HTML;
-            $this->layout = false;
-            return $this->render('behavioral');
+            $post = Yii::$app->request->post();
+            if (!empty($post['year'])) {
+                $this->layout = false;
+                return $this->render('behavioral', [
+                    'year' => $post['year']
+                ]);
+            }
+
         }
     }
 
@@ -43,8 +50,13 @@ class AjaxController extends Controller
     {
         if (Yii::$app->request->isAjax) {
             \Yii::$app->response->format = Response::FORMAT_HTML;
-            $this->layout = false;
-            return $this->render('impact');
+            $post = Yii::$app->request->post();
+            if (!empty($post['year'])) {
+                $this->layout = false;
+                return $this->render('impact', [
+                    'year' => $post['year']
+                ]);
+            }
         }
     }
 
@@ -170,6 +182,7 @@ class AjaxController extends Controller
                 $model->user_id = Yii::$app->user->identity->getId();
                 $model->description = $description;
                 $model->user_comment = $userComment;
+                $model->year = Years::GetYearIdByYear($post['year']);
                 if ($model->save()) {
                     Mail::SandNewGoal($model);
                     return $model->id;

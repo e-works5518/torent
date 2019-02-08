@@ -6,7 +6,7 @@
  * Time: 12:50 PM
  */
 
-$impacts = \common\models\Impact::GetAll();
+$impacts = \common\models\Impact::GetAll($year);
 ?>
 <?php foreach ($impacts as $beh):
     $employee_comments = \common\models\UserImpact::GetCommentByBehId($beh['id']);
@@ -43,7 +43,7 @@ $impacts = \common\models\Impact::GetAll();
                             </a>
                         <?php else: ?>
                             <a href="javascript:void(0);"
-                               class="btn disagree inline-block transition">Pending approval</a>
+                               class="btn disagree inline-block transition">Pending</a>
                         <?php endif; ?>
                     </div>
                     <p><?= $managers_comment['comment'] ?></p>

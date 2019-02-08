@@ -5,15 +5,17 @@ $this->registerJsFile('/js/common.js');
 $this->registerJsFile('/js/impact/content.js');
 $this->registerJsFile('/js/custom.js');
 $this->params['goals'] = true;
+$year = Yii::$app->request->get('year');
+$this->title = "Impact | " . $year;
 ?>
 
 <div class="main-content">
     <div class="container flex">
         <div class="main-left">
-            <h1 class="content-title">Impact | 2019</h1>
+            <h1 class="content-title" data-year="<?= $year ?>">Impact | <?= $year ?></h1>
             <div id="Impact"></div>
         </div>
-        <?php echo $this->render('@app/views/layouts/_right-menu.php',['active' => 'impact']); ?>
+        <?php echo $this->render('@app/views/layouts/_right-menu.php', ['active' => 'impact' . $year]); ?>
     </div>
 </div>
 
@@ -26,7 +28,8 @@ $this->params['goals'] = true;
                 a piece of classical Latin literature from 45 BC, making it over 2000 years old.
             </div>
             <div class="select-manager-content flex">
-                <span id="manager-name" data-id="<?=Yii::$app->user->identity->manager_id?>"><?= \backend\models\User::GetManagerName() ?></span>
+                <span id="manager-name"
+                      data-id="<?= Yii::$app->user->identity->manager_id ?>"><?= \backend\models\User::GetManagerName() ?></span>
                 <span class="or">or</span>
                 <?= \kartik\select2\Select2::widget([
 //                    'model' => $model,
@@ -48,3 +51,6 @@ $this->params['goals'] = true;
         </div>
     </div>
 </div>
+<script>
+    var _Year = '<?=$year?>'
+</script>

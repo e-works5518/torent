@@ -40,10 +40,7 @@ class ImpactController extends Controller
         ];
     }
 
-    /**
-     * Lists all Impact models.
-     * @return mixed
-     */
+
     public function actionIndex()
     {
         $model = new Impact();

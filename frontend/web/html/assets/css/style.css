@@ -1,17 +1,33 @@
 @font-face {
+	font-family: 'GT-Walsheim-Pro-Light.ttf';
+	src: url('../fonts/GT-Walsheim-Pro-Light.ttf');
+}
+
+@font-face {
 	font-family: 'GT-Walsheim-Pro-Regular';
 	src: url('../fonts/GT-Walsheim-Pro-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'GT-Walsheim-Pro-Medium';
+	src: url('../fonts/GT-Walsheim-Pro-Medium.ttf');
+}
+
+@font-face {
+	font-family: 'GT-Walsheim-Pro-Bold.ttf';
+	src: url('../fonts/GT-Walsheim-Pro-Bold.ttf');
 }
 
 html,
 body {
 	height:100%;
-	font-family: Roboto;
+	font-family: 'GT-Walsheim-Pro-Regular';
 }
 
 	a {
 		text-decoration:none;
-		color:#fff;
+		color: inherit;
+		transition: all 0.3s;
 	}
 	
 	.relative {
@@ -58,8 +74,8 @@ body {
 		}
 
 		.top-navigation {
-			height:66px;
-			background:#512178;
+		    height: 110px;
+		    border-bottom: 1px solid #f3f2ee;
 		}
 		
 			.top-navigation .container {
@@ -74,8 +90,12 @@ body {
 			}
 			
 			.top-navigation label {
-				cursor:pointer;
-				text-align: center;
+			    cursor: pointer;
+			    text-align: center;
+			    margin-left: auto;
+			    padding: 4px 11px 4px 0;
+			    border-right: 1px solid #f3f2ee;
+			    margin-right: 25px;
 			}
 				
 				.top-navigation .logo {
@@ -88,18 +108,18 @@ body {
 				}
 			
 			.nav-menu {
-				font-size:13px;
-				text-transform:uppercase;
+				font-size:15px;
 			}
 				
 				.nav-menu li {
-					margin-left:32px;
-					margin-right:32px;
+					margin-left:15px;
+					margin-right:15px;
 				}
 				
 					.nav-menu a {
 						padding-bottom: 7px;
 						border-bottom:1px transparent solid;
+						color: #4f2d7f;
 					}
 					
 						.nav-menu a i {
@@ -125,8 +145,7 @@ body {
 					.nav-menu a:focus,
 					.nav-menu a:hover,
 					.nav-menu a.active {
-						border-bottom:1px rgba(255, 255, 255, 1) solid;
-						color: #fff;
+						border-bottom:1px #4f2d7f solid;
 						text-decoration: none;
 					}
 				
@@ -137,7 +156,7 @@ body {
 				.user-options a {
 					align-items: center;
 					text-decoration: none;
-					color:#fff;
+						color: #4f2d7f;
 				}
 				
 					.user-options img {
@@ -154,25 +173,24 @@ body {
 					}
 					
 		.main-content {
-			padding-top:20px;
-			padding-bottom:20px;
-			font-size:15px;
+			min-height: calc(100vh - 215px);
+			font-size:16px;
 		}
 		
 			.content-title {
-				margin-top:30px;
-				margin-bottom:30px;
-				font-family: "GT-Walsheim-Pro-Regular";
-				font-size:40px;
-				color:#512178;
+			    margin-top: 20px;
+			    margin-bottom: 20px;
+			    font-family: "GT-Walsheim-Pro-Regular";
+			    font-size: 36px;
+			    color: #512178;
 			}
 			
 			.requests-tab-title {
-				display: flex;
-				padding-bottom:7px;
-				font-size:15px;
-				font-weight:500;
-				border-bottom:2px #512178 solid;
+			    display: flex;
+			    padding-bottom: 7px;
+			    font-size: 16px;
+			    font-weight: 500;
+			    margin-bottom: 15px;
 			}
 			
 				.requests-tab-title li:first-child a {
@@ -180,13 +198,15 @@ body {
 				}
 			
 				.requests-tab-title a {
-					color:rgba(0, 0, 0, .4);
+					color:#75787b;
 					text-decoration: none;
+					border-bottom: 3px solid transparent;
 				}
 
 				.requests-tab-title a:hover,							
 				.requests-tab-title a.active {
-					color:#512178;
+			    	color: #000;
+    				border-color: #e92841;
 				}
 				
 				.requests-tab-title li {
@@ -205,9 +225,10 @@ body {
 			.requests-list {
 				height:0;
 				opacity:0;
-				visibility:hidden;
-				
+				visibility:hidden;				
 				transition:all .5s;
+				left: 25px;
+    			right: 25px;
 			}
 			
 			.requests-list.active {
@@ -517,7 +538,7 @@ body {
 	}
 	
 		.popup {
-			margin:50px auto auto;
+			margin:70px auto auto;
 			border-radius:4px;
 			background:rgba(255, 255, 255, 1);
 			box-shadow:1px 0 8px rgba(0, 0, 0, .2);
@@ -526,6 +547,7 @@ body {
 			width:100%;
 			padding:24px 26px;
 			font-size:15px;
+			min-height: 520px;
 		}
 		
 			.popup-close {
@@ -611,13 +633,11 @@ body {
 				input[type="text"],
 				input[type="password"],
 				select {
-					border:1px #e8e8e8 solid;
-					border-radius:4px;
 					padding-left:10px;
 					padding-right:10px;
-					line-height:30px;
+					line-height:32px;
 					height:30px !important;
-					color:#8d8d8d;
+					color:#75787b;
 				}
 				
 				textarea {
@@ -719,7 +739,14 @@ body {
 				background:#de012f;
 				color:#fff;
 			}
-						
+
+	.footer {
+	    background-color: #452671;
+	    padding: 45px 0;
+	    color: #fff;
+	    font-size: 15px;
+	}
+
 @media screen and (max-width:1080px) {
 	.inner-page .container {
 		width: 100%;
@@ -777,12 +804,12 @@ body {
 			.top-navigation input[type="checkbox"] ~ .burger-icon:before {
 				content:"\02261";
 				font-size: 50px;
-				color:rgba(255, 255, 255, 1);
+				color: #4f2d7f;
 				transition:all .5s;
 			}
 			
 			.top-navigation input[type="checkbox"]:checked ~ .burger-icon:before {
-				color:rgba(255, 255, 255, .5);
+				color:rgba(79, 45, 127, 0.5);
 			}
 			
 			.top-navigation input[type="checkbox"] ~ .nav-menu {
@@ -798,6 +825,11 @@ body {
 				visibility:visible;
 				opacity:1;
 				height: initial;
+			}
+
+			.top-navigation label {
+			    border-right: 0;
+			    margin-right: auto;
 			}
 	
 	.user-options {

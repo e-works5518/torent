@@ -6,7 +6,7 @@
  * Time: 12:50 PM
  */
 
-$behs = \common\models\Behavioral::GetAll();
+$behs = \common\models\Behavioral::GetAll($year);
 ?>
 <?php foreach ($behs as $beh):
     $employee_comments = \common\models\UserBehavioral::GetCommentByBehId($beh['id']);
@@ -19,8 +19,8 @@ $behs = \common\models\Behavioral::GetAll();
     </div>
     <div class="post has-border relative">
         <a href="javascript:void(0);" class="post-edit absolute">
-            <em>Edit</em>
-            <i class="fas fa-pencil-alt fa-icon-prop edit-d"></i>
+            <em title="Edit">Edit</em>
+            <i class="fas fa-pencil-alt fa-icon-prop edit-d" title="Edit"></i>
         </a>
         <span class="post-title semibold">My comments</span>
         <textarea readonly data-id="<?= $beh['id'] ?>" class="user_comment"><?= $employee_comments['user_comment'] ?></textarea>
@@ -46,7 +46,7 @@ $behs = \common\models\Behavioral::GetAll();
                             </a>
                         <?php else: ?>
                             <a href="javascript:void(0);"
-                               class="btn disagree inline-block transition">Pending approval</a>
+                               class="btn disagree inline-block transition">Pending</a>
                         <?php endif; ?>
                     </div>
                     <p><?= $managers_comment['comment'] ?></p>

@@ -2,8 +2,8 @@
     <div class="goals-inputs-content" data-goals-id="">
         <div class="post has-border objective-post relative description-content">
             <label for="goals-description" class="post-edit absolute">
-                <em>Edit</em>
-                <i class="fas fa-pencil-alt fa-icon-prop edit-d"></i>
+                <em title="Edit">Edit</em>
+                <i class="fas fa-pencil-alt fa-icon-prop edit-d" title="Edit"></i>
                 <em>Delete</em>
                 <a class="" href="/goals/delete?id=<?=$goal->id?>"
                    title="Delete object"
@@ -16,8 +16,9 @@
             <textarea readonly name="Goals[description]" class="description" rows="1"></textarea>
         </div>
         <div class="post has-border relative user-comment-content">
-            <label for="goals-user_comment" class="post-edit absolute"><em>Edit</em><i
-                        class="fas fa-pencil-alt fa-icon-prop edit-d"></i></label>
+            <label for="goals-user_comment" class="post-edit absolute">
+                <em title="Edit">Edit</em>
+                <i class="fas fa-pencil-alt fa-icon-prop edit-d" title="Edit"></i></label>
             <span class="post-title semibold">My comments</span>
             <textarea readonly name="Goals[user_comment]" class="user_comment"
                       rows="1"></textarea>

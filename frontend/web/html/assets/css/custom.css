@@ -1,0 +1,356 @@
+table {
+    width: 100%;
+}
+
+button {
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.btn-border {
+	border: 2px solid  #4f2d7f;
+	color: #4f2d7f ;
+	font-size: 15px;
+	padding: 7px 15px;
+}
+
+.btn-border:hover,
+.btn-with-bg,
+.save-submit .btn-border:hover {
+	color: #fff;
+	background-color: #4f2d7f;
+}
+
+.btn-with-bg {
+	border: 2px solid #4f2d7f
+}
+   
+.gray-bg {
+	background-color: #f3f2ee;
+}
+
+.nav-tab {
+    padding: 10px 0;
+}
+
+	.nav-tab .flex {
+	    justify-content: space-between;
+	    align-items: center;
+	}
+
+	.nav-tab ul li {
+	    display: inline-block;
+	    margin-right: 2.5vw;
+	    font-size: 16px;
+	    color: #4f2d7f;
+	}
+
+	.nav-tab ul li a {
+	    border-bottom: 3px solid transparent;
+	    padding-bottom: 11px;
+	}
+
+	.nav-tab ul li a:hover,
+	.nav-tab ul li a.active {
+	    color: #e92841;
+	    border-color: #e92841;
+	}
+
+	.change-year select {
+	    border: 2px solid #e92841;
+	    margin-left:7px;
+	}
+
+.table-list,
+.goals  {
+    overflow: hidden;
+    padding: 25px 0 40px;
+}
+
+.table-item {
+    padding-bottom: 30px;
+}
+
+	.table-item tr th {
+	    text-align: left;
+	    padding: 11px 6px;
+	    font-family: 'GT-Walsheim-Pro-Medium';
+	    white-space: nowrap;
+	}
+
+	.table-item tr td {
+	    color: #75787b;
+	    background-color: #fff;
+	    border-right: 1px solid #f3f2ee;
+	    border-bottom: 1px solid #f3f2ee;
+	    padding: 17px 8px;
+	    line-height: 120%;
+	    font-family: 'GT-Walsheim-Pro-Light.ttf';
+	    max-width: 225px;
+	}
+
+	.white-bg .table-item tr td {
+	    background-color: #f3f2ee;
+	    border-right: 1px solid #fff;
+	    border-bottom: 1px solid #fff;
+	}
+
+	.annual-appraisal .table-item tbody tr:not(:last-child) {
+	    border-bottom: 25px solid #f3f2ee;
+	}
+
+	.table-item tr td span {
+	    display: block;
+	    margin-bottom: 6px;
+	}
+
+	.table-item tr td strong {
+		color: #00adc6;
+		text-align: left;
+    	display: block;
+		font-family: 'GT-Walsheim-Pro-Bold.ttf';
+	}
+
+	.table-item tr td:last-child {
+	    color: #e92841;
+	    text-align: center;
+	}
+
+	.feedback .table-item tr td span {
+	    float: left;
+	    margin-right: 10px;
+	}
+
+	.feedback-links i {
+	    margin-left:9px;
+	}
+
+	.feedback-links .fa-chevron-right {
+	    font-size: 10px;
+	    position: relative;
+	    top: -2px;
+	}
+
+	.request-body div {
+	    max-width: 400px;
+	    margin-bottom: 20px;
+	}
+
+	.request-body div input,
+	.request-body div select {
+	    width: 100%;
+	    border-radius: 4px;
+	    border: 1px solid #f3f2ee;
+	    height: 47px !important;
+	    padding: 0 10px;
+	}
+
+	.popup-layer h3 {
+	    font-size: 24px;
+	    margin-bottom: 20px;
+	}
+
+	.popup-layer .requests-list {
+	    display: none;
+	}
+
+	.popup-layer.active .requests-list {
+	    display: block;
+	}
+
+	.main-bottom .flex > * {
+	    width: 50%;
+	    padding: 90px 0;
+	}
+
+	.bottom-left > * {
+	    position: relative;
+	    z-index: 1;
+	    width: 80%;
+	}
+
+	.bottom-right > * {
+	    margin-left: 10%;
+	    color: #000;
+	}
+
+	.bottom-left {
+	    color: #fff;
+	}
+	
+	.main-bottom {
+	    position: relative;
+	}
+
+	.purple:after {
+	    content: "";
+	    position: absolute;
+	    background-color: #4f2d7f;
+	    left: 0;
+	    right: 50%;
+	    top: 0;
+	    bottom: 0;
+	}
+
+	.main-bottom h2 {
+	    font-size: 40px;
+	    font-family: 'GT-Walsheim-Pro-Medium';
+	    line-height: 120%;
+	    margin-bottom: 30px;
+	}
+
+	.main-bottom p {
+	    font-size: 18px;
+	    line-height: 30px;
+	}
+
+	.main-bottom a, .long-btn {
+	    max-width: 220px;
+	    display: inline-block;
+	    text-align: center;
+	    padding: 13px 15px;
+	    font-size: 18px;
+	    margin-top: 30px;
+	    width: 100%;
+	    border: 2px solid;
+	}
+
+	.bottom-left a:hover {
+		background-color: #fff;
+		color: #4f2d7f;
+	}
+
+	.bottom-right a:hover {
+		background-color: #4f2d7f;
+		color: #fff;
+	}
+
+	.goal-list .flex {
+	    justify-content: space-between;
+	    flex-wrap: wrap;
+	}
+
+	.goal-item {
+	    width: calc(50% - 15px);
+	    margin-bottom: 10px;
+	}
+
+	.goal-list h2 {
+	    font-size: 28px;
+	    margin-bottom: 25px;
+	    font-family: 'GT-Walsheim-Pro-Bold.ttf';
+	}
+
+	.goal-item label {
+		margin-bottom: 8px;
+	    font-family: 'GT-Walsheim-Pro-Medium';
+	    display: block;
+	}
+
+	.container .goal-list:not(:last-child) {
+	    border-bottom: 1px solid #e6e6e2;
+	    margin-bottom: 40px;
+	    padding-bottom: 10px;
+	}
+
+	.goal-item textarea {
+		font-family: 'GT-Walsheim-Pro-Light.ttf';
+	    height: 95px;
+	}
+
+	.long-btn {
+		border: 2px solid #4f2d7f;
+		    margin-top: 0;
+	}
+
+	.long-btn:hover {
+	    background: #fff;
+	    color: #4f2d7f;
+	}
+
+	.save-submit {
+	    padding: 40px 0 100px;
+	}
+
+	.save-submit .btn-border {
+	    background-color: #fff;
+	    margin: 20px;
+	}
+
+@media screen and (min-width:1080px) {	
+	.feedback-links {
+	    float: right;
+	    margin-top:2px;
+	}
+
+	.feedback-links .btn-border {
+	   margin-left:15px;
+	}
+}
+
+@media screen and (max-width:1080px) {
+	.table-item {
+	    padding-top: 20px;
+	    overflow-x: auto;
+	}
+
+	.feedback-links {
+	    justify-content: center;
+	    flex-wrap: wrap;
+	}
+
+	.feedback-links .btn-border {
+	   margin:7px;
+	}
+
+	.main-bottom h2 {
+	    font-size: 30px;
+	}
+}
+
+@media screen and (max-width:768px) {
+	.nav-tab .flex {
+	    flex-direction: column;
+	}
+
+	.change-year {
+	    order: -1;
+	    margin-bottom: 16px;
+	}
+
+	.nav-tab ul li a {
+	    padding-bottom: 5px;
+	}
+
+	.inner-page .main-content .container.flex {
+	    display: block;
+	}
+
+	.purple:after {
+	    right: 0;
+	    bottom: 44%;
+	}
+
+	.main-bottom .flex > * {
+	    width: 100%;
+	    padding: 35px 0;
+	}
+
+	.bottom-right > * {
+	    margin-left: 0;
+	}
+
+	.bottom-left > * {
+	    width: 100%;
+	}
+}
+
+@media screen and (max-width:736px) {
+	.goal-item {
+	    width: 100%;
+	}
+
+	.footer {
+	    padding: 25px 0;
+	}
+}

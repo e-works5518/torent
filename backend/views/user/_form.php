@@ -6,6 +6,8 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */
 /* @var $form yii\widgets\ActiveForm */
+$this->registerJsFile('/js/jq.js');
+//$this->registerJsFile('/js/sss.js?v=2');
 ?>
 
 <div class="user-form ">
@@ -23,6 +25,7 @@ use yii\widgets\ActiveForm;
         <div class="col-md-6">
             <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true,'title' => $model->getAttributeLabel('password_hash'), 'autocomplete'=>"off", 'placeholder' => $model->getAttributeLabel('password_hash')]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('email'), 'placeholder' => $model->getAttributeLabel('email')]) ?>
+            <?= $form->field($model, 'position')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('position'), 'placeholder' => $model->getAttributeLabel('position')]) ?>
         </div>
     </div>
 

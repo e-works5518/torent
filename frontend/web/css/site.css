@@ -23,7 +23,12 @@
     width: 100px;
     margin: 20% auto auto;
 }
-span.select2-selection__clear{
-    right: 2rem!important;
-    top: 4px!important;
+
+span.select2-selection__clear {
+    right: 2rem !important;
+    top: 4px !important;
+}
+
+.hide-a {
+    display: none;
 }

@@ -14,6 +14,7 @@
 //                    ['label' => 'Goals feedback', 'icon' => 'file-code-o', 'url' => ['/goals-feedback']],
                     ['label' => 'Departments', 'icon' => 'list', 'url' => ['/departments']],
                     ['label' => 'Users', 'icon' => 'users', 'url' => ['/user']],
+                    ['label' => 'Years', 'icon' => 'list', 'url' => ['/years']],
 
                 ],
             ]

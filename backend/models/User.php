@@ -22,6 +22,7 @@ use yii\web\UploadedFile;
  * @property int $manager_id
  * @property int $created_at
  * @property int $updated_at
+ * @property int $position
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -66,7 +67,7 @@ class User extends \yii\db\ActiveRecord
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
             [['last_name', 'first_name', 'email'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['last_name', 'first_name', 'password_reset_token', 'email', 'avatar'], 'string', 'max' => 255],
+            [['last_name', 'first_name', 'password_reset_token', 'email', 'avatar','position'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
 
@@ -95,6 +96,7 @@ class User extends \yii\db\ActiveRecord
             'department_id' => 'Department',
             'manager_id' => 'Manager',
             'password_repeat' => 'Confirm password',
+            'position' => 'Position',
 
         ];
     }
@@ -133,6 +135,7 @@ class User extends \yii\db\ActiveRecord
         $user->status = $this->status;
         $user->manager_id = $this->manager_id;
         $user->department_id = $this->department_id;
+        $user->position = $this->position;
         $user->setPassword($this->password_hash);
         return $user->save() ? $user->getId() : false;
     }
@@ -156,6 +159,7 @@ class User extends \yii\db\ActiveRecord
             $user->status = $this->status;
             $user->manager_id = $this->manager_id;
             $user->department_id = $this->department_id;
+            $user->position = $this->position;
             if (!empty($user->password_hash)) {
                 $user->password_hash = Yii::$app->security->generatePasswordHash($this->password_hash);
             }

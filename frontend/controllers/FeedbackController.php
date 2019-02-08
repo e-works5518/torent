@@ -50,7 +50,19 @@ class FeedbackController extends Controller
     public function actionIndex()
     {
 
-        return $this->render('index',[
+        return $this->render('index', [
+
+        ]);
+    }
+
+    /**
+     * Lists all BehavioralFeedback models.
+     * @return mixed
+     */
+    public function actionIndex1()
+    {
+
+        return $this->render('index', [
             'goals_feedbacks' => GoalsFeedback::GetCurrentUserFeedback(),
             'goals_feedbacks_provided' => GoalsFeedback::GetCurrentUserFeedbackProvided(),
             'behavioral_feedbacks' => BehavioralFeedback::GetCurrentUserFeedback(),
@@ -59,5 +71,4 @@ class FeedbackController extends Controller
             'impact_feedbacks_provided' => ImpactFeedback::GetCurrentUserFeedbackProvided()
         ]);
     }
-
 }

@@ -25,10 +25,12 @@ $(document).ready(function () {
 });
 var Impact = {
     GetBehs: function () {
+        var data = {};
+        data.year = _Year;
         $.ajax({
             type: "POST",
             url: "/ajax/get-all-impacts",  //actionGetCurrentUserBeh
-            data: null,
+            data: data,
             success: function (res) {
                 $('#Impact').html(res);
                 $("textarea").each(function (textarea) {

@@ -6,7 +6,7 @@
 
         <span class="request-date">
             <i class="far fa-clock"></i><?= date("d-m-Y" , strtotime($goalsFeedback->date)); ?></span>
-        <a href="javascript:void(0);" class="btn disagree inline-block transition">Pending approval</a>
+        <a href="javascript:void(0);" class="btn disagree inline-block transition">Pending</a>
     </div>
     <p><?= $goalsFeedback->comment; ?></p>
 </div>

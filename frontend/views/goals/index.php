@@ -2,147 +2,101 @@
 $this->registerJsFile('/js/common.js');
 $this->registerJsFile('/js/goals/content.js');
 $this->params['goals'] = true;
+$year = Yii::$app->request->get('year');
+$this->title = "Goals | " . $year;
 ?>
 
 <div class="main-content">
-    <div class="container flex">
-        <div class="main-left">
-            <?php if (Yii::$app->session->hasFlash('success')): ?>
-                <div class="alert alert-success alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i> Deleted...</h4>
+    <section class="nav-tab">
+        <div class="container">
+            <div class="flex">
+                <ul>
+                    <li><a href="/annual" class="active">Annual appraisal</a></li>
+                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/conversations">Coaching sessions</a></li>
+                </ul>
+                <div class="change-year">
+                    <label>Change year</label>
+                    <select>
+                        <option <?=$year == 2018?'selected':''?>>2018</option>
+                        <option <?=$year == 2019?'selected':''?> >2019</option>
+                    </select>
                 </div>
-            <?php endif; ?>
-            <h1 class="content-title">Goals and Expectations | 2019</h1>
-            <div id="goals-form">
-                <div class="goals-all-content">
+            </div>
+        </div>
+    </section>
+    <section class="gray-bg goals">
+        <div class="container">
+            <h1 class="content-title">My goals for <?=$year?></h1>
+            <div class="goal-list">
+                <h2>Goal 1</h2>
+                <div class="flex">
                     <div class="goal-item">
-                        <?php if (!empty($goals)): ?>
-                            <?php $i = 0;
-                            foreach ($goals as $goal): $i++; ?>
-                                <div class="goal-item-content">
-                                    <div class="goals-inputs-content" data-goals-id="<?= $goal->id; ?>">
-                                        <div class="post has-border objective-post relative description-content">
-                                            <label for="goals-description" class="post-edit absolute">
-                                                <em>Edit</em>
-                                                <i class="fas fa-pencil-alt fa-icon-prop edit-d"></i>
-                                                <em>Delete</em>
-                                                <a class="" href="/goals/delete?id=<?=$goal->id?>"
-                                                   title="Delete object"
-                                                   data-confirm="Are you sure you want to delete this item?"
-                                                   data-method="post">
-                                                    <i class="fas fa-trash-alt fa-icon-prop"></i>
-                                                </a>
-                                            </label>
-                                            <span class="post-title semibold">Objective <?= $i; ?><? ?></span>
-                                            <textarea readonly name="Goals[description]" class="description"
-                                                      rows="1"><?= $goal->description; ?></textarea>
-                                        </div>
-                                        <div class="post has-border relative user-comment-content">
-                                            <label for="goals-user_comment" class="post-edit absolute">
-                                                <em>Edit</em>
-                                                <i class="fas fa-pencil-alt fa-icon-prop edit-d"></i></label>
-                                            <span class="post-title semibold">My comments</span>
-                                            <textarea readonly name="Goals[user_comment]" class="user_comment"
-                                                      rows="1"><?= $goal->user_comment; ?></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="post post-comments relative">
-                                        <a href="javascript:void(0);" data-id="<?= $goal->id; ?>"
-                                        <a href="javascript:void(0);" data-id="<?= $goal->id; ?>"
-                                        <a href="javascript:void(0);" data-id="<?= $goal->id; ?>"
-                                           class="post-edit absolute give-feedback-btn give-feedback-btn"><span>Request feedback</span><i
-                                                    class="fas fa-plus fa-icon-prop"></i></a>
-                                        <span class="post-title semibold">Manager’s comments</span>
-                                        <?php if (!empty($managers_comments)): ?>
-                                            <?php foreach ($managers_comments as $manager_comment): ?>
-                                                <?php if ($manager_comment['goal_id'] == $goal->id): ?>
-                                                    <div class="comment-item flex">
-                                                        <div class="request-to">
-                                                            <img src="/users/<?= $manager_comment['avatar'] ?>" alt=""
-                                                                 class="request-to-whom">
-                                                            <strong><?= $manager_comment['first_name'] ?> <?= $manager_comment['last_name'] ?></strong>
-                                                            <span class="request-date"><i
-                                                                        class="far fa-clock"></i><?= \backend\components\Helper::GetDate($manager_comment['date']) ?></span>
-                                                            <?php if ($manager_comment['state'] == 0): ?>
-                                                                <a href="javascript:void(0);"
-                                                                   class="btn disagree inline-block transition">Pending
-                                                                    approval</a>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                        <p><?= $manager_comment['comment']; ?></p>
-                                                    </div>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <div class="goals-inputs-content" data-goals-id="">
-                                <div class="post has-border objective-post relative description-content">
-                                    <label for="goals-description" class="post-edit absolute"><em>Edit</em><i
-                                                class="fas fa-pencil-alt fa-icon-prop edit-d"></i></label>
-                                    <span class="post-title semibold">Objective 1</span>
-                                    <textarea readonly name="Goals[description]" class="description"
-                                              rows="1"></textarea>
-                                </div>
-                                <div class="post has-border relative user-comment-content">
-                                    <label for="goals-user_comment" class="post-edit absolute"><em>Edit</em><i
-                                                class="fas fa-pencil-alt fa-icon-prop edit-d"></i></label>
-                                    <span class="post-title semibold">My comments</span>
-                                    <textarea readonly name="Goals[user_comment]" class="user_comment"
-                                              rows="1"></textarea>
-                                </div>
-                            </div>
-                            <div class="post post-comments relative">
-                                <a href="javascript:void(0);" data-id=""
-                                   class="post-edit absolute give-feedback-btn give-feedback-btn"><span>Request feedback</span><i
-                                            class="fas fa-plus fa-icon-prop"></i></a>
-                            </div>
-                            <br>
-                            <br>
-                        <?php endif; ?>
+                        <label>Goal description</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Timeframe</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Measure of success</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Support needed</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>My comments</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Manager’s comments</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
                     </div>
                 </div>
             </div>
+            <div class="goal-list">
+                <h2>Goal 2</h2>
+                <div class="flex">
+                    <div class="goal-item">
+                        <label>Goal description</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Timeframe</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Measure of success</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Support needed</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>My comments</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                    <div class="goal-item">
+                        <label>Manager’s comments</label>
+                        <textarea placeholder="What do I want to achieve? How does it contribute to my service line/team/GTIL strategic priorities?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div><button class="long-btn btn-with-bg"> + Add new goal</button></div>
+        </div>
+    </section>
+    <section class="save-submit">
+        <div align="center" class="container">
+            <button class="long-btn btn-border"> Save changes</button>
+            <button class="long-btn btn-with-bg"> Save & Submit</button>
+        </div>
+    </section>
+</div>
 
-            <a class="load-more-btn flex semibold" id="add-objective"><i
-                        class="fas fa-plus"></i>Add objective</a>
-        </div>
-        <?php echo $this->render('@app/views/layouts/_right-menu.php', ['active' => 'goals']); ?>
-    </div>
-</div>
-<div class="popup-layer transition">
-    <div class="popup relative">
-        <a href="javascript:void(0);" class="popup-close absolute" title="Close popup"></a>
-        <div class="request-body">
-            <strong>Goal / Objective</strong>
-            <div class="request-msg">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
-                a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-            </div>
-            <div class="select-manager-content flex">
-                <span id="manager-name"
-                      data-id="<?= Yii::$app->user->identity->manager_id ?>"><?= \backend\models\User::GetManagerName() ?></span>
-                <span class="or">or</span>
-                <?= \kartik\select2\Select2::widget([
-//                    'model' => $model,
-                    'name' => 'user_id',
-                    'attribute' => 'user_id',
-                    'data' => $users,
-                    'maintainOrder' => true,
-                    'options' => ['placeholder' => 'Users ...', 'id' => 'users', 'multiple' => false],
-                    'pluginOptions' => [
-                        'tags' => true,
-                        'allowClear' => true,
-                    ],
-                ]);
-                ?>
-            </div>
-        </div>
-        <div align="center">
-            <button class="submit-btn transition request_feedback">Request feedback</button>
-        </div>
-    </div>
-</div>
+<script>
+    var _Year = '<?=$year?>'
+</script>

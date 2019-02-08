@@ -4,9 +4,28 @@ $this->registerJsFile('/js/conversation/conversation-src.js');
 $this->params['conversations'] = true;
 $flag = true;
 $flag_p = true;
+$this->title = "Coaching conversations";
 ?>
 
 <div class="main-content">
+    <section class="nav-tab">
+        <div class="container">
+            <div class="flex">
+                <ul>
+                    <li><a href="/annual" >Annual appraisal</a></li>
+                    <li><a href="/feedback" >Feedback</a></li>
+                    <li><a href="/conversations" class="active">Coaching sessions</a></li>
+                </ul>
+                <div class="change-year">
+                    <label>Change year</label>
+                    <select>
+                        <option>2018</option>
+                        <option>2019</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="container">
         <?php if (Yii::$app->session->hasFlash('success')): ?>
             <div class="alert alert-success alert-dismissable">
@@ -131,7 +150,7 @@ $flag_p = true;
                 ]);
                 ?>
             </div>
-            <?= $form->field($model, 'notes')->textarea(['maxlength' => true,'autocomplete' => 'off']) ?>
+            <?= $form->field($model, 'notes')->textarea(['maxlength' => true, 'autocomplete' => 'off']) ?>
             <?= $form->field($model, 'attachment_f')->fileInput() ?>
             <?= $form->field($model, 'date')->widget(\kartik\date\DatePicker::classname(), [
                 'options' => ['placeholder' => 'Date ...'],

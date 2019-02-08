@@ -13,6 +13,7 @@ use Yii;
  * @property string $description
  * @property string $user_comment
  * @property string $date
+ * @property int $year
  */
 class Goals extends \yii\db\ActiveRecord
 {
@@ -30,11 +31,11 @@ class Goals extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
+            [['user_id', 'year'], 'integer'],
             [['description', 'user_comment'], 'string'],
             [['date'], 'safe'],
             [['title'], 'string', 'max' => 255],
-        ];
+       ];
     }
 
     /**
@@ -49,8 +50,10 @@ class Goals extends \yii\db\ActiveRecord
             'description' => 'Description',
             'user_comment' => 'User Comment',
             'date' => 'Date',
+            'year' => 'Year',
         ];
     }
+
 
     public static function getGoalByIdUserId($goal_id, $user_id)
     {
@@ -60,10 +63,18 @@ class Goals extends \yii\db\ActiveRecord
                     'goal.*',
                     'u.*',
                 ])
-            ->from(self::tableName().' goal')
+            ->from(self::tableName() . ' goal')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = goal.user_id')
             ->where(['goal.id' => $goal_id, 'user_id' => $user_id])
             ->one();
     }
 
+    public static function GetAllByUserByYear($year)
+    {
+        return self::find()->where(
+            [
+                'user_id' => Yii::$app->user->getId(),
+                'year' => Years::GetYearIdByYear($year),
+            ])->all();
+    }
 }

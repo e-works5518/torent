@@ -27,6 +27,7 @@ $model->password_hash = null;
             <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('first_name'), 'placeholder' => $model->getAttributeLabel('first_name')]) ?>
             <?= $form->field($model, 'last_name')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('last_name'), 'placeholder' => $model->getAttributeLabel('last_name')]) ?>
             <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'title' => $model->getAttributeLabel('email'), 'placeholder' => $model->getAttributeLabel('email')]) ?>
+            <?= $form->field($model, 'position')->textInput(['maxlength' => true,'title' => $model->getAttributeLabel('position'), 'placeholder' => $model->getAttributeLabel('position')]) ?>
             <?= $form->field($model, 'password_hash')
                 ->passwordInput(['maxlength' => true,
                     'title' => $model->getAttributeLabel('password_hash'),

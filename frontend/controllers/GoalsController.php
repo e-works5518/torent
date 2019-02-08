@@ -42,16 +42,25 @@ class GoalsController extends Controller
 
     }
 
+
+    public function actionIndex($year)
+    {
+        return $this->render('index', [
+            'goals' => Goals::GetAllByUserByYear($year),
+            'year' => $year
+        ]);
+    }
+
     /**
      * Lists all Goals models.
      * @return mixed
      */
-    public function actionIndex()
+    public function _actionIndex()
     {
-        $goals = Goals::find()->where(['user_id' => Yii::$app->user->identity->getId()])->all();
+        $goals = Goals::GetAllByUserByYear(Yii::$app->request->get('year'));
         $managers_comments = GoalsFeedback::goalCurrentUserFellByUserlId(Yii::$app->user->identity->getId());
 
-        return $this->render('index',[
+        return $this->render('index', [
             'goals' => $goals,
             'users' => User::GetUsers(),
             'managers_comments' => $managers_comments,
@@ -62,6 +71,6 @@ class GoalsController extends Controller
     {
         Goals::findOne($id)->delete();
         Yii::$app->session->setFlash('success', "Deleted...", true);
-        return $this->redirect(['index']);
+        return $this->redirect(['index/2018']);
     }
 }

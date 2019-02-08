@@ -15,6 +15,7 @@ use yii\web\UploadedFile;
  * @property string $icon
  * @property string $date
  * @property string $icon_f
+ * @property string $year
  */
 class Behavioral extends \yii\db\ActiveRecord
 {
@@ -37,6 +38,7 @@ class Behavioral extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['year'], 'integer'],
             [['description'], 'string'],
             [['icon_f'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
             [['date'], 'safe'],
@@ -57,6 +59,7 @@ class Behavioral extends \yii\db\ActiveRecord
             'icon' => 'Icon',
             'date' => 'Date',
             'attachment' => 'Icon',
+            'year' => 'Year',
         ];
     }
 
@@ -71,9 +74,9 @@ class Behavioral extends \yii\db\ActiveRecord
         }
     }
 
-    public static function GetAll()
+    public static function GetAll($year)
     {
-        return self::find()->asArray()->all();
+        return self::find()->asArray()->where(['year' => Years::GetYearIdByYear($year)])->all();
     }
 
     public static function GetOneById($id)

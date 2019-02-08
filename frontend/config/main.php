@@ -42,6 +42,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'impact/<year:\d+>' => 'impact',
+                'goals/<year:\d+>' => 'goals',
+                'behavioral/<year:\d+>' => 'behavioral',
             ],
         ],
 
