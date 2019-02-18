@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use backend\models\User;
+use common\models\UserBehavioral;
 use Yii;
 use common\models\Behavioral;
 use yii\web\Controller;
@@ -41,17 +42,48 @@ class BehavioralController extends Controller
     }
 
     /**
-     * Lists all Behavioral models.
-     * @return mixed
+     * @param $year
+     * @return string
      */
-    public function actionIndex()
+    public function actionIndex($year)
     {
-        $model = new Behavioral();
+        $comments = Yii::$app->request->post('comments');
+        if ($comments) {
+            foreach ($comments as $comment) {
+                if (!empty($comment['id'])) {
+                    $model = UserBehavioral::findOne($comment['id']);
+                    $model->user_comment = $comment['user_comment'];
+                    $model->save();
+                } else {
+                    $model = new UserBehavioral();
+                    $model->user_id = Yii::$app->user->getId();
+                    $model->behavioral_id = $comment['behavioral_id'];
+                    $model->user_comment = $comment['user_comment'];
+                    $model->save();
+                }
 
+            }
+        }
         return $this->render('index', [
-            'model' => $model,
-            'users' => User::GetUsers()
+            'year' => $year,
+            'behavioral' => Behavioral::GetAllCurrentUserByYear($year)
         ]);
     }
-
+    public function actionUser($year,$id)
+    {
+        $comments = Yii::$app->request->post('comments');
+        if ($comments) {
+            foreach ($comments as $comment) {
+                if (!empty($comment['id'])) {
+                    $model = UserBehavioral::findOne($comment['id']);
+                    $model->manager_comment = $comment['manager_comment'];
+                    $model->save();
+                }
+            }
+        }
+        return $this->render('user-index', [
+            'year' => $year,
+            'behavioral' => Behavioral::GetAllbyUserByYear($year,$id)
+        ]);
+    }
 }

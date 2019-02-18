@@ -11,7 +11,7 @@ $this->title = "Feedback requests";
         <div class="container">
             <div class="flex">
                 <ul>
-                    <li><a href="/annual" >Annual appraisal</a></li>
+                    <li><a href="/annual/2018" >Annual appraisal</a></li>
                     <li><a href="/feedback" class="active">Feedback</a></li>
                     <li><a href="/conversations">Coaching sessions</a></li>
                 </ul>

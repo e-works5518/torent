@@ -12,6 +12,7 @@ use Yii;
  * @property int $user_id
  * @property string $user_comment
  * @property string $date
+ * @property string $manager_comment
  */
 class UserImpact extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class UserImpact extends \yii\db\ActiveRecord
     {
         return [
             [['impact_id', 'user_id'], 'integer'],
-            [['user_comment'], 'string'],
+            [['user_comment','manager_comment'], 'string'],
             [['date'], 'safe'],
         ];
     }
@@ -46,6 +47,7 @@ class UserImpact extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'user_comment' => 'User Comment',
             'date' => 'Date',
+            'manager_comment' => 'manager_comment',
         ];
     }
 

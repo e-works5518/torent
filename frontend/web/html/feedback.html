@@ -13,8 +13,7 @@
 		<link rel="stylesheet" href="assets/css/style.css">
 		<link rel="stylesheet" href="assets/css/custom.css">
 		
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-			  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 		<script src="assets/js/custom.js"></script>
@@ -25,22 +24,17 @@
 	<body class="inner-page">
 		<div class="top-navigation">
 			<div class="container flex">
-				<a href="feedback.html">
-					<picture>
-					  <source media="(max-width: 1080px)" srcset="assets/images/logo-short2.png">
-					  <img src="assets/images/logo-short.png" alt="" class="logo"></a>
-					</picture>
-				</a>
-				<label>
-					<input type="checkbox">
-					<span class="burger-icon"></span>
-					<ul class="nav-menu flex">
-						<li><a href="#" class="transition relative">SMART objectives</a></li>
-						<li><a href="#" class="transition relative">User guidelines</a></li>
-						<li><a href="#" class="transition relative">Contact us</a></li>
-					</ul>
-				</label>
-				<div class="user-options">
+				<div class="logo flex">					
+					<a href="main.html">
+						<picture>
+						  <source media="(max-width: 1080px)" srcset="assets/images/logo-short2.png">
+						  <img src="assets/images/logo-short.png" alt=""></a>
+						</picture>
+					</a>
+					<span>MyPerformance</span>
+				</div>
+				<div class="user-options flex">
+					<div class="nav-menu"><a href="#" class="transition relative">Contact us</a></div >
 					<a href="javascript:void(0);" class="flex">
 						<img src="assets/images/members/member-1.png" alt="">
 						<span class="inline-block">Ani Hakobyan</span>
@@ -54,12 +48,13 @@
 				<div class="container">
 					<div class="flex">
 						<ul>
+							<li><img src="assets/images/icons/home-icon.png"></li>
 							<li><a href="main.html" >Annual appraisal</a></li>
 							<li><a href="#" class="active">Feedback</a></li>
-							<li><a href="#">Coaching sessions</a></li>
+							<li><a href="coaching.html">Coaching sessions</a></li>
 						</ul>
 						<div class="change-year">
-							<label>Change year</label>
+							<label>Year</label>
 							<select>
 								<option>2018</option>
 								<option>2019</option>
@@ -72,113 +67,115 @@
 				<div class="container">
 					<div class="feedback-links flex">
 						<a href="javascript:void(0);" class="btn-border give-feedback-btn inline-block transition">Request feedback <i class="fas fa-chevron-right"></i></a>
-
-						<a class="btn-border" href="#">Provide feedback <i class="fas fa-chevron-right"></i></a>
-						<a class="btn-border" href="#">Download report <i class="far fa-file-pdf"></i></a>
+						<a class="btn-border" href="provide-feedback.html">Provide feedback <i class="fas fa-chevron-right"></i></a>
+						<a class="btn-border download-report" href="#">Download report <i class="far fa-file-pdf"></i></a>
 					</div>
-					<h1 class="content-title">Feedback received</h1>				
-					<div class="table-item">
-						<table>
-							<thead>
-								<tr>                                           
-									<th>Name</th>
-									<th>Job title</th>
-									<th>Department</th>
-									<th>Internal/External</th>
-									<th>Project</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><span><img src="assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td>Pending acceptance</td>
-								</tr>
-								<tr>
-									<td><span><img src="assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td>Pending acceptance</td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="table-block">
+						<div class="table-title flex"><img src="assets/images/icons/feedback-received.png"> Feedback received</div>				
+						<div class="table-item">
+							<table>
+								<thead>
+									<tr>                                           
+										<th>Name</th>
+										<th>Job title</th>
+										<th>Department</th>
+										<th>Internal/External</th>
+										<th>Project</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span><img src="assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td>Internal</td>
+										<td>CyberSecurity Standards  implementation in CIS</td>
+										<td class="red-text">Feedback pending</td>
+									</tr>
+									<tr>
+										<td><span><img src="assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td>Internal</td>
+										<td>CyberSecurity Standards  implementation in CIS</td>
+										<td class="green-text">Feedback received</td>
+									</tr>
+									<tr>
+										<td><span><img src="assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td>Internal</td>
+										<td>CyberSecurity Standards  implementation in CIS</td>
+										<td class="green-text">Feedback received</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-					<h1 class="content-title">Feedback provided</h1>
-					<div class="table-item">
-						<table>
-							<thead>
-								<tr>                                           
-									<th>Name</th>
-									<th>Job title</th>
-									<th>Department</th>
-									<th>Internal/External</th>
-									<th>Project</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td>Pending acceptance</td>
-								</tr>
-								<tr>
-									<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td>Pending acceptance</td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="table-block">
+						<div class="table-title flex"><img src="assets/images/icons/feedback-provided.png"> Feedback provided</div>
+						<div class="table-item">
+							<table>
+								<thead>
+									<tr>                                           
+										<th>Name</th>
+										<th>Job title</th>
+										<th>Department</th>
+										<th>Internal/External</th>
+										<th>Project</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td>Internal</td>
+										<td>CyberSecurity Standards  implementation in CIS</td>
+										<td class="red-text"><a href="#">Feedback received</a></td>
+									</tr>
+									<tr>
+										<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td>Internal</td>
+										<td>CyberSecurity Standards  implementation in CIS</td>
+										<td class="green-text">Feedback received</td>									
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
-			</section>
-
-			<section class="table-list white-bg feedback"> 
-				<div class="container">
-					<h1 class="content-title">Team members feedback</h1>
-					<div class="table-item">
-						<table>
-							<thead>
-								<tr>                                           
-									<th>Name</th>
-									<th>Job title</th>
-									<th>Department</th>
-									<th>Internal/External</th>
-									<th>Project</th>
-									<th>Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td><strong>View dashboard</strong></td>
-								</tr>
-								<tr>
-									<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-									<td>Regional  marketing  manager - CIS  & Mongolia</td>
-									<td>Member firm  development</td>
-									<td>Internal</td>
-									<td>CyberSecurity Standards  implementation in CIS</td>
-									<td><strong>View dashboard</strong></td>
-								</tr>
-							</tbody>
-						</table>
+					<div class="table-block">
+						<div class="table-title flex"><img src="assets/images/icons/team-members-feedback.png"> Team member’s feedback</div>
+						<div class="table-item">
+							<table>
+								<thead>
+									<tr>                                           
+										<th>Name</th>
+										<th>Job title</th>
+										<th>Department</th>
+										<th>Feedback</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td class="red-text"><a href="#">View report</a> <i class="far fa-file-pdf"></i></td>
+									</tr>
+									<tr>
+										<td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
+										<td>Regional  marketing  manager - CIS  & Mongolia</td>
+										<td>Member firm  development</td>
+										<td class="red-text"><a href="#">View report</a> <i class="far fa-file-pdf"></i></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</section>

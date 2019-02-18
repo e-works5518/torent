@@ -45,4 +45,10 @@ class Departments extends \yii\db\ActiveRecord
     {
         return self::find()->select(['title', 'id'])->indexBy('id')->column();
     }
+
+    public static function GetTitleById($id)
+    {
+        $d = self::findOne($id);
+        return $d ? $d['title'] : null;
+    }
 }

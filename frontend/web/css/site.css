@@ -32,3 +32,13 @@ span.select2-selection__clear {
 .hide-a {
     display: none;
 }
+
+.common-list {
+    position: relative;
+}
+
+.delete {
+    color: red;
+    position: absolute;
+    right: 0;
+}

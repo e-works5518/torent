@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
  * @property string $notes
  * @property string $attachment
  * @property string $date
+ * @property string $year
  */
 class Conversations extends \yii\db\ActiveRecord
 {
@@ -47,9 +48,10 @@ class Conversations extends \yii\db\ActiveRecord
             [['attachment_f'], 'file', 'skipOnEmpty' => true],
             [['user_id', 'manager_id',
                 'status',
+                'year',
             ], 'integer'],
             [['date'], 'safe'],
-            [['notes','user_id'], 'required'],
+            [['notes', 'user_id'], 'required'],
             [['notes', 'attachment'], 'string'],
         ];
     }
@@ -67,12 +69,13 @@ class Conversations extends \yii\db\ActiveRecord
             'attachment' => 'Attachment',
             'date' => 'Date',
             'attachment_f' => 'Attachment',
+            'year' => 'year',
         ];
     }
 
     public function beforeSave($insert)
     {
-        if(empty($this->manager_id)){
+        if (empty($this->manager_id)) {
             $this->manager_id = Yii::$app->user->getId();
         }
         $this->date = Helper::GetDateFoSql($this->date);
@@ -90,7 +93,7 @@ class Conversations extends \yii\db\ActiveRecord
         }
     }
 
-    public static function GetReceivedConversations()
+    public static function GetReceivedConversations($year)
     {
         return (new \yii\db\Query())
             ->select(
@@ -103,13 +106,14 @@ class Conversations extends \yii\db\ActiveRecord
             ->from(self::tableName() . ' as c')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = c.user_id')
             ->where(['c.manager_id' => Yii::$app->user->getId()])
+            ->andWhere(['c.year' => Years::GetYearIdByYear($year)])
             ->andFilterWhere(['or',
                 ['=', 'c.status', self::STATUS_ALL_SHOW],
                 ['=', 'c.status', self::STATUS_DELETED_USER]])
             ->all();
     }
 
-    public static function GetProvidedConversations()
+    public static function GetProvidedConversations($year)
     {
         return (new \yii\db\Query())
             ->select(
@@ -122,6 +126,7 @@ class Conversations extends \yii\db\ActiveRecord
             ->from(self::tableName() . ' as c')
             ->leftJoin(\backend\models\User::tableName() . ' u', 'u.id = c.manager_id')
             ->where(['c.user_id' => Yii::$app->user->getId()])
+            ->andWhere(['c.year' => Years::GetYearIdByYear($year)])
             ->andFilterWhere(['or',
                 ['=', 'c.status', self::STATUS_ALL_SHOW],
                 ['=', 'c.status', self::STATUS_DELETED_MANAGER]])

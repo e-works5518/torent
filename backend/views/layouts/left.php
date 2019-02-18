@@ -7,6 +7,7 @@
                 'items' => [
 //                    ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Behavioral', 'icon' => 'list', 'url' => ['/behavioral']],
+                    ['label' => 'Development', 'icon' => 'list', 'url' => ['/development']],
                     ['label' => 'Impacts', 'icon' => 'outdent', 'url' => ['/impact']],
 //                    ['label' => 'User behavioral', 'icon' => 'file-code-o', 'url' => ['/user-behavioral']],
 //                    ['label' => 'Behavioral feedback', 'icon' => 'file-code-o', 'url' => ['/behavioral-feedback']],

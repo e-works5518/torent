@@ -1,9 +1,10 @@
 <?php
 //$this->registerJsFile('/js/jq.js');
+$this->registerJsFile('/js/common.js');
 //$this->registerJsFile('/js/feedback/feedback-src.js');
 $this->params['feedback'] = true;
 
-$this->title = "Feedback requests";
+$this->title = "Annual appraisal";
 ?>
 
 <div class="main-content">
@@ -11,15 +12,16 @@ $this->title = "Feedback requests";
         <div class="container">
             <div class="flex">
                 <ul>
-                    <li><a href="/annual" class="active">Annual appraisal</a></li>
+                    <li><img src="/html/assets/images/icons/home-icon.png"></li>
+                    <li><a href="/annual/<?= $year ?>" class="active">Annual appraisal</a></li>
                     <li><a href="/feedback">Feedback</a></li>
-                    <li><a href="/conversations">Coaching sessions</a></li>
+                    <li><a href="/conversations/<?= $year ?>">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">
-                    <label>Change year</label>
-                    <select>
-                        <option>2018</option>
-                        <option>2019</option>
+                    <label>Year</label>
+                    <select id="years">
+                        <option <?= $year == 2018 ? 'selected' : '' ?>>2018</option>
+                        <option <?= $year == 2019 ? 'selected' : '' ?> >2019</option>
                     </select>
                 </div>
             </div>
@@ -27,94 +29,105 @@ $this->title = "Feedback requests";
     </section>
     <section class="table-list gray-bg annual-appraisal">
         <div class="container">
-            <h1 class="content-title">My annual appraisal</h1>
-            <div class="table-item">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Department</th>
-                        <th>Manager</th>
-                        <th>Goals</th>
-                        <th>Behavioral competencies</th>
-                        <th>Your impact</th>
-                        <th>Development plan</th>
-                        <th>Report</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Ani Hakobyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Gurgen Hakobyan</td>
-                        <td><strong><a href="/goals/2018">View goals</a></strong></td>
-                        <td><strong>View behavioral competencies</strong></td>
-                        <td><strong>View your impact</strong></td>
-                        <td><strong>View development plan</strong></td>
-                        <td><a href="#"><i class="far fa-file-pdf"></i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table-block">
+                <div class="table-title flex"><img src="/html/assets/images/icons/user-icon.png"> My annual appraisal
+                </div>
+                <div class="table-item">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Manager</th>
+                            <th>Goals</th>
+                            <th>Behavioral competencies</th>
+                            <th>Your impact</th>
+                            <th>Development plan</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><?= \frontend\models\User::getCurrentUserName() ?></td>
+                            <td><?= Yii::$app->user->identity->position ?></td>
+                            <td><?= \common\models\Departments::GetTitleById(Yii::$app->user->identity->department_id) ?></td>
+                            <td><?= \backend\models\User::GetManagerName() ?></td>
+                            <td class="blue-text"><a href="/goals/<?= $year ?>">View goals</a></td>
+                            <td class="blue-text"><a href="/behavioral/<?= $year ?>"> View behavioral
+                                    competencies </a></td>
+                            <td class="blue-text"><a href="/impact/<?= $year ?>">View your impact</a></td>
+                            <td class="blue-text"><a href="/development/<?= $year ?>">View development plan </a></td>
+                            <td class="red-text"><a href="#"><i class="far fa-file-pdf"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <h1 class="content-title">Team members’ annual appraisal</h1>
-            <div class="table-item">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Department</th>
-                        <th>Manager</th>
-                        <th>Goals</th>
-                        <th>Behavioral competencies</th>
-                        <th>Your impact</th>
-                        <th>Development plan</th>
-                        <th>Report</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Karen Poghosyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Gurgen Hakobyan</td>
-                        <td><strong>View goals</strong></td>
-                        <td><strong>View behavioral competencies</strong></td>
-                        <td><strong>View your impact</strong></td>
-                        <td><strong>View development plan</strong></td>
-                        <td><a href="#"><i class="far fa-file-pdf"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td><span><img src="assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Karen Poghosyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Gurgen Hakobyan</td>
-                        <td><strong>View goals</strong></td>
-                        <td><strong>View behavioral competencies</strong></td>
-                        <td><strong>View your impact</strong></td>
-                        <td><strong>View development plan</strong></td>
-                        <td><a href="#"><i class="far fa-file-pdf"></i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table-block">
+                <div class="table-title flex"><img src="/html/assets/images/icons/team-icon.png"> Team members’ annual
+                    appraisal
+                </div>
+                <div class="table-item">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <!--                            <th>Manager</th>-->
+                            <th>Goals</th>
+                            <th>Behavioral competencies</th>
+                            <th>Your impact</th>
+                            <th>Development plan</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($my_users)): ?>
+                            <?php foreach ($my_users as $k => $my_user): ++$k ?>
+                                <tr>
+                                    <td><span><img src="/users/<?= $my_user['avatar'] ?>" alt=""
+                                                   class="request-to-whom"></span><?= $my_user['first_name'] ?> <?= $my_user['last_name'] ?>
+                                    </td>
+                                    <td><?= $my_user['position'] ?> </td>
+                                    <td><?= $my_user['title'] ?> </td>
+                                    <!--                                    <td>Gurgen Hakobyan</td>-->
+                                    <td class="blue-text"><a href="/user-goals/<?= $year . '/' . $my_user['id'] ?>">View
+                                            goals</a></td>
+
+                                    <td class="blue-text"><a
+                                                href="/user-behavioral/<?= $year . '/' . $my_user['id'] ?>"> View
+                                            behavioral
+                                            competencies </a></td>
+
+                                    <td class="blue-text"><a href="/user-impact/<?= $year . '/' . $my_user['id'] ?>">View
+                                            your impact</a></td>
+                                    <td class="blue-text"><a
+                                                href="/user-development/<?= $year . '/' . $my_user['id'] ?>">View
+                                            development plan </a>
+                                    </td>
+                                    <td class="red-text"><a href="#"><i class="far fa-file-pdf"></i></a></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
-    <section class="main-bottom">
+    <section class="main-bottom gray-bg">
         <div class="container flex">
-            <div class="bottom-left purple">
-                <h2>
-                    Setting S.M.A.R.T.  objectives
-                </h2>
-                <p>Objectives should be aligned with Grant Thornton's strategic priorities. Typically an individual and coach agree three to four stretch objectives for the coming year usin the SMART approach.</p>
-                <a href="#">Read more</a>
+            <div class="purple-bg">
+                <span><img src="/html/assets/images/icons/smart-goals.png"></span>
+                <h2>SMART objectives</h2>
+                <p>Read the guideline to help you shape up objectives for this year.</p>
             </div>
-            <div class="bottom-right">
-                <h2>MyPerformance system  user guidelines</h2>
-                <p>Here you will find answers on how to use the system, set your g</p>
-                <a href="#">Read more</a>
+            <div class="green-bg ">
+                <span><img src="/html/assets/images/icons/user-guidelines.png"></span>
+                <h2>User guidelines</h2>
+                <p>Learn how to use all features of MyPerformance system. </p>
             </div>
         </div>
     </section>

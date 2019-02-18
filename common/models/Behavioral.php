@@ -42,7 +42,7 @@ class Behavioral extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['icon_f'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png'],
             [['date'], 'safe'],
-            [['title', 'color', 'icon'], 'string', 'max' => 255],
+            [['title', 'color', 'icon', 'sub_title'], 'string', 'max' => 255],
         ];
     }
 
@@ -54,6 +54,7 @@ class Behavioral extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'sub_title' => 'Sub Title',
             'description' => 'Description',
             'color' => 'Color',
             'icon' => 'Icon',
@@ -78,6 +79,40 @@ class Behavioral extends \yii\db\ActiveRecord
     {
         return self::find()->asArray()->where(['year' => Years::GetYearIdByYear($year)])->all();
     }
+
+    public static function GetAllCurrentUserByYear($year)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'b.*',
+                    'ub.user_comment',
+                    'ub.manager_comment',
+                    'ub.id as user_beh_id',
+                ])
+            ->from(self::tableName() . ' as b')
+            ->leftJoin(UserBehavioral::tableName() . ' ub', 'ub.behavioral_id = b.id AND ub.user_id =' . Yii::$app->user->getId())
+            ->where(['b.year' => Years::GetYearIdByYear($year)])
+            ->all();
+
+    }
+    public static function GetAllbyUserByYear($year,$id)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'b.*',
+                    'ub.user_comment',
+                    'ub.manager_comment',
+                    'ub.id as user_beh_id',
+                ])
+            ->from(self::tableName() . ' as b')
+            ->leftJoin(UserBehavioral::tableName() . ' ub', 'ub.behavioral_id = b.id AND ub.user_id =' . $id)
+            ->where(['b.year' => Years::GetYearIdByYear($year)])
+            ->all();
+
+    }
+
 
     public static function GetOneById($id)
     {

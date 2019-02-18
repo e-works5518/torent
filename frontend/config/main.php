@@ -15,7 +15,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
-            'baseUrl'=>'',
+            'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -43,8 +43,16 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'impact/<year:\d+>' => 'impact',
+                'user-impact/<year:\d+>/<id:\d+>' => 'impact/user',
                 'goals/<year:\d+>' => 'goals',
+                'user-goals/<year:\d+>/<id:\d+>' => 'goals/user',
+                'annual/<year:\d+>' => 'annual',
+                'user-annual/<year:\d+>/<id:\d+>' => 'annual/user',
                 'behavioral/<year:\d+>' => 'behavioral',
+                'user-behavioral/<year:\d+>/<id:\d+>' => 'behavioral/user',
+                'development/<year:\d+>' => 'development',
+                'user-development/<year:\d+>/<id:\d+>' => 'development/user',
+                'conversations/<year:\d+>' => 'conversations',
             ],
         ],
 

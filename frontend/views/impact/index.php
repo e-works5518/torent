@@ -1,55 +1,71 @@
 <?php
 
-$this->registerJsFile('/js/jq.js');
+//$this->registerJsFile('/js/jq.js');
 $this->registerJsFile('/js/common.js');
-$this->registerJsFile('/js/impact/content.js');
-$this->registerJsFile('/js/custom.js');
-$this->params['goals'] = true;
+//$this->registerJsFile('/js/impact/content.js');
+//$this->registerJsFile('/js/custom.js');
+//$this->params['goals'] = true;
 $year = Yii::$app->request->get('year');
 $this->title = "Impact | " . $year;
 ?>
 
-<div class="main-content">
-    <div class="container flex">
-        <div class="main-left">
-            <h1 class="content-title" data-year="<?= $year ?>">Impact | <?= $year ?></h1>
-            <div id="Impact"></div>
-        </div>
-        <?php echo $this->render('@app/views/layouts/_right-menu.php', ['active' => 'impact' . $year]); ?>
-    </div>
-</div>
 
-<div class="popup-layer transition">
-    <div class="popup relative">
-        <a href="javascript:void(0);" class="popup-close absolute" title="Close popup"></a>
-        <div class="request-body">
-            <strong>Select a manager </strong>
-            <div class="request-msg">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in
-                a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-            </div>
-            <div class="select-manager-content flex">
-                <span id="manager-name"
-                      data-id="<?= Yii::$app->user->identity->manager_id ?>"><?= \backend\models\User::GetManagerName() ?></span>
-                <span class="or">or</span>
-                <?= \kartik\select2\Select2::widget([
-//                    'model' => $model,
-                    'name' => 'user_id',
-                    'attribute' => 'user_id',
-                    'data' => $users,
-                    'maintainOrder' => true,
-                    'options' => ['placeholder' => 'Users ...', 'id' => 'users', 'multiple' => false],
-                    'pluginOptions' => [
-                        'tags' => true,
-                        'allowClear' => true,
-                    ],
-                ]);
-                ?>
+<div class="main-content">
+    <section class="nav-tab">
+        <div class="container">
+            <div class="flex">
+                <ul>
+                    <li><img src="/html/assets/images/icons/home-icon.png"></li>
+                    <li><a href="/annual/<?=$year?>" class="active">Annual appraisal</a></li>
+                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/conversations">Coaching sessions</a></li>
+                </ul>
+                <div class="change-year">
+                    <label>Year</label>
+                    <select id="years">
+                        <option <?= $year == 2018 ? 'selected' : '' ?>>2018</option>
+                        <option <?= $year == 2019 ? 'selected' : '' ?> >2019</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div align="center">
-            <button class="submit-btn transition request_feedback">Request feedback</button>
+    </section>
+    <section class="gray-bg common-block">
+        <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'form']); ?>
+        <div class="container">
+            <div class="table-title flex"><img src="/html/assets/images/icons/team-members-feedback.png">Impact
+                - <?= \backend\models\User::GetCurrentUserName() ?></div>
+            <?php if (!empty($impacts)): ?>
+                <?php foreach ($impacts as $k => $impact): ++$k ?>
+                    <div class="common-list">
+                        <div class="common-title"><?= $impact['title'] ?></div>
+                        <div class="flex">
+                            <div class="common-item">
+                                <label>My comments</label>
+                                <input type="hidden"
+                                       name="comments[<?= $k ?>][impact_id]"
+                                       value="<?= $impact['id'] ?>">
+                                <input type="hidden"
+                                       name="comments[<?= $k ?>][id]"
+                                       value="<?= $impact['user_imp_id'] ?>">
+                                <textarea placeholder="Comment"
+                                          name="comments[<?= $k ?>][user_comment]"><?= $impact['user_comment'] ?></textarea>
+                            </div>
+                            <div class=" common-item">
+                                <label>Manager’s comments</label>
+                                <textarea placeholder="Comment" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
-    </div>
+        <div align="center" class="save-submit">
+            <button type="submit" class="long-btn"> Save changes</button>
+            <button class="long-btn"> Save & Submit</button>
+        </div>
+        <?php \yii\widgets\ActiveForm::end(); ?>
+    </section>
 </div>
 <script>
     var _Year = '<?=$year?>'

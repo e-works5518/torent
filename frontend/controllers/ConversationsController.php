@@ -7,6 +7,7 @@ use backend\models\User;
 use common\models\Conversations;
 use common\models\GoalsFeedback;
 use common\models\ImpactFeedback;
+use common\models\Years;
 use Yii;
 use common\models\BehavioralFeedback;
 use common\models\search\BehavioralFeedbackSearch;
@@ -51,7 +52,7 @@ class ConversationsController extends Controller
      * Lists all BehavioralFeedback models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($year)
     {
         $model = new Conversations();
         if (Yii::$app->request->isPost) {
@@ -60,17 +61,17 @@ class ConversationsController extends Controller
             if (!empty($u)) {
                 $model->attachment = $u;
             }
+            $model->year = Years::GetYearIdByYear($year);
         }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('/conversations');
-        }
 
+        }
         return $this->render('index', [
+            'year' => $year,
             'model' => $model,
             'users' => User::GetUsersWhichManagerI(),
-            'received' => Conversations::GetReceivedConversations(),
-            'provided' => Conversations::GetProvidedConversations(),
+            'received' => Conversations::GetReceivedConversations($year),
+            'provided' => Conversations::GetProvidedConversations($year),
         ]);
 
     }

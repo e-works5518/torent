@@ -31,25 +31,20 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="top-navigation">
     <div class="container flex">
-        <a href="/annual">
-            <picture>
-                <source media="(max-width: 1080px)" srcset="/html/assets/images/logo-short2.png">
-                <img src="/html/assets/images/logo-short.png" alt="" class="logo">
-            </picture>
-        </a>
-        <label>
-            <input type="checkbox">
-            <span class="burger-icon"></span>
-            <ul class="nav-menu flex">
-                <li><a href="#" class="transition relative">SMART objectives</a></li>
-                <li><a href="#" class="transition relative">User guidelines</a></li>
-                <li><a href="#" class="transition relative">Contact us</a></li>
-            </ul>
-        </label>
-        <div class="user-options">
+        <div class="logo flex">
+            <a href="/annual/2018">
+                <picture>
+                    <source media="(max-width: 1080px)" srcset="/html/assets/images/logo-short2.png">
+                    <img src="/html/assets/images/logo-short.png" alt="">
+                </picture>
+            </a>
+            <span>MyPerformance</span>
+        </div>
+        <div class="user-options flex">
+            <div class="nav-menu"><a href="#" class="transition relative">Contact us</a></div >
             <a href="javascript:void(0);" class="flex">
-                <img src="/html/assets/images/members/member-1.png" alt="">
-                <span class="inline-block">Ani Hakobyan</span>
+                <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
+                <span class="inline-block"><?= \frontend\models\User::getCurrentUserName() ?></span>
                 <i class="fas fa-angle-down"></i>
             </a>
         </div>

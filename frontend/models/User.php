@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Departments;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -99,6 +100,7 @@ class User extends \yii\db\ActiveRecord
             'department_id' => 'Department',
             'manager_id' => 'Manager',
             'password_repeat' => 'Confirm password',
+            'position' => 'position',
 
 
         ];
@@ -142,4 +144,22 @@ class User extends \yii\db\ActiveRecord
         return false;
     }
 
+    public static function getCurrentUserName()
+    {
+        return Yii::$app->user->identity->first_name . ' ' . Yii::$app->user->identity->last_name;
+    }
+
+    public static function GetMyUsers()
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'u.*',
+                    'd.title',
+                ])
+            ->from(self::tableName() . ' as u')
+            ->leftJoin(Departments::tableName() . ' d', 'u.department_id = d.id')
+            ->where(['u.manager_id' => Yii::$app->user->getId()])
+            ->all();
+    }
 }

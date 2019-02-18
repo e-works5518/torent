@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use backend\models\User;
 use common\models\GoalsFeedback;
+use common\models\Years;
 use Yii;
 use common\models\Goals;
 use yii\web\Controller;
@@ -23,7 +24,7 @@ class GoalsController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+//                    'delete' => ['POST'],
                 ],
             ],
             'access' => [
@@ -45,10 +46,46 @@ class GoalsController extends Controller
 
     public function actionIndex($year)
     {
+        if (Yii::$app->request->post() && Yii::$app->request->post('description')) {
+            $model = new Goals();
+            $model->load(Yii::$app->request->post(), '');
+            $model->year = Years::GetYearIdByYear($year);
+            $model->save();
+        }
         return $this->render('index', [
             'goals' => Goals::GetAllByUserByYear($year),
             'year' => $year
         ]);
+    }
+
+    public function actionUser($year, $id)
+    {
+        $comments = Yii::$app->request->post('comments');
+        if ($comments) {
+            foreach ($comments as $comment) {
+                if (!empty($comment['id'])) {
+                    $model = Goals::findOne($comment['id']);
+                    $model->manager_comments = $comment['manager_comment'];
+                    $model->save();
+                }
+            }
+        }
+        return $this->render('user-index', [
+            'goals' => Goals::GetAllByUserIdByYear($year,$id),
+            'year' => $year
+        ]);
+    }
+
+    public function actionSubmit($year)
+    {
+        Goals::updateAll([
+            'status' => Goals::STATUS_SUBMIT_USER,
+        ], [
+            'status' => Goals::STATUS_NEW,
+            'user_id' => Yii::$app->user->getId(),
+            'year' => Years::GetYearIdByYear($year)
+        ]);
+        return $this->redirect(['/goals/' . $year]);
     }
 
     /**
@@ -71,6 +108,6 @@ class GoalsController extends Controller
     {
         Goals::findOne($id)->delete();
         Yii::$app->session->setFlash('success', "Deleted...", true);
-        return $this->redirect(['index/2018']);
+        return $this->redirect(['/goals/2018']);
     }
 }

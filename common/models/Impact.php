@@ -83,4 +83,38 @@ class Impact extends \yii\db\ActiveRecord
     {
         return self::findOne($id);
     }
+
+    public static function GetAllCurrentUserByYear($year)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'b.*',
+                    'ub.user_comment',
+                    'ub.manager_comment',
+                    'ub.id as user_imp_id',
+                ])
+            ->from(self::tableName() . ' as b')
+            ->leftJoin(UserImpact::tableName() . ' ub', 'ub.impact_id = b.id AND ub.user_id =' . Yii::$app->user->getId())
+            ->where(['b.year' => Years::GetYearIdByYear($year)])
+            ->all();
+
+    }
+    public static function GetAllByUserIdByYear($year,$id)
+    {
+        return (new \yii\db\Query())
+            ->select(
+                [
+                    'b.*',
+                    'ub.user_comment',
+                    'ub.manager_comment',
+                    'ub.id as user_imp_id',
+                ])
+            ->from(self::tableName() . ' as b')
+            ->leftJoin(UserImpact::tableName() . ' ub', 'ub.impact_id = b.id AND ub.user_id =' . $id)
+            ->where(['b.year' => Years::GetYearIdByYear($year)])
+            ->all();
+
+    }
+
 }

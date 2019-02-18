@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\GoalsFeedback;
 use common\models\ImpactFeedback;
+use frontend\models\User;
 use Yii;
 use common\models\BehavioralFeedback;
 use common\models\search\BehavioralFeedbackSearch;
@@ -47,11 +48,12 @@ class AnnualController extends Controller
      * Lists all BehavioralFeedback models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($year)
     {
 
         return $this->render('index', [
-
+            'year'=> $year,
+            'my_users'=> User::GetMyUsers()
         ]);
     }
 

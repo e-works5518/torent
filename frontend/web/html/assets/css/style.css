@@ -69,7 +69,7 @@ body {
 	
 		.inner-page .container {
 			/*width:90%;*/
-			width:75%;
+			width:79%;
 			margin:auto;
 		}
 
@@ -89,74 +89,46 @@ body {
 				content:none;
 			}
 			
-			.top-navigation label {
-			    cursor: pointer;
-			    text-align: center;
-			    margin-left: auto;
-			    padding: 4px 11px 4px 0;
+			.nav-menu {
+			    padding: 9px 25px 9px 0;
 			    border-right: 1px solid #f3f2ee;
 			    margin-right: 25px;
 			}
-				
-				.top-navigation .logo {
-					max-width:196px;
-					/*width:100%;*/
-				}
-				
-				.top-navigation input[type="checkbox"] {
-					display:none;
-				}
-			
-			.nav-menu {
-				font-size:15px;
-			}
-				
-				.nav-menu li {
-					margin-left:15px;
-					margin-right:15px;
-				}
-				
+							
 					.nav-menu a {
 						padding-bottom: 7px;
 						border-bottom:1px transparent solid;
-						color: #4f2d7f;
+						color: #75787b;
 					}
-					
-						.nav-menu a i {
-							margin-right:5px;
-							font-size: 16px;
-							vertical-align: middle;
-							color: rgba(255, 255, 255, .6);
-						}
-						
-						.nav-menu a .has-notification {
-							position:absolute;
-							top: -10px;
-							width:15px;
-							height:15px;
-							border-radius:100%;
-							background:#de012f;
-							font-size: 9px;
-							text-align: center;
-							line-height: 15px;
-							right: -15px;
-						}
-					
+											
 					.nav-menu a:focus,
 					.nav-menu a:hover,
 					.nav-menu a.active {
-						border-bottom:1px #4f2d7f solid;
+						border-bottom:1px #75787b solid;
 						text-decoration: none;
+					}
+
+				.logo {
+				    align-items: center;
+				}
+
+					.logo span {
+					    color: #00a7b5;
+					    font-size: 26px;
+					    border-left: 1px solid #b1a0c9;
+					    padding: 6px 10px;
+					    margin-left: 10px;
 					}
 				
 			.user-options {
 				font-size:14px;
+				align-items: center;
 			}
 				
 				.user-options a {
 					align-items: center;
 					text-decoration: none;
-						color: #4f2d7f;
+						color: #75787b;
 				}
 				
 					.user-options img {
@@ -173,7 +145,6 @@ body {
 					}
 					
 		.main-content {
-			min-height: calc(100vh - 215px);
 			font-size:16px;
 		}
 		
@@ -641,14 +612,12 @@ body {
 				}
 				
 				textarea {
-					line-height: 22px;
+					line-height: 20px;
 					width:100%;
-					/*height:140px;*/
-					border:1px #e8e8e8 solid;
-					border-radius:4px;
-					padding:16px;
-					margin-bottom:21px;
+					border:1px #e7e7e7 solid;
+					padding:8px;
 					resize:none;
+					color: #75787b;
 				}
 				
 				.request-feedback {
@@ -747,17 +716,21 @@ body {
 	    font-size: 15px;
 	}
 
-@media screen and (max-width:1080px) {
+@media screen and (max-width:1280px) {
 	.inner-page .container {
 		width: 100%;
 		padding-left: 10px;
 		padding-right: 10px;
+	}	
+
+	.common-block .container {
+	    padding-left: 0;
+	    padding-right: 0;
 	}
-	
-		.top-navigation .logo {
-			max-width:37px;
-		}
-	
+
+}	
+
+@media screen and (max-width:1080px) {		
 		.nav-menu a {
 			text-transform: capitalize;
 		}
@@ -796,46 +769,26 @@ body {
 		padding-top: 8px;
 		padding-bottom: 8px;
 	}
-		
-		.top-navigation .container {
-			align-items: baseline;
-		}
 	
-			.top-navigation input[type="checkbox"] ~ .burger-icon:before {
-				content:"\02261";
-				font-size: 50px;
-				color: #4f2d7f;
-				transition:all .5s;
-			}
-			
-			.top-navigation input[type="checkbox"]:checked ~ .burger-icon:before {
-				color:rgba(79, 45, 127, 0.5);
-			}
-			
-			.top-navigation input[type="checkbox"] ~ .nav-menu {
-				flex-direction: column;
-				line-height: 30px;
-				visibility:hidden;
-				opacity:0;
-				height: 0;
-				transition:all .5s;
-			}
-			
-			.top-navigation input[type="checkbox"]:checked ~ .nav-menu {
-				visibility:visible;
-				opacity:1;
-				height: initial;
-			}
+	.nav-tab ul {
+	    text-align: center;
+	}
 
-			.top-navigation label {
-			    border-right: 0;
-			    margin-right: auto;
-			}
+	.nav-tab ul li:first-child {
+	    display: none;
+	}
 	
 	.user-options {
-		transform: translateY(-3px);
+		flex-direction: column-reverse;
 	}
-		
+
+	.nav-menu {
+	    padding: 0;
+	    border-right: 0;
+	    margin-right: 0;
+	    margin-top: 14px;
+	}
+			
 		.user-options span {
 			display:none;
 		}
@@ -867,13 +820,24 @@ body {
 			margin-left: 0;
 			padding-top: 0;
 		}
+
+		.logo span {
+		    font-size: 22px;
+		}
 }
 
 @media screen and (max-width:568px) {
-	.request-feedback {
-		flex-direction:column;
+	.logo {
+	    margin-bottom: 15px;
 	}
+
+	.logo span {
+	    font-size: 18px;
+	}
+
 }
+
+
 i.fas.fa-pencil-alt.fa-icon-prop{
 	cursor: pointer;
 }
