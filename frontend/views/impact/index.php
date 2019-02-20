@@ -17,7 +17,7 @@ $this->title = "Impact | " . $year;
                 <ul>
                     <li><img src="/html/assets/images/icons/home-icon.png"></li>
                     <li><a href="/annual/<?=$year?>" class="active">Annual appraisal</a></li>
-                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/feedback/<?= $year ?>">Feedback</a></li>
                     <li><a href="/conversations">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">

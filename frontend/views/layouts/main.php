@@ -42,11 +42,15 @@ AppAsset::register($this);
         </div>
         <div class="user-options flex">
             <div class="nav-menu"><a href="#" class="transition relative">Contact us</a></div >
-            <a href="javascript:void(0);" class="flex">
-                <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
-                <span class="inline-block"><?= \frontend\models\User::getCurrentUserName() ?></span>
-                <i class="fas fa-angle-down"></i>
-            </a>
+            <div class="menu-block">
+                <a href="javascript:void(0);"  class="flex drop-down">
+                    <img src="/users/<?=Yii::$app->user->identity->avatar?>" alt="">
+                    <span class="inline-block"><?= \frontend\models\User::getCurrentUserName() ?></span>
+                    <i class="fas fa-angle-down"></i>
+                </a>
+                <a data-method="post"  class="logout hide" href="/site/logout">Logout</a>
+            </div>
+
         </div>
     </div>
 </div>

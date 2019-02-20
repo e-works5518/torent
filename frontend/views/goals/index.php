@@ -13,7 +13,7 @@ $this->title = "Goals | " . $year;
                 <ul>
                     <li><img src="/html/assets/images/icons/home-icon.png"></li>
                     <li><a href="/annual/<?=$year?>" class="active">Annual appraisal</a></li>
-                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/feedback/<?= $year ?>">Feedback</a></li>
                     <li><a href="/conversations">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">
@@ -33,9 +33,9 @@ $this->title = "Goals | " . $year;
             <?php if (!empty($goals)): ?>
                 <?php foreach ($goals as $k => $goal): ++$k ?>
                     <div class="common-list">
-                        <div class="common-title"> Goal <?= $k ?></div>
+                        <div class="common-title"> Goal <?= $k ?> <a class="delete" title="Delete goal" href="/goals/delete?id=<?= $goal['id'] ?>"><i class="fas fa-trash-alt"></i></a></div>
                         <div class="flex">
-                            <a class="delete" title="Delete goal" href="/goals/delete?id=<?= $goal['id'] ?>">Delete</a>
+
                             <div class="common-item">
                                 <label>Goal description</label>
                                 <textarea readonly><?= $goal['description'] ?></textarea>
@@ -102,21 +102,21 @@ $this->title = "Goals | " . $year;
         </div>
         <div align="center" class="save-submit">
             <button title="submit" form="form" class="long-btn"> Save changes</button>
-            <a href="/goals/submit?year=<?= $year ?>">Save & Submit</a>
+            <a class="long-btn" href="/goals/submit?year=<?= $year ?>">Save & Submit</a>
         </div>
     </section>
     <section class="main-bottom gray-bg">
         <div class="container flex">
-            <div class="purple-bg">
+            <a class="purple-bg" href="#">
                 <span><img src="/html/assets/images/icons/smart-goals.png"></span>
                 <h2>SMART objectives</h2>
                 <p>Read the guideline to help you shape up objectives for this year.</p>
-            </div>
-            <div class="green-bg ">
+            </a>
+            <a class="green-bg " href="#">
                 <span><img src="/html/assets/images/icons/user-guidelines.png"></span>
                 <h2>User guidelines</h2>
                 <p>Learn how to use all features of MyPerformance system. </p>
-            </div>
+            </a>
         </div>
     </section>
 </div>

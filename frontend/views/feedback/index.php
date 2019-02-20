@@ -1,9 +1,10 @@
 <?php
 //$this->registerJsFile('/js/jq.js');
 //$this->registerJsFile('/js/feedback/feedback-src.js');
+$this->registerJsFile('/js/common.js');
 $this->params['feedback'] = true;
 
-$this->title = "Feedback requests";
+$this->title = "Feedback | " . $year;
 ?>
 
 <div class="main-content">
@@ -11,15 +12,16 @@ $this->title = "Feedback requests";
         <div class="container">
             <div class="flex">
                 <ul>
-                    <li><a href="/annual/2018" >Annual appraisal</a></li>
-                    <li><a href="/feedback" class="active">Feedback</a></li>
-                    <li><a href="/conversations">Coaching sessions</a></li>
+                    <li><img src="/html/assets/images/icons/home-icon.png"></li>
+                    <li><a href="/annual/<?= $year ?>">Annual appraisal</a></li>
+                    <li><a href="/feedback/<?= $year ?>" class="active">Feedback</a></li>
+                    <li><a href="/conversations/<?= $year ?>">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">
-                    <label>Change year</label>
-                    <select>
-                        <option>2018</option>
-                        <option>2019</option>
+                    <label>Year</label>
+                    <select id="years">
+                        <option <?= $year == 2018 ? 'selected' : '' ?>>2018</option>
+                        <option <?= $year == 2019 ? 'selected' : '' ?>>2019</option>
                     </select>
                 </div>
             </div>
@@ -28,114 +30,160 @@ $this->title = "Feedback requests";
     <section class="table-list gray-bg feedback">
         <div class="container">
             <div class="feedback-links flex">
-                <a href="javascript:void(0);" class="btn-border give-feedback-btn inline-block transition">Request feedback <i class="fas fa-chevron-right"></i></a>
-
-                <a class="btn-border" href="#">Provide feedback <i class="fas fa-chevron-right"></i></a>
-                <a class="btn-border" href="#">Download report <i class="far fa-file-pdf"></i></a>
+                <a href="javascript:void(0);" class="btn-border give-feedback-btn inline-block transition">Request
+                    feedback <i class="fas fa-chevron-right"></i></a>
+                <a class="btn-border" href="/provide-feedback/<?= $year ?>">Provide feedback <i
+                            class="fas fa-chevron-right"></i></a>
+                <a class="btn-border download-report" href="#">Download report <i class="far fa-file-pdf"></i></a>
             </div>
-            <h1 class="content-title">Feedback received</h1>
-            <div class="table-item">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Job title</th>
-                        <th>Department</th>
-                        <th>Internal/External</th>
-                        <th>Project</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td>Pending acceptance</td>
-                    </tr>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-1.png" alt="" class="request-to-whom"></span> Ani Hakobyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td>Pending acceptance</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table-block">
+                <div class="table-title flex"><img src="/html/assets/images/icons/feedback-received.png"> Feedback
+                    received
+                </div>
+                <div class="table-item">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <!--                            <th>Job title</th>-->
+                            <th>Department</th>
+                            <th>Internal/External</th>
+                            <th>Project</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($feedback_received)): ?>
+                            <?php foreach ($feedback_received as $k => $item): ++$k ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($item['type'] == \common\models\Feedbacks::TYPE_INTERNAL): ?>
+                                            <span><img src="/users/<?= $item['avatar'] ?>" alt=""
+                                                       class="request-to-whom"></span>
+                                            <?= $item['first_name'] . ' ' . $item['last_name'] ?>
+                                        <?php else: ?>
+                                            <span><img src="/images/user.png" alt="" class="request-to-whom"></span>
+                                            <?= $item['user_name'] ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $item['departments'] ?></td>
+                                    <!--                                    <td>Member firm development</td>-->
+                                    <td>
+                                        <?php if ($item['type'] == \common\models\Feedbacks::TYPE_INTERNAL): ?>
+                                            Internal
+                                        <?php else: ?>
+                                            External
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $item['project_name'] ?></td>
+                                    <td>
+                                        <?php if ($item['status'] == \common\models\Feedbacks::STATUS_PENDING): ?>
+                                            <a class="red-text" href="/give-feedback/<?= $year ?>/<?= $item['id'] ?>">Feedback
+                                                pending</a>
+                                        <?php else: ?>
+                                            <a class="green-text" href="/view-feedback/<?= $year ?>/<?= $item['id'] ?>">
+                                                Feedback received</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <h1 class="content-title">Feedback provided</h1>
-            <div class="table-item">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Job title</th>
-                        <th>Department</th>
-                        <th>Internal/External</th>
-                        <th>Project</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td>Pending acceptance</td>
-                    </tr>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td>Pending acceptance</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table-block">
+                <div class="table-title flex"><img src="/html/assets/images/icons/feedback-provided.png"> Feedback
+                    provided
+                </div>
+                <div class="table-item">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <!--                            <th>Job title</th>-->
+                            <th>Department</th>
+                            <th>Internal/External</th>
+                            <th>Project</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($feedback_provided)): ?>
+                            <?php foreach ($feedback_provided as $k => $item): ++$k ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($item['type'] == \common\models\Feedbacks::TYPE_INTERNAL): ?>
+                                            <span>
+                                        <img src="/users/<?= $item['avatar'] ?>" alt="" class="request-to-whom">
+                                    </span>
+                                            <?= $item['first_name'] . ' ' . $item['last_name'] ?>
+                                        <?php else: ?>
+                                            <span>
+                                        <img src="/images/user.png" alt=""
+                                             class="request-to-whom">
+                                    </span>
+                                            <?= $item['user_name'] ?>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $item['departments'] ?></td>
+                                    <!--                                    <td>Member firm development</td>-->
+                                    <td>
+                                        <?php if ($item['type'] == \common\models\Feedbacks::TYPE_INTERNAL): ?>
+                                            Internal
+                                        <?php else: ?>
+                                            External
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $item['project_name'] ?></td>
+                                    <td>
+                                        <?php if ($item['status'] == \common\models\Feedbacks::STATUS_PENDING): ?>
+                                            <span class="red-text">Feedback
+                                            pending</span>
+                                        <?php else: ?>
+                                            <a class="green-text" href="/view-feedback/<?= $year ?>/<?= $item['id'] ?>">Feedback
+                                                received</a>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section class="table-list white-bg feedback">
-        <div class="container">
-            <h1 class="content-title">Team members feedback</h1>
-            <div class="table-item">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Job title</th>
-                        <th>Department</th>
-                        <th>Internal/External</th>
-                        <th>Project</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td><strong>View dashboard</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span><img src="/html/assets/images/members/member-2.png" alt="" class="request-to-whom"></span> Vladislav Muradyan</td>
-                        <td>Regional  marketing  manager - CIS  & Mongolia</td>
-                        <td>Member firm  development</td>
-                        <td>Internal</td>
-                        <td>CyberSecurity Standards  implementation in CIS</td>
-                        <td><strong>View dashboard</strong></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="table-block">
+                <div class="table-title flex"><img src="/html/assets/images/icons/team-members-feedback.png"> Team
+                    member’s
+                    feedback
+                </div>
+                <div class="table-item">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Feedback</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($team)): ?>
+                            <?php foreach ($team as $k => $item): ++$k ?>
+                                <tr>
+                                    <td><span><img src="/users/<?= $item['avatar'] ?>" alt=""
+                                                   class="request-to-whom"></span> <?= $item['first_name'] . ' ' . $item['last_name'] ?>
+                                    </td>
+                                    <td><?= $item['position'] ?></td>
+                                    <td><?= $item['title'] ?></td>
+                                    <td class="red-text"><a href="#">View report</a> <i class="far fa-file-pdf"></i>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
@@ -148,41 +196,93 @@ $this->title = "Feedback requests";
             <li><a href="javascript:void(0);" class="transition active">Internal</a></li>
             <li><a href="javascript:void(0);" class="transition">External</a></li>
         </ul>
+
         <div class="requests-list active absolute">
+            <?php $form_i = \yii\widgets\ActiveForm::begin(['id' => 'form']); ?>
             <div class="request-body">
                 <div>
-                    <select>
-                        <option>Select person</option>
-                        <option>Select </option>
-                        <option>Select </option>
-                    </select>
+                    <?= \kartik\select2\Select2::widget([
+                        'model' => $internal_model,
+                        'name' => 'user_id',
+                        'attribute' => 'user_id',
+                        'data' => $users,
+                        'maintainOrder' => true,
+                        'options' => ['placeholder' => 'Select person...', 'id' => 'add-user', 'multiple' => false],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'initialize' => true,
+                            'tags' => true,
+                        ],
+                    ]);
+                    ?>
                 </div>
                 <div>
-                    <select>
-                        <option>Reason for feedback</option>
-                        <option>Reason for </option>
-                        <option>Reason for </option>
-                    </select>
+                    <?= \kartik\select2\Select2::widget([
+                        'model' => $internal_model,
+                        'name' => 'feedback_type',
+                        'attribute' => 'feedback_type',
+                        'data' => \common\models\Feedbacks::FEEDBACK_TYPE,
+//                        'maintainOrder' => true,
+                        'options' => ['placeholder' => 'Reason for feedback', 'id' => 'Reason', 'multiple' => false],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'initialize' => true,
+//                            'tags' => true,
+                        ],
+                    ]);
+                    ?>
                 </div>
-                <div><input type="text" name="" placeholder="Project name / other"></div>
+                <div>
+                    <?= $form_i->field($internal_model, 'project_name')->textInput(['maxlength' => true, 'placeholder' => 'Project name / other'])->label(false) ?>
+                </div>
             </div>
-            <div><button class="submit-btn transition">Request feedback</button></div>
+            <div>
+                <button type="submit" class="submit-btn transition">Request feedback</button>
+            </div>
+            <?php \yii\widgets\ActiveForm::end(); ?>
         </div>
+
+
         <div class="requests-list absolute">
+            <?php $form = \yii\widgets\ActiveForm::begin(['id' => 'External_model']); ?>
             <div class="request-body">
-                <div><input type="email" name="" placeholder="Email"></div>
-                <div><input type="text" name="" placeholder="Name"></div>
-                <div><input type="text" name="" placeholder="Company / Position"></div>
                 <div>
-                    <select>
-                        <option>Reason for feedback</option>
-                        <option>Reason for </option>
-                        <option>Reason for </option>
-                    </select>
+                    <?= $form->field($External_model, 'user_email')
+                        ->textInput(['maxlength' => true, 'placeholder' => 'Email'])->label(false) ?>
                 </div>
-                <div><input type="text" name="" placeholder="Project name / other"></div>
+                <div>
+                    <?= $form->field($External_model, 'user_name')
+                        ->textInput(['maxlength' => true, 'placeholder' => 'Name'])->label(false) ?>
+                </div>
+                <div>
+                    <?= $form->field($External_model, 'user_position')
+                        ->textInput(['maxlength' => true, 'placeholder' => 'Company / Position'])->label(false) ?>
+                </div>
+                <div>
+                    <?= \kartik\select2\Select2::widget([
+                        'model' => $External_model,
+                        'name' => 'feedback_type',
+                        'attribute' => 'feedback_type',
+                        'data' => \common\models\Feedbacks::FEEDBACK_TYPE,
+//                        'maintainOrder' => true,
+                        'options' => ['placeholder' => 'Reason for feedback', 'id' => 'External_model_2', 'multiple' => false],
+                        'pluginOptions' => [
+                            'allowClear' => true,
+                            'initialize' => true,
+//                            'tags' => true,
+                        ],
+                    ]);
+                    ?>
+                </div>
+                <div>
+                    <?= $form->field($External_model, 'project_name')
+                        ->textInput(['maxlength' => true, 'placeholder' => 'Project name / other'])->label(false) ?>
+                </div>
             </div>
-            <div><button class="submit-btn transition">Request feedback</button></div>
+            <div>
+                <button type="submit" class="submit-btn transition">Request feedback</button>
+            </div>
+            <?php \yii\widgets\ActiveForm::end(); ?>
         </div>
     </div>
 </div>

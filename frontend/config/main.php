@@ -53,6 +53,11 @@ return [
                 'development/<year:\d+>' => 'development',
                 'user-development/<year:\d+>/<id:\d+>' => 'development/user',
                 'conversations/<year:\d+>' => 'conversations',
+                'feedback/<year:\d+>' => 'feedback',
+                'provide-feedback/<year:\d+>' => 'feedback/provide-feedback',
+                'give-feedback/<year:\d+>/<id:\d+>' => 'feedback/give-feedback',
+                'view-feedback/<year:\d+>/<id:\d+>' => 'feedback/view-feedback',
+                'open-feedback/<year:\d+>/<id:\d+>' => 'open-feedback',
             ],
         ],
 

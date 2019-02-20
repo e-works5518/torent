@@ -15,7 +15,7 @@ $this->title = "Coaching conversations";
                 <ul>
                     <li><img src="/html/assets/images/icons/home-icon.png"></li>
                     <li><a href="/annual/<?= $year ?>" >Annual appraisal</a></li>
-                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/feedback/<?= $year ?>">Feedback</a></li>
                     <li><a href="/conversations/<?= $year ?>" class="active">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">

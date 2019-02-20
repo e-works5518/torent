@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use common\models\Departments;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -67,7 +68,7 @@ class User extends \yii\db\ActiveRecord
             [['imageFile'], 'file', 'extensions' => 'png, jpg'],
             [['last_name', 'first_name', 'email'], 'required'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['last_name', 'first_name', 'password_reset_token', 'email', 'avatar','position'], 'string', 'max' => 255],
+            [['last_name', 'first_name', 'password_reset_token', 'email', 'avatar', 'position'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['password_reset_token'], 'unique'],
 
@@ -197,6 +198,15 @@ class User extends \yii\db\ActiveRecord
         return self::find()->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])->indexBy('id')->column();
     }
 
+    public static function GetAllUsersNotMe()
+    {
+        return self::find()
+            ->select(["CONCAT(`first_name`,' ',`last_name`) as name", 'id'])
+            ->andWhere(['<>', 'id', Yii::$app->user->identity->getId()])
+            ->indexBy('id')
+            ->column();
+    }
+
     public static function GetUsersWhichManagerI()
     {
         return self::find()
@@ -205,6 +215,21 @@ class User extends \yii\db\ActiveRecord
             ->andWhere(['<>', 'id', Yii::$app->user->identity->getId()])
             ->indexBy('id')
             ->column();
+    }
+
+    public static function GetUsersWhichManagerMyByDepartment()
+    {
+        return self::find()
+            ->from(self::tableName() . ' u')
+            ->select([
+                'u.*',
+                'd.title',
+            ])
+            ->leftJoin(Departments::tableName() . ' d', 'd.id = u.department_id')
+            ->where(['manager_id' => Yii::$app->user->getId()])
+            ->andWhere(['<>', 'u.id', Yii::$app->user->identity->getId()])
+            ->asArray()
+            ->all();
     }
 
     /**

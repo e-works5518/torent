@@ -14,7 +14,7 @@ $this->title = "Annual appraisal";
                 <ul>
                     <li><img src="/html/assets/images/icons/home-icon.png"></li>
                     <li><a href="/annual/<?= $year ?>" class="active">Annual appraisal</a></li>
-                    <li><a href="/feedback">Feedback</a></li>
+                    <li><a href="/feedback/<?= $year ?>">Feedback</a></li>
                     <li><a href="/conversations/<?= $year ?>">Coaching sessions</a></li>
                 </ul>
                 <div class="change-year">
@@ -119,16 +119,16 @@ $this->title = "Annual appraisal";
     </section>
     <section class="main-bottom gray-bg">
         <div class="container flex">
-            <div class="purple-bg">
+            <a class="purple-bg" href="#">
                 <span><img src="/html/assets/images/icons/smart-goals.png"></span>
                 <h2>SMART objectives</h2>
                 <p>Read the guideline to help you shape up objectives for this year.</p>
-            </div>
-            <div class="green-bg ">
+            </a>
+            <a class="green-bg " href="#">
                 <span><img src="/html/assets/images/icons/user-guidelines.png"></span>
                 <h2>User guidelines</h2>
                 <p>Learn how to use all features of MyPerformance system. </p>
-            </div>
+            </a>
         </div>
     </section>
 </div>

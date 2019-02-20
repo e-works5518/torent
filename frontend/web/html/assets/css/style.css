@@ -24,12 +24,12 @@ body {
 	font-family: 'GT-Walsheim-Pro-Regular';
 }
 
-	a {
+	a, a:hover, a:focus  {
 		text-decoration:none;
 		color: inherit;
 		transition: all 0.3s;
 	}
-	
+
 	.relative {
 		position:relative;
 	}
@@ -65,12 +65,15 @@ body {
 		font-weight:300;
 		color:#8d8d8d;
 		outline:none;
+		-webkit-appearance: none;
 	}
 	
 		.inner-page .container {
-			/*width:90%;*/
 			width:79%;
 			margin:auto;
+			max-width: 1200px;
+			padding-left: 0;
+    			padding-right: 0;
 		}
 
 		.top-navigation {
@@ -184,6 +187,7 @@ body {
 					display: flex;
 					align-items: center;
 				}
+
 				
 				.requests-tab-title li.add-conversation {
 					margin-left: auto;
@@ -606,9 +610,8 @@ body {
 				select {
 					padding-left:10px;
 					padding-right:10px;
-					line-height:32px;
-					height:30px !important;
 					color:#75787b;
+					background-color: #fff;
 				}
 				
 				textarea {
@@ -618,6 +621,8 @@ body {
 					padding:8px;
 					resize:none;
 					color: #75787b;
+					border-radius: 0;
+					-webkit-appearance: none;
 				}
 				
 				.request-feedback {
